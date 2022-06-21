@@ -14,14 +14,12 @@ class NoSqlDatabase implements Database {
   final Box _busBox = Hive.box(busBoxKey);
   final Box _driverBox = Hive.box(driverBoxKey);
 
-  BaseObject createObject(BaseObjectType type, {String? json}) {
+  BaseObject _object(BaseObjectType type, String json) {
     switch (type) {
       case BaseObjectType.driver:
-        if (json != null) return Driver.fromJson(json);
-        return Driver(id: ObjectId().hexString);
+        return Driver.fromJson(json);
       case BaseObjectType.bus:
-        if (json != null) return Bus.fromJson(json);
-        return Bus(id: ObjectId().hexString);
+        return Bus.fromJson(json);
     }
   }
 
@@ -44,5 +42,5 @@ class NoSqlDatabase implements Database {
   bool contain(BaseObject object) => _box(object.type).containsKey(object.key);
 
   @override
-  List<BaseObject> get(BaseObjectType type) => _box(type).values.map((e) => createObject(type, json: e)).toList();
+  List<BaseObject> get(BaseObjectType type) => _box(type).values.map((e) => _object(type, e)).toList();
 }

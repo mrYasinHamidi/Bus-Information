@@ -7,6 +7,4 @@ abstract class BaseObject extends Equatable {
   BaseObjectType get type;
 
   String toJson();
-
-  void fromJson(String json);
 }
