@@ -33,6 +33,7 @@ class _LanguagePageState extends State<LanguagePage> {
           onPressed: () {
             context.read<LanguageCubit>().toggleLanguage();
             context.read<ThemeCubit>().toggleTheme();
+
           },
         ),
       ),
