@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:new_bus_information/cubit/language/language_cubit.dart';
-import 'package:new_bus_information/cubit/theme/theme_cubit.dart';
+import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
+import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
+import 'package:new_bus_information/application/pages/home_page.dart';
 import 'package:new_bus_information/generated/l10n.dart';
-import 'package:new_bus_information/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());

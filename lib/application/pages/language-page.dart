@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_bus_information/cubit/language/language_cubit.dart';
-import 'package:new_bus_information/cubit/theme/theme_cubit.dart';
+import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class LanguagePage extends StatefulWidget {
@@ -32,8 +31,6 @@ class _LanguagePageState extends State<LanguagePage> {
           child: Text(S.of(context).toggleLanguage),
           onPressed: () {
             context.read<LanguageCubit>().toggleLanguage();
-            context.read<ThemeCubit>().toggleTheme();
-
           },
         ),
       ),

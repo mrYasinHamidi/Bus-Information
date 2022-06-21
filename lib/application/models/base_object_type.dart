@@ -1,0 +1,1 @@
+enum BaseObjectType { driver, bus }
