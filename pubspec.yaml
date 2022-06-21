@@ -18,6 +18,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   hive_flutter: ^1.1.0
   equatable: ^2.0.3
+  objectid: ^2.1.0
 
 dev_dependencies:
   flutter_test:

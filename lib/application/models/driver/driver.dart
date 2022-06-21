@@ -1,4 +1,5 @@
 import 'package:new_bus_information/application/models/base_object.dart';
+import 'package:new_bus_information/application/models/base_object_type.dart';
 
 class Driver implements BaseObject {
   final String id;
@@ -16,11 +17,14 @@ class Driver implements BaseObject {
   bool? get stringify => true;
 
   @override
-  void toJson() {}
+  String toJson() {return '';}
 
   @override
   void fromJson(String json) {}
 
   @override
   BaseObjectType get type => BaseObjectType.driver;
+
+  @override
+  String get key => id;
 }
