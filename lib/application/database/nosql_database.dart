@@ -3,6 +3,7 @@ import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:objectid/objectid.dart';
 
 import 'database.dart';
@@ -10,9 +11,11 @@ import 'database.dart';
 class NoSqlDatabase implements Database {
   static const String driverBoxKey = 'driverBoxKey';
   static const String busBoxKey = 'busBoxKey';
+  static const String propBoxKey = 'propBoxKey';
 
   final Box _busBox = Hive.box(busBoxKey);
   final Box _driverBox = Hive.box(driverBoxKey);
+  final Box _propBox = Hive.box(propBoxKey);
 
   BaseObject _object(BaseObjectType type, String json) {
     switch (type) {
@@ -20,6 +23,8 @@ class NoSqlDatabase implements Database {
         return Driver.fromJson(json);
       case BaseObjectType.bus:
         return Bus.fromJson(json);
+      case BaseObjectType.prop:
+        return Prop.fromJson(json);
     }
   }
 
@@ -29,6 +34,9 @@ class NoSqlDatabase implements Database {
         return _driverBox;
       case BaseObjectType.bus:
         return _busBox;
+      case BaseObjectType.prop:
+        return _propBox;
+        break;
     }
   }
 

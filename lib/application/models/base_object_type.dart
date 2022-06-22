@@ -1,1 +1,1 @@
-enum BaseObjectType { driver, bus }
+enum BaseObjectType { driver, bus,prop }
