@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/pages/language-page.dart';
+import 'package:new_bus_information/application/pages/create-prop-page.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,20 +17,24 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).name),
-        leading: GestureDetector(
-          onTap: () {
-            context.read<ThemeCubit>().toggleTheme();
-          },
-          child: const Icon(Icons.switch_access_shortcut),
-        ),
         actions: [
           IconButton(
             onPressed: () {
-              LanguagePage.open(context);
+              context.read<ThemeCubit>().toggleTheme();
             },
+            icon: Icon(context.watch<ThemeCubit>().state is DarkThemeState ? Icons.light_mode : Icons.dark_mode),
+          ),
+          IconButton(
+            onPressed: () {},
             icon: const Icon(Icons.language),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          CreatePropPage.open(context);
+        },
       ),
       body: Container(),
     );

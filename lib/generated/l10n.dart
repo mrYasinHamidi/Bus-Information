@@ -69,6 +69,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Bus Number`
+  String get busNumber {
+    return Intl.message(
+      'Bus Number',
+      name: 'busNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bus Status`
+  String get busStatus {
+    return Intl.message(
+      'Bus Status',
+      name: 'busStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Driver`
+  String get driver {
+    return Intl.message(
+      'Driver',
+      name: 'driver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alternative`
+  String get alternativeDriver {
+    return Intl.message(
+      'Alternative',
+      name: 'alternativeDriver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Prop`
+  String get createProp {
+    return Intl.message(
+      'Create Prop',
+      name: 'createProp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bus Information`
+  String get busInformation {
+    return Intl.message(
+      'Bus Information',
+      name: 'busInformation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

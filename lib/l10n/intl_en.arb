@@ -1,5 +1,11 @@
 {
   "@@locale": "en",
   "name": "Bus Information",
-  "toggleLanguage": "Toggle Language"
+  "toggleLanguage": "Toggle Language",
+  "busNumber": "Bus Number",
+  "busStatus": "Bus Status",
+  "driver": "Driver",
+  "alternativeDriver": "Alternative",
+  "createProp": "Create Prop",
+  "busInformation": "Bus Information"
 }
