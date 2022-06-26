@@ -28,9 +28,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bus Information"),
         "busNumber": MessageLookupByLibrary.simpleMessage("Bus Number"),
         "busStatus": MessageLookupByLibrary.simpleMessage("Bus Status"),
+        "buses": MessageLookupByLibrary.simpleMessage("Buses"),
         "createProp": MessageLookupByLibrary.simpleMessage("Create Prop"),
         "driver": MessageLookupByLibrary.simpleMessage("Driver"),
+        "driverStatus": MessageLookupByLibrary.simpleMessage("driver Status"),
+        "drivers": MessageLookupByLibrary.simpleMessage("Drivers"),
         "name": MessageLookupByLibrary.simpleMessage("Bus Information"),
+        "repeatedName": MessageLookupByLibrary.simpleMessage("Repeated Name"),
+        "repeatedNumber":
+            MessageLookupByLibrary.simpleMessage("Repeated number"),
+        "shiftWork": MessageLookupByLibrary.simpleMessage("Shift Work"),
+        "shouldNotEmpty":
+            MessageLookupByLibrary.simpleMessage("Should not empty"),
+        "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "toggleLanguage":
             MessageLookupByLibrary.simpleMessage("Toggle Language")
       };

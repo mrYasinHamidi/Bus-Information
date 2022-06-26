@@ -3,7 +3,7 @@ import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 
-import 'Dot.dart';
+import 'dot.dart';
 
 class DriverPreviewer extends StatelessWidget {
   final Driver? driver;

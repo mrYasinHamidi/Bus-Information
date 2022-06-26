@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/pages/item_chooser.dart';
+import 'package:new_bus_information/application/utils.dart';
 import 'package:new_bus_information/application/widgets/bus_preview.dart';
 import 'package:new_bus_information/application/widgets/driver_preview.dart';
 import 'package:new_bus_information/generated/l10n.dart';
@@ -13,14 +13,6 @@ class CreatePropPage extends StatefulWidget {
   @override
   State<CreatePropPage> createState() => _CreatePropPageState();
 
-  static void open(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (s) => const CreatePropPage(),
-      ),
-    );
-  }
 }
 
 class _CreatePropPageState extends State<CreatePropPage> {
@@ -89,6 +81,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
   }
 
   Future<Driver?> _chooseDriver() async {
+    openPage(context, const ItemChooser(items: []));
     // return await Navigator.push(
     //   context,
     //   MaterialPageRoute(
@@ -101,15 +94,8 @@ class _CreatePropPageState extends State<CreatePropPage> {
   }
 
   Future<Bus?> _chooseBus() async {
-    // return await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (BuildContext context) => ItemChooser(
-    //       items: DatabaseHelper.instance.buses,
-    //       type: ObjectType.bus,
-    //     ),
-    //   ),
-    // );
+    openPage(context, const ItemChooser(items: []));
+
   }
 
   void _submit() {

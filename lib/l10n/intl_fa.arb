@@ -1,5 +1,13 @@
 {
   "@@locale": "fa",
   "name": "اتوبوسرانی",
-  "toggleLanguage": "تغیر زبان"
+  "toggleLanguage": "تغیر زبان",
+  "busNumber": "Bus Number",
+  "busStatus": "Bus Status",
+  "driver": "Driver",
+  "alternativeDriver": "Alternative",
+  "createProp": "Create Prop",
+  "busInformation": "Bus Information",
+  "drivers": "Drivers",
+  "buses": "Buses"
 }

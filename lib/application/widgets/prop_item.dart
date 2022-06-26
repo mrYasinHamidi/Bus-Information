@@ -3,7 +3,7 @@ import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
-import 'package:new_bus_information/application/widgets/Dot.dart';
+import 'package:new_bus_information/application/widgets/dot.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class PropItemWidget extends StatelessWidget {

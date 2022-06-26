@@ -28,6 +28,9 @@ class Driver implements BaseObject {
     );
   }
 
+  factory Driver.fromName(String name) =>
+      Driver(name: name, time: DateTime.now(), status: DriverStatus.active, shiftWork: ShiftWork.evening);
+
   @override
   List<Object?> get props => [name];
 
@@ -50,4 +53,7 @@ class Driver implements BaseObject {
 
   @override
   String get key => name;
+
+  @override
+  String get searchKey => name;
 }

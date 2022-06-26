@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/pages/create-prop-page.dart';
+import 'package:new_bus_information/application/pages/create_prop_page.dart';
+import 'package:new_bus_information/application/utils.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          CreatePropPage.open(context);
+          openPage(context, const CreatePropPage());
         },
       ),
       body: Container(),

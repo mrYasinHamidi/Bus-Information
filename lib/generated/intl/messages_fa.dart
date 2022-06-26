@@ -22,6 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "alternativeDriver":
+            MessageLookupByLibrary.simpleMessage("Alternative"),
+        "busInformation":
+            MessageLookupByLibrary.simpleMessage("Bus Information"),
+        "busNumber": MessageLookupByLibrary.simpleMessage("Bus Number"),
+        "busStatus": MessageLookupByLibrary.simpleMessage("Bus Status"),
+        "buses": MessageLookupByLibrary.simpleMessage("Buses"),
+        "createProp": MessageLookupByLibrary.simpleMessage("Create Prop"),
+        "driver": MessageLookupByLibrary.simpleMessage("Driver"),
+        "drivers": MessageLookupByLibrary.simpleMessage("Drivers"),
         "name": MessageLookupByLibrary.simpleMessage("اتوبوسرانی"),
         "toggleLanguage": MessageLookupByLibrary.simpleMessage("تغیر زبان")
       };

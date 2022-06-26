@@ -20,6 +20,10 @@ class Bus implements BaseObject {
     );
   }
 
+  factory Bus.fromId(String id) {
+    return Bus(id: id, time: DateTime.now(), status: BusStatus.active);
+  }
+
   @override
   List<Object?> get props => [id];
 
@@ -33,11 +37,15 @@ class Bus implements BaseObject {
       'status': status.index,
       'time': time.toString(),
     };
-    return jsonEncode(data);  }
+    return jsonEncode(data);
+  }
 
   @override
   BaseObjectType get type => BaseObjectType.bus;
 
   @override
   String get key => id;
+
+  @override
+  String get searchKey => id;
 }

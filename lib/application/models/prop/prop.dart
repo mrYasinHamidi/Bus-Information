@@ -47,4 +47,5 @@ class Prop implements BaseObject {
 
   @override
   BaseObjectType get type => BaseObjectType.prop;
+
 }

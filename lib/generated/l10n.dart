@@ -129,6 +129,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Drivers`
+  String get drivers {
+    return Intl.message(
+      'Drivers',
+      name: 'drivers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buses`
+  String get buses {
+    return Intl.message(
+      'Buses',
+      name: 'buses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message(
+      'Submit',
+      name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Should not empty`
+  String get shouldNotEmpty {
+    return Intl.message(
+      'Should not empty',
+      name: 'shouldNotEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Repeated number`
+  String get repeatedNumber {
+    return Intl.message(
+      'Repeated number',
+      name: 'repeatedNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shift Work`
+  String get shiftWork {
+    return Intl.message(
+      'Shift Work',
+      name: 'shiftWork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `driver Status`
+  String get driverStatus {
+    return Intl.message(
+      'driver Status',
+      name: 'driverStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Repeated Name`
+  String get repeatedName {
+    return Intl.message(
+      'Repeated Name',
+      name: 'repeatedName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
