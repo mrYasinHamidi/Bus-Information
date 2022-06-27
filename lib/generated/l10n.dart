@@ -209,6 +209,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Coordination`
+  String get coordination {
+    return Intl.message(
+      'Coordination',
+      name: 'coordination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vacation`
+  String get vacation {
+    return Intl.message(
+      'Vacation',
+      name: 'vacation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inactive`
+  String get inActive {
+    return Intl.message(
+      'Inactive',
+      name: 'inActive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active`
+  String get active {
+    return Intl.message(
+      'Active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Morning Shift`
+  String get morningShift {
+    return Intl.message(
+      'Morning Shift',
+      name: 'morningShift',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Evening Shift`
+  String get eveningShift {
+    return Intl.message(
+      'Evening Shift',
+      name: 'eveningShift',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First OverTime`
+  String get firstOverTime {
+    return Intl.message(
+      'First OverTime',
+      name: 'firstOverTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Second OverTime`
+  String get secondOverTime {
+    return Intl.message(
+      'Second OverTime',
+      name: 'secondOverTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shift Switching`
+  String get shiftSwitching {
+    return Intl.message(
+      'Shift Switching',
+      name: 'shiftSwitching',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

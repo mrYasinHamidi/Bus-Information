@@ -15,6 +15,14 @@
   "repeatedNumber": "Repeated number",
   "shiftWork": "Shift Work",
   "driverStatus": "driver Status",
-  "repeatedName": "Repeated Name"
-
+  "repeatedName": "Repeated Name",
+  "coordination": "Coordination",
+  "vacation": "Vacation",
+  "inActive": "Inactive",
+  "active": "Active",
+  "morningShift": "Morning Shift",
+  "eveningShift": "Evening Shift",
+  "firstOverTime": "First OverTime",
+  "secondOverTime": "Second OverTime",
+  "shiftSwitching": "Shift Switching"
 }

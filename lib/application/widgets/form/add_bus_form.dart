@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
+import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/widgets/custom_drop_down.dart';
@@ -28,9 +29,7 @@ class _AddDriverFormState extends State<AddBusForm> {
   bool _show = false;
 
   late String id;
-  late BusStatus status;
-
-
+  late BusStatus status = BusStatus.active;
 
   @override
   void initState() {
@@ -97,9 +96,6 @@ class _AddDriverFormState extends State<AddBusForm> {
             const SizedBox(height: 16),
             OutlinedButton(
               onPressed: _onSubmit,
-              // style: ElevatedButton.styleFrom(
-              //   primary: Colors.lightGreen,
-              // ),
               child: Text(S.of(context).submit),
             ),
           ],
@@ -111,7 +107,7 @@ class _AddDriverFormState extends State<AddBusForm> {
   String? _busNumberValidator(String? value) {
     if (value == null) return '';
     if (value.isEmpty) return S.of(context).shouldNotEmpty;
-    if (context.read<Database>().contain(Bus.fromId(value.trim()))) {
+    if (context.read<Database>().containBusCode(value.trim())) {
       return S.of(context).repeatedNumber;
     }
     return null;
@@ -127,7 +123,7 @@ class _AddDriverFormState extends State<AddBusForm> {
 
   void _onSubmit() {
     if (globalKey.currentState!.validate()) {
-      Bus bus = Bus(id: id,status: status,time: DateTime.now());
+      Bus bus = Bus(busCode: id, status: status);
       context.read<Database>().put(bus);
       widget.onSubmit?.call(bus);
     }

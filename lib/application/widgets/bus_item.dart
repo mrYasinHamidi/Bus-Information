@@ -18,7 +18,7 @@ class BusItemWidget extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(bus.id),
+          Text(bus.busCode) ,
           Dot(color: bus.status.color),
         ],
       ),

@@ -76,7 +76,7 @@ class _ItemChooserState extends State<ItemChooser> {
         ],
       ),
       floatingActionButton: CreatorDialog(
-        onAddItem: _onAddDriver,
+        onAddItem: _onAddItem,
         type: widget.type,
       ),
     );
@@ -107,9 +107,13 @@ class _ItemChooserState extends State<ItemChooser> {
     Navigator.pop(context, item);
   }
 
-  void _onAddDriver(BaseObject item) {
+  void _onAddItem(BaseObject item) {
     setState(() {
-      widget.items.insert(0, item);
+      if (widget.items.isEmpty) {
+        widget.items.add(item);
+      } else {
+        widget.items.insert(0, item);
+      }
     });
   }
 

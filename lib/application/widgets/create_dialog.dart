@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
-import 'package:new_bus_information/application/widgets/AddBusForm.dart';
-import 'package:new_bus_information/application/widgets/AddDriverForm.dart';
+import 'package:new_bus_information/application/widgets/form/add_bus_form.dart';
+import 'package:new_bus_information/application/widgets/form/add_driver_form.dart';
 
 class CreatorDialog extends StatefulWidget {
   final Function(BaseObject)? onAddItem;

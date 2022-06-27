@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_bus_information/generated/l10n.dart';
 
 enum BusStatus { active, deActive, }
 
@@ -6,9 +7,9 @@ extension BusStatusEx on BusStatus {
   String get text {
     switch (this) {
       case BusStatus.active:
-        return 'Languages.language.value.active';
+        return S.current.active;
       case BusStatus.deActive:
-        return 'Languages.language.value.inActive';
+        return S.current.inActive;
     }
   }
   Color get color {

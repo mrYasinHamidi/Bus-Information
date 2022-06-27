@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:objectid/objectid.dart';
 import '../base_object.dart';
 
 class Prop implements BaseObject {
@@ -9,11 +10,11 @@ class Prop implements BaseObject {
   final String? secondDriverId;
 
   Prop({
-    required this.id,
+    String? id,
     this.busId,
     this.secondDriverId,
     this.driverId,
-  });
+  }) : id = id ?? ObjectId().hexString;
 
   factory Prop.fromJson(String source) {
     Map data = jsonDecode(source);
@@ -24,6 +25,8 @@ class Prop implements BaseObject {
       busId: data['busId'],
     );
   }
+
+  DateTime get creationTime => ObjectId.fromHexString(id).timestamp;
 
   @override
   String get key => id;
@@ -47,5 +50,4 @@ class Prop implements BaseObject {
 
   @override
   BaseObjectType get type => BaseObjectType.prop;
-
 }

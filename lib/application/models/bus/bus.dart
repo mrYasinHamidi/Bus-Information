@@ -3,26 +3,28 @@ import 'dart:convert';
 import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
+import 'package:objectid/objectid.dart';
 
 class Bus implements BaseObject {
   final String id;
+  final String busCode;
   final BusStatus status;
-  final DateTime time;
 
-  const Bus({required this.id, required this.status, required this.time});
+  Bus({
+    String? id,
+    required this.busCode,
+    required this.status,
+  }) : id = id ?? ObjectId().hexString;
 
   factory Bus.fromJson(String json) {
     Map data = jsonDecode(json);
     return Bus(
       id: data['id'],
+      busCode: data['busCode'],
       status: BusStatus.values[data['status'] ?? 0],
-      time: DateTime.parse(data['time']),
     );
   }
 
-  factory Bus.fromId(String id) {
-    return Bus(id: id, time: DateTime.now(), status: BusStatus.active);
-  }
 
   @override
   List<Object?> get props => [id];
@@ -33,9 +35,9 @@ class Bus implements BaseObject {
   @override
   String toJson() {
     Map data = {
-      'busNumber': id,
+      'id': id,
+      'busCode': busCode,
       'status': status.index,
-      'time': time.toString(),
     };
     return jsonEncode(data);
   }
@@ -46,6 +48,5 @@ class Bus implements BaseObject {
   @override
   String get key => id;
 
-  @override
-  String get searchKey => id;
+  DateTime get creationTime => ObjectId.fromHexString(id).timestamp;
 }

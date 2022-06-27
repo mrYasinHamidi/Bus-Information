@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_bus_information/application/database/database.dart';
+import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/pages/item_chooser.dart';
 import 'package:new_bus_information/application/utils.dart';
 import 'package:new_bus_information/application/widgets/bus_preview.dart';
@@ -12,7 +16,6 @@ class CreatePropPage extends StatefulWidget {
 
   @override
   State<CreatePropPage> createState() => _CreatePropPageState();
-
 }
 
 class _CreatePropPageState extends State<CreatePropPage> {
@@ -81,30 +84,32 @@ class _CreatePropPageState extends State<CreatePropPage> {
   }
 
   Future<Driver?> _chooseDriver() async {
-    openPage(context, const ItemChooser(items: []));
-    // return await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (BuildContext context) => ItemChooser(
-    //       items: DatabaseHelper.instance.drivers,
-    //       type: ObjectType.driver,
-    //     ),
-    //   ),
-    // );
+    return await openPage(
+      context,
+      ItemChooser(
+        items: context.read<Database>().getObjects(BaseObjectType.driver),
+        type: BaseObjectType.driver,
+      ),
+    );
   }
 
   Future<Bus?> _chooseBus() async {
-    openPage(context, const ItemChooser(items: []));
-
+    return await openPage(
+      context,
+      ItemChooser(
+        items: context.read<Database>().getObjects(BaseObjectType.bus),
+        type: BaseObjectType.bus,
+      ),
+    );
   }
 
   void _submit() {
-    // Prop prop = Prop(
-    //   id: _bus?.id,
-    //   driverId: _firstDriver?.id,
-    //   secondDriverId: _secondDriver?.id,
-    // );
-    // DatabaseHelper.instance.put(prop);
-    // Navigator.pop(context,true);
+    Prop prop = Prop(
+      busId: _bus?.key,
+      driverId: _firstDriver?.key,
+      secondDriverId: _secondDriver?.key,
+    );
+    context.read<Database>().put(prop);
+    Navigator.pop(context, prop);
   }
 }

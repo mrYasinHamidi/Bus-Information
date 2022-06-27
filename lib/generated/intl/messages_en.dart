@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "active": MessageLookupByLibrary.simpleMessage("Active"),
         "alternativeDriver":
             MessageLookupByLibrary.simpleMessage("Alternative"),
         "busInformation":
@@ -29,19 +30,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "busNumber": MessageLookupByLibrary.simpleMessage("Bus Number"),
         "busStatus": MessageLookupByLibrary.simpleMessage("Bus Status"),
         "buses": MessageLookupByLibrary.simpleMessage("Buses"),
+        "coordination": MessageLookupByLibrary.simpleMessage("Coordination"),
         "createProp": MessageLookupByLibrary.simpleMessage("Create Prop"),
         "driver": MessageLookupByLibrary.simpleMessage("Driver"),
         "driverStatus": MessageLookupByLibrary.simpleMessage("driver Status"),
         "drivers": MessageLookupByLibrary.simpleMessage("Drivers"),
+        "eveningShift": MessageLookupByLibrary.simpleMessage("Evening Shift"),
+        "firstOverTime": MessageLookupByLibrary.simpleMessage("First OverTime"),
+        "inActive": MessageLookupByLibrary.simpleMessage("Inactive"),
+        "morningShift": MessageLookupByLibrary.simpleMessage("Morning Shift"),
         "name": MessageLookupByLibrary.simpleMessage("Bus Information"),
         "repeatedName": MessageLookupByLibrary.simpleMessage("Repeated Name"),
         "repeatedNumber":
             MessageLookupByLibrary.simpleMessage("Repeated number"),
+        "secondOverTime":
+            MessageLookupByLibrary.simpleMessage("Second OverTime"),
+        "shiftSwitching":
+            MessageLookupByLibrary.simpleMessage("Shift Switching"),
         "shiftWork": MessageLookupByLibrary.simpleMessage("Shift Work"),
         "shouldNotEmpty":
             MessageLookupByLibrary.simpleMessage("Should not empty"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "toggleLanguage":
-            MessageLookupByLibrary.simpleMessage("Toggle Language")
+            MessageLookupByLibrary.simpleMessage("Toggle Language"),
+        "vacation": MessageLookupByLibrary.simpleMessage("Vacation")
       };
 }

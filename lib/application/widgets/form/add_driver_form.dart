@@ -29,8 +29,8 @@ class _AddDriverFormState extends State<AddDriverForm> {
   late Size size;
   
   late String name;
-  late DriverStatus status;
-  late ShiftWork shiftWork;
+  DriverStatus status = DriverStatus.active;
+  ShiftWork shiftWork = ShiftWork.morning;
   bool _show = false;
 
 
@@ -118,13 +118,13 @@ class _AddDriverFormState extends State<AddDriverForm> {
   String? _personNameValidator(String? value) {
     if (value == null) return '';
     if (value.isEmpty) return S.of(context).shouldNotEmpty;
-    if (context.read<Database>().contain(Driver.fromName(name))) return S.of(context).repeatedName;
+    if (context.read<Database>().containName(value)) return S.of(context).repeatedName;
     return null;
   }
 
   void _onSubmit() {
     if (globalKey.currentState!.validate()) {
-      Driver driver = Driver(name: name, time: DateTime.now(), status: status, shiftWork: shiftWork);
+      Driver driver = Driver(name: name, status: status, shiftWork: shiftWork);
       context.read<Database>().put(driver);
       widget.onSubmit?.call(driver);
     }

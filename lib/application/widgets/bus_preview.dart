@@ -63,7 +63,7 @@ class BusPreviewer extends StatelessWidget {
               color: ThemeState.of(context).onCard,
             ),
             Text(
-              bus?.id ?? '',
+              bus?.busCode ?? '',
               style:  TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
             ),
           ],

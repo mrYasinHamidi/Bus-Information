@@ -1,5 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:new_bus_information/generated/l10n.dart';
+import 'package:new_bus_information/generated/l10n.dart';
+import 'package:new_bus_information/generated/l10n.dart';
+import 'package:new_bus_information/generated/l10n.dart';
+import 'package:new_bus_information/generated/l10n.dart';
 
 enum ShiftWork {
   morning,
@@ -11,19 +16,18 @@ enum ShiftWork {
 
 extension ShiftWorkEx on ShiftWork {
   String get text {
-    return '';
-    // switch (this) {
-    //   case ShiftWork.morning:
-    //     return Languages.language.value.morningShift;
-    //   case ShiftWork.evening:
-    //     return Languages.language.value.eveningShift;
-    //   case ShiftWork.firstOverTime:
-    //     return Languages.language.value.firstOverTime;
-    //   case ShiftWork.secondOverTime:
-    //     return Languages.language.value.secondOverTime;
-    //   case ShiftWork.shiftSwitching:
-    //     return Languages.language.value.shiftSwitching;
-    // }
+    switch (this) {
+      case ShiftWork.morning:
+        return S.current.morningShift;
+      case ShiftWork.evening:
+        return S.current.eveningShift;
+      case ShiftWork.firstOverTime:
+        return S.current.firstOverTime;
+      case ShiftWork.secondOverTime:
+        return S.current.secondOverTime;
+      case ShiftWork.shiftSwitching:
+        return S.current.shiftSwitching;
+    }
   }
 }
 

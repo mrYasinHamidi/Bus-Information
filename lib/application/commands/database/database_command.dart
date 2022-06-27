@@ -25,9 +25,7 @@ class DatabaseCommand implements Command {
       return;
     }
     if (type == DatabaseCommandType.update) {
-      if (dataBase.contain(object)) {
         dataBase.put(object);
-      }
       return;
     }
   }

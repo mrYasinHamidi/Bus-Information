@@ -4,32 +4,30 @@ import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
+import 'package:objectid/objectid.dart';
 
 class Driver implements BaseObject {
+  final String id;
   final String name;
   final ShiftWork shiftWork;
   final DriverStatus status;
-  final DateTime time;
 
   Driver({
+    String? id,
     required this.name,
-    required this.time,
     required this.status,
     required this.shiftWork,
-  });
+  }) : id = id ?? ObjectId().hexString;
 
   factory Driver.fromJson(String json) {
     Map data = jsonDecode(json);
     return Driver(
+      id: data['id'],
       name: data['name'],
-      time: DateTime.parse(data['time']),
       status: DriverStatus.values[data['status'] ?? 0],
       shiftWork: ShiftWork.values[data['shiftWork'] ?? 0],
     );
   }
-
-  factory Driver.fromName(String name) =>
-      Driver(name: name, time: DateTime.now(), status: DriverStatus.active, shiftWork: ShiftWork.evening);
 
   @override
   List<Object?> get props => [name];
@@ -40,10 +38,10 @@ class Driver implements BaseObject {
   @override
   String toJson() {
     Map data = {
+      'id': id,
       'name': name,
       'status': status.index,
       'shiftWork': shiftWork.index,
-      'time': time.toString(),
     };
     return jsonEncode(data);
   }
@@ -52,8 +50,7 @@ class Driver implements BaseObject {
   BaseObjectType get type => BaseObjectType.driver;
 
   @override
-  String get key => name;
+  String get key => id;
 
-  @override
-  String get searchKey => name;
+  DateTime get creationTime => ObjectId.fromHexString(id).timestamp;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_bus_information/generated/l10n.dart';
 
 enum DriverStatus {
   active,
@@ -8,17 +9,16 @@ enum DriverStatus {
 }
 extension DriverStatusEx on DriverStatus {
   String get text {
-    return '';
-    // switch (this) {
-    //   case DriverStatus.active:
-    //     return Languages.language.value.active;
-    //   case DriverStatus.inActive:
-    //     return Languages.language.value.inActive;
-    //   case DriverStatus.vacation:
-    //     return Languages.language.value.vacation;
-    //   case DriverStatus.coordination:
-    //     return Languages.language.value.coordination;
-    // }
+    switch (this) {
+      case DriverStatus.active:
+        return S.current.active;
+      case DriverStatus.inActive:
+        return S.current.inActive;
+      case DriverStatus.vacation:
+        return S.current.vacation;
+      case DriverStatus.coordination:
+        return S.current.coordination;
+    }
   }
   Color get color {
     switch (this) {
