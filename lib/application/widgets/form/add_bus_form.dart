@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
@@ -96,7 +97,12 @@ class _AddDriverFormState extends State<AddBusForm> {
             const SizedBox(height: 16),
             OutlinedButton(
               onPressed: _onSubmit,
-              child: Text(S.of(context).submit),
+              child: Text(S.of(context).submit,style: TextStyle(color: ThemeState.of(context).enableInputBorder),),
+              style: ButtonStyle(
+                side: MaterialStateBorderSide.resolveWith(
+                  (states) => BorderSide(color: ThemeState.of(context).enableInputBorder),
+                ),
+              ),
             ),
           ],
         ),

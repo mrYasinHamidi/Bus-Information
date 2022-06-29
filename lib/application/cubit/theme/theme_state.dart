@@ -10,6 +10,12 @@ abstract class ThemeState {
   Color get onTapSplash;
 
   Color get createDialog;
+
+  Color get enableInputBorder;
+
+  Color get errorInputBorder;
+
+  Color get focusInputBorder;
 }
 
 class DarkThemeState extends ThemeState {
@@ -17,6 +23,12 @@ class DarkThemeState extends ThemeState {
   ThemeData get theme => ThemeData.dark().copyWith(
         appBarTheme: const AppBarTheme(
           iconTheme: IconThemeData(color: Colors.white),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          iconColor: enableInputBorder,
+          floatingLabelStyle: TextStyle(
+            color: enableInputBorder,
+          ),
         ),
       );
 
@@ -27,7 +39,16 @@ class DarkThemeState extends ThemeState {
   Color get onTapSplash => Colors.black26;
 
   @override
-  Color get createDialog => theme.primaryColor;//const Color(0xff4b4b4b);
+  Color get createDialog => const Color(0xff343434);
+
+  @override
+  Color get enableInputBorder => Colors.white;
+
+  @override
+  Color get errorInputBorder => Colors.redAccent;
+
+  @override
+  Color get focusInputBorder => Colors.white;
 }
 
 class LightThemeState extends ThemeState {
@@ -38,6 +59,12 @@ class LightThemeState extends ThemeState {
           iconTheme: IconThemeData(color: Colors.white),
         ),
         primaryIconTheme: const IconThemeData(color: Colors.black),
+        inputDecorationTheme: InputDecorationTheme(
+          iconColor: enableInputBorder,
+          floatingLabelStyle: TextStyle(
+            color: enableInputBorder,
+          ),
+        ),
       );
 
   @override
@@ -46,7 +73,15 @@ class LightThemeState extends ThemeState {
   @override
   Color get onTapSplash => Colors.black26;
 
+  @override
+  Color get createDialog => theme.primaryColorLight;
 
   @override
-  Color get createDialog => Colors.lightBlueAccent;
+  Color get enableInputBorder => Colors.black;
+
+  @override
+  Color get errorInputBorder => Colors.redAccent;
+
+  @override
+  Color get focusInputBorder => Colors.black;
 }

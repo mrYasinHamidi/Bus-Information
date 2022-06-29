@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 
 class CustomInputField extends StatelessWidget {
-  final Color fillColor;
-  final Color borderColor;
-  final Color activeBorderColor;
-  final double borderWidth;
   final double radius;
   final String? label;
   final Icon icon;
@@ -14,13 +11,11 @@ class CustomInputField extends StatelessWidget {
   final bool readOnly;
   final String? text;
   final int? maxLength;
+
   const CustomInputField({
     Key? key,
-    this.readOnly=false,this.text,
-    this.fillColor = Colors.grey,
-    this.activeBorderColor = Colors.blue,
-    this.borderColor = Colors.black,
-    this.borderWidth = 1,
+    this.readOnly = false,
+    this.text,
     this.radius = 8,
     this.label,
     this.icon = const Icon(Icons.person),
@@ -35,19 +30,31 @@ class CustomInputField extends StatelessWidget {
     return TextFormField(
       maxLength: maxLength,
       decoration: InputDecoration(
-        // icon: icon,
-        prefixIcon: icon,
         label: label == null ? null : Text(label ?? ''),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: activeBorderColor,
-            width: borderWidth,
-          ),
-        ),
+        prefixIcon: icon,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: borderColor,
-            width: borderWidth,
+            color: ThemeState.of(context).enableInputBorder,
+            width: 1,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ThemeState.of(context).focusInputBorder,
+            width: 1,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ThemeState.of(context).errorInputBorder,
+            width: 1,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+
+          borderSide: BorderSide(
+            color: ThemeState.of(context).errorInputBorder,
+            width: 1,
           ),
         ),
       ),

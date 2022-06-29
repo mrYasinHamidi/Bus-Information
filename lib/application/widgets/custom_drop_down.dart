@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 
 class CustomDropDown extends StatefulWidget {
   final List<Widget> items;
@@ -61,10 +62,30 @@ class _CustomDropDownState extends State<CustomDropDown> {
       focusColor: Colors.transparent,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-        label: widget.label == null ? null : Text(widget.label ?? '',style: const TextStyle(color: Colors.black),),
-        focusedBorder: const OutlineInputBorder(
+        label: widget.label == null ? null : Text(widget.label ?? ''),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ThemeState.of(context).enableInputBorder,
+            width: 1,
+          ),
         ),
-        enabledBorder: const OutlineInputBorder(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ThemeState.of(context).focusInputBorder,
+            width: 1,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ThemeState.of(context).errorInputBorder,
+            width: 1,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ThemeState.of(context).errorInputBorder,
+            width: 1,
+          ),
         ),
       ),
       value: _value,

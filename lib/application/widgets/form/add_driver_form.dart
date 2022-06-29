@@ -1,7 +1,7 @@
-
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
@@ -27,12 +27,11 @@ class AddDriverForm extends StatefulWidget {
 class _AddDriverFormState extends State<AddDriverForm> {
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   late Size size;
-  
+
   late String name;
   DriverStatus status = DriverStatus.active;
   ShiftWork shiftWork = ShiftWork.morning;
   bool _show = false;
-
 
   @override
   void initState() {
@@ -63,56 +62,59 @@ class _AddDriverFormState extends State<AddDriverForm> {
           transitionType: SharedAxisTransitionType.vertical,
         );
       },
-      child: _show
-          ? _form
-          : const SizedBox(),
+      child: _show ? _form : const SizedBox(),
     );
   }
 
   Form get _form {
     return Form(
-            key: globalKey,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CustomInputField(
-                      label: S.of(context).name,
-                      validator: _personNameValidator,
-                      onChange: _onPersonNameChange,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomDropDown(
-                      items: ShiftWork.values.asTextList,
-                      onChange: _onShiftWorkChange,
-                      label: S.of(context).shiftWork,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomDropDown(
-                      items: DriverStatus.values.asTextList,
-                      label: S.of(context).driverStatus,
-                      onChange: _onStatusChange,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  OutlinedButton(
-                    onPressed: _onSubmit,
-                    child: Text(
-                      S.of(context).submit,
-                      style: const TextStyle(color: Colors.white70),
-                    ),
-                  ),
-                ],
+      key: globalKey,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: CustomInputField(
+                label: S.of(context).name,
+                validator: _personNameValidator,
+                onChange: _onPersonNameChange,
               ),
             ),
-          );
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomDropDown(
+                items: ShiftWork.values.asTextList,
+                onChange: _onShiftWorkChange,
+                label: S.of(context).shiftWork,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomDropDown(
+                items: DriverStatus.values.asTextList,
+                label: S.of(context).driverStatus,
+                onChange: _onStatusChange,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            OutlinedButton(
+              onPressed: _onSubmit,
+              child: Text(
+                S.of(context).submit,
+                style: TextStyle(color: ThemeState.of(context).enableInputBorder),
+              ),
+              style: ButtonStyle(
+                side: MaterialStateBorderSide.resolveWith(
+                  (states) => BorderSide(color: ThemeState.of(context).enableInputBorder),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   String? _personNameValidator(String? value) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
@@ -49,19 +50,15 @@ class _ItemChooserState extends State<ItemChooser> {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: TextField(
-              controller: _controller,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
-              ),
-            ),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: _buildSearchBox(context),
           ),
           if (widget.items.isEmpty)
             Expanded(
-                child: LottieViewer(
-              width: size.width * .5,
-            ))
+              child: LottieViewer(
+                width: size.width * .5,
+              ),
+            )
           else
             Expanded(
               child: ListView.builder(
@@ -80,6 +77,22 @@ class _ItemChooserState extends State<ItemChooser> {
       floatingActionButton: CreatorDialog(
         onAddItem: _onAddItem,
         type: widget.type,
+      ),
+    );
+  }
+
+  TextField _buildSearchBox(BuildContext context) {
+    return TextField(
+      controller: _controller,
+      decoration: InputDecoration(
+        isDense: true,
+        prefixIcon: const Icon(Icons.search),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: ThemeState.of(context).enableInputBorder),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: ThemeState.of(context).focusInputBorder),
+        ),
       ),
     );
   }
