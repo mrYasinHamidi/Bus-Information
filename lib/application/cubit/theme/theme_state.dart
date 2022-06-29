@@ -8,6 +8,8 @@ abstract class ThemeState {
   Color get onCard;
 
   Color get onTapSplash;
+
+  Color get createDialog;
 }
 
 class DarkThemeState extends ThemeState {
@@ -23,6 +25,9 @@ class DarkThemeState extends ThemeState {
 
   @override
   Color get onTapSplash => Colors.black26;
+
+  @override
+  Color get createDialog => theme.primaryColor;//const Color(0xff4b4b4b);
 }
 
 class LightThemeState extends ThemeState {
@@ -40,4 +45,8 @@ class LightThemeState extends ThemeState {
 
   @override
   Color get onTapSplash => Colors.black26;
+
+
+  @override
+  Color get createDialog => Colors.lightBlueAccent;
 }

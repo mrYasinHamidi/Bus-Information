@@ -36,6 +36,7 @@ class _ItemChooserState extends State<ItemChooser> {
     _controller.addListener(() {
       setState(() {});
     });
+
     super.initState();
   }
 
@@ -75,6 +76,7 @@ class _ItemChooserState extends State<ItemChooser> {
             ),
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: CreatorDialog(
         onAddItem: _onAddItem,
         type: widget.type,
