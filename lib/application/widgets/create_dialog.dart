@@ -35,6 +35,8 @@ class _CreatorDialogState extends State<CreatorDialog> {
 
   Color get _color => context.read<ThemeCubit>().state.createDialog;
 
+  Color get _backgroundColor => _isOpen ? Colors.black38 : Colors.transparent;
+
   BorderRadius get _radius => BorderRadius.circular(16);
 
   BoxDecoration get _decoration => BoxDecoration(color: _color, borderRadius: _radius, boxShadow: const [
@@ -79,14 +81,17 @@ class _CreatorDialogState extends State<CreatorDialog> {
       },
       child: Stack(
         children: [
-          if (_isOpen)
-            GestureDetector(
+          IgnorePointer(
+            ignoring: !_isOpen,
+            child: GestureDetector(
                 onTap: _close,
-                child: Container(
+                child: AnimatedContainer(
                   width: size.width,
                   height: size.height,
-                  color: Colors.black38,
+                  color: _backgroundColor,
+                  duration: _duration,
                 )),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(

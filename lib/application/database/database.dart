@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
 
@@ -13,4 +14,6 @@ abstract class Database {
   BaseObject getObject(String id, BaseObjectType type);
 
   List<BaseObject> getObjects(BaseObjectType type);
+
+  ValueListenable listen(BaseObjectType type);
 }

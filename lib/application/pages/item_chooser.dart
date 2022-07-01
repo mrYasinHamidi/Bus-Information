@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
+import 'package:new_bus_information/application/extensions.dart';
 import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
@@ -29,7 +30,7 @@ class _ItemChooserState extends State<ItemChooser> {
   final TextEditingController _controller = TextEditingController();
 
   List<BaseObject> get _searchedItems => widget.items
-      .where((element) => element.key.toLowerCase().contains(_controller.text.trim().toLowerCase()))
+      .where((element) => element.searchTerm.toLowerCase().contains(_controller.text.trim().toLowerCase()))
       .toList();
 
   @override
@@ -37,6 +38,7 @@ class _ItemChooserState extends State<ItemChooser> {
     _controller.addListener(() {
       setState(() {});
     });
+
 
     super.initState();
   }

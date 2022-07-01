@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:new_bus_information/application/extensions.dart';
@@ -67,4 +68,9 @@ class NoSqlDatabase implements Database {
 
   @override
   List<BaseObject> getObjects(BaseObjectType type) => _box(type).values.map((e) => _object(type, e)).toList()..reSort();
+
+  @override
+  ValueListenable listen(BaseObjectType type) {
+    return _box(type).listenable();
+  }
 }
