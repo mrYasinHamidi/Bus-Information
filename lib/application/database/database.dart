@@ -5,7 +5,7 @@ import 'package:new_bus_information/application/models/base_object_type.dart';
 abstract class Database {
   void put(BaseObject object);
 
-  void delete(BaseObject object);
+  Future<void> delete(BaseObject object);
 
   bool containName(String name);
 

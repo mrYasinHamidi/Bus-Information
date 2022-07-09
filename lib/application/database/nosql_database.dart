@@ -52,7 +52,7 @@ class NoSqlDatabase implements Database {
   void put(BaseObject object) => _box(object.type).put(object.key, object.toJson());
 
   @override
-  void delete(BaseObject object) => _box(object.type).delete(object.key);
+  Future<void> delete(BaseObject object) => _box(object.type).delete(object.key);
 
   @override
   bool containName(String name) =>
