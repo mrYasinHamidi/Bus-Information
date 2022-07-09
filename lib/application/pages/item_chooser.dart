@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
+import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/extensions.dart';
 import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
@@ -39,7 +41,6 @@ class _ItemChooserState extends State<ItemChooser> {
       setState(() {});
     });
 
-
     super.initState();
   }
 
@@ -47,7 +48,7 @@ class _ItemChooserState extends State<ItemChooser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(buildTitle),
+        title: Text(widget.type.text),
       ),
       body: Column(
         children: [
@@ -83,6 +84,8 @@ class _ItemChooserState extends State<ItemChooser> {
     );
   }
 
+  Stream<List<BaseObject>> _stream() async* {}
+
   TextField _buildSearchBox(BuildContext context) {
     return TextField(
       controller: _controller,
@@ -108,16 +111,6 @@ class _ItemChooserState extends State<ItemChooser> {
       default:
         return BusItemWidget(item as Bus);
     }
-  }
-
-  String get buildTitle {
-    if (widget.items is List<Driver>) {
-      return S.of(context).drivers;
-    }
-    if (widget.items is List<Bus>) {
-      return S.of(context).buses;
-    }
-    return S.of(context).buses;
   }
 
   void _onItemSelect(BaseObject item) {

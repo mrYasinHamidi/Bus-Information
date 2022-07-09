@@ -1,13 +1,14 @@
 {
   "@@locale": "en",
-  "name": "Bus Information",
+  "name": "Name",
+  "appName":"Bus Information",
   "toggleLanguage": "Toggle Language",
   "busNumber": "Bus Number",
   "busStatus": "Bus Status",
   "driver": "Driver",
+  "bus": "Bus",
   "alternativeDriver": "Alternative",
   "createProp": "Create Prop",
-  "busInformation": "Bus Information",
   "drivers": "Drivers",
   "buses": "Buses",
   "submit": "Submit",
@@ -24,5 +25,6 @@
   "eveningShift": "Evening Shift",
   "firstOverTime": "First OverTime",
   "secondOverTime": "Second OverTime",
-  "shiftSwitching": "Shift Switching"
+  "shiftSwitching": "Shift Switching",
+  "props":"Props"
 }

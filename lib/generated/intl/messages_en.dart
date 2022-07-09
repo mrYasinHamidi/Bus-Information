@@ -25,8 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "alternativeDriver":
             MessageLookupByLibrary.simpleMessage("Alternative"),
-        "busInformation":
-            MessageLookupByLibrary.simpleMessage("Bus Information"),
+        "appName": MessageLookupByLibrary.simpleMessage("Bus Information"),
+        "bus": MessageLookupByLibrary.simpleMessage("Bus"),
         "busNumber": MessageLookupByLibrary.simpleMessage("Bus Number"),
         "busStatus": MessageLookupByLibrary.simpleMessage("Bus Status"),
         "buses": MessageLookupByLibrary.simpleMessage("Buses"),
@@ -39,7 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "firstOverTime": MessageLookupByLibrary.simpleMessage("First OverTime"),
         "inActive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "morningShift": MessageLookupByLibrary.simpleMessage("Morning Shift"),
-        "name": MessageLookupByLibrary.simpleMessage("Bus Information"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "props": MessageLookupByLibrary.simpleMessage("Props"),
         "repeatedName": MessageLookupByLibrary.simpleMessage("Repeated Name"),
         "repeatedNumber":
             MessageLookupByLibrary.simpleMessage("Repeated number"),

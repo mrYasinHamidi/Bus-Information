@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_bus_information/application/database/database.dart';
+import 'package:new_bus_information/application/models/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
@@ -13,9 +16,10 @@ class PropItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Driver? _driver;
-    Driver? _secondDriver;
-    Bus? _bus;
+    Driver? _driver = context.read<Database>().getObject(prop.driverId ?? '', BaseObjectType.driver) as Driver?;
+    Driver? _secondDriver =
+        context.read<Database>().getObject(prop.secondDriverId ?? '', BaseObjectType.driver) as Driver?;
+    Bus? _bus = context.read<Database>().getObject(prop.busId ?? '', BaseObjectType.bus) as Bus?;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -25,7 +29,7 @@ class PropItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildProperty(S.of(context).busNumber, _bus?.id ?? ''),
+              _buildProperty(S.of(context).busNumber, _bus?.busCode ?? ''),
               Dot(color: _bus?.status.color),
             ],
           ),
@@ -35,8 +39,7 @@ class PropItemWidget extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Container(
-                  decoration: _decoration(),
+                child: Card(
                   child: ListTile(
                     leading: const CircleAvatar(
                       radius: 18,
@@ -55,8 +58,7 @@ class PropItemWidget extends StatelessWidget {
                 width: 8,
               ),
               Expanded(
-                child: Container(
-                  decoration: _decoration(),
+                child: Card(
                   child: ListTile(
                     leading: const CircleAvatar(
                       child: Icon(Icons.person),
@@ -77,13 +79,6 @@ class PropItemWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  BoxDecoration _decoration() {
-    return BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [BoxShadow(blurRadius: 2, offset: Offset(0, 0), spreadRadius: 0, color: Colors.black12)]);
   }
 
   Row _buildProperty(String name, String value) {

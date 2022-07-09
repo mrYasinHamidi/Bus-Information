@@ -12,9 +12,9 @@ import 'package:objectid/objectid.dart';
 import 'database.dart';
 
 class NoSqlDatabase implements Database {
-  static const String driverBoxKey = 'driverBoxKey1';
-  static const String busBoxKey = 'busBoxKey1';
-  static const String propBoxKey = 'propBoxKey1';
+  static const String driverBoxKey = 'driverBoxKey2';
+  static const String busBoxKey = 'busBoxKey2';
+  static const String propBoxKey = 'propBoxKey2';
 
   final Box _busBox = Hive.box(busBoxKey);
   final Box _driverBox = Hive.box(driverBoxKey);
@@ -45,7 +45,6 @@ class NoSqlDatabase implements Database {
         return _busBox;
       case BaseObjectType.prop:
         return _propBox;
-        break;
     }
   }
 
@@ -64,13 +63,26 @@ class NoSqlDatabase implements Database {
       getObjects(BaseObjectType.bus).indexWhere((element) => (element as Bus).busCode == busCode) != -1;
 
   @override
-  BaseObject getObject(String id, BaseObjectType type) => _box(type).get(id);
+  BaseObject? getObject(String id, BaseObjectType type) {
+    BaseObject? object;
+    String data = _box(type).get(id) ?? '';
+    if (data.isNotEmpty) object = _object(type, data);
+    return object;
+  }
 
   @override
-  List<BaseObject> getObjects(BaseObjectType type) => _box(type).values.map((e) => _object(type, e)).toList()..reSort();
+  List<BaseObject> getObjects(BaseObjectType type) {
+    List<BaseObject> objects = <BaseObject>[];
+    Iterable data = _box(type).values;
+    if (data.isNotEmpty) {
+      objects = data.map((e) => _object(type, e)).toList();
+      objects.reSort();
+    }
+    return objects;
+  }
 
   @override
-  ValueListenable listen(BaseObjectType type) {
+  ValueListenable<Box> listen(BaseObjectType type) {
     return _box(type).listenable();
   }
 }

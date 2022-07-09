@@ -38,13 +38,13 @@ class BusPreviewer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          Icons.person_add_alt_1_rounded,
+          Icons.directions_bus,
           size: 60,
           color: ThemeState.of(context).onCard,
         ),
         Text(
           emptyTitle,
-          style:  TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
+          style: TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
         ),
       ],
     );
@@ -64,7 +64,7 @@ class BusPreviewer extends StatelessWidget {
             ),
             Text(
               bus?.busCode ?? '',
-              style:  TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
+              style: TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
             ),
           ],
         ),
@@ -76,5 +76,4 @@ class BusPreviewer extends StatelessWidget {
       ],
     );
   }
-
 }

@@ -50,11 +50,21 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Bus Information`
+  /// `Name`
   String get name {
     return Intl.message(
-      'Bus Information',
+      'Name',
       name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bus Information`
+  String get appName {
+    return Intl.message(
+      'Bus Information',
+      name: 'appName',
       desc: '',
       args: [],
     );
@@ -100,6 +110,16 @@ class S {
     );
   }
 
+  /// `Bus`
+  String get bus {
+    return Intl.message(
+      'Bus',
+      name: 'bus',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Alternative`
   String get alternativeDriver {
     return Intl.message(
@@ -115,16 +135,6 @@ class S {
     return Intl.message(
       'Create Prop',
       name: 'createProp',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Bus Information`
-  String get busInformation {
-    return Intl.message(
-      'Bus Information',
-      name: 'busInformation',
       desc: '',
       args: [],
     );
@@ -295,6 +305,16 @@ class S {
     return Intl.message(
       'Shift Switching',
       name: 'shiftSwitching',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Props`
+  String get props {
+    return Intl.message(
+      'Props',
+      name: 'props',
       desc: '',
       args: [],
     );

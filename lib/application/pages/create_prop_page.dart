@@ -59,7 +59,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
             ),
             BusPreviewer(
               onTap: _selectBus,
-              emptyTitle: S.of(context).busInformation,
+              emptyTitle: S.of(context).bus,
               bus: _bus,
             ),
           ],
@@ -110,6 +110,6 @@ class _CreatePropPageState extends State<CreatePropPage> {
       secondDriverId: _secondDriver?.key,
     );
     context.read<Database>().put(prop);
-    Navigator.pop(context, prop);
+    Navigator.pop(context);
   }
 }

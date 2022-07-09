@@ -11,7 +11,7 @@ abstract class Database {
 
   bool containBusCode(String busCode);
 
-  BaseObject getObject(String id, BaseObjectType type);
+  BaseObject? getObject(String id, BaseObjectType type);
 
   List<BaseObject> getObjects(BaseObjectType type);
 
