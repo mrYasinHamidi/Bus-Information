@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -21,7 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<BaseObject> get _props => context.read<Database>().getObjects(BaseObjectType.prop);
+  List<Prop> get _props => context.read<Database>().getObjects(BaseObjectType.prop).cast<Prop>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,23 +54,37 @@ class _HomePageState extends State<HomePage> {
                 key: ValueKey(_props[i].key),
                 startActionPane: ActionPane(
                   motion: const ScrollMotion(),
-                  dismissible: DismissiblePane(onDismissed: () {
-                    _delete(_props[i]);
-                  }),
+                  dismissible: DismissiblePane(
+                    confirmDismiss: _showDeleteDialog,
+                    onDismissed: () {
+                      _delete(_props[i]);
+                    },
+                    closeOnCancel: true,
+                  ),
                   children: [
-                    Expanded(
-                        child: Container(
-                      color: Colors.red,
-                      child: Icon(Icons.search),
-                    )),
-                    Expanded(
-                        child: Container(
-                      color: Colors.blue,
-                      child: Icon(Icons.add),
-                    )),
+                    SlidableAction(
+                      onPressed: (context) async {
+                        if (await _showDeleteDialog()) {
+                          _delete(_props[i]);
+                        }
+                      },
+                      backgroundColor: Color(0xFF21B7CA),
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete_rounded,
+                      label: S.of(context).delete,
+                    ),
+                    SlidableAction(
+                      onPressed: (context) {
+                        _edit(_props[i]);
+                      },
+                      backgroundColor: Color(0xFF21B7CA),
+                      foregroundColor: Colors.white,
+                      icon: Icons.edit_rounded,
+                      label: S.of(context).edite,
+                    ),
                   ],
                 ),
-                child: PropItemWidget(_props[i] as Prop),
+                child: PropItemWidget(_props[i]),
               );
             },
           );
@@ -80,38 +93,48 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<bool?> _confirmDissmis(BaseObject object) async {
-    try {
-      await context.read<Database>().delete(object);
-    } catch (e) {
-      return false;
-    }
-    return true;
+  void _edit(Prop object) {
+    openPage(
+      context,
+      CreatePropPage(
+        prop: object,
+      ),
+    );
+  }
+
+  Future<bool> _showDeleteDialog() async {
+    return await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              backgroundColor: ThemeState.of(context).createDialog,
+              title: Text('Did you realy wanna delete this?'),
+              content: Text('If ypu delete this item , you can\'t return this.'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  style: ElevatedButton.styleFrom(elevation: 0),
+                  child: Text('No'),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: Text('Yes do it'),
+                ),
+              ],
+            );
+          },
+        ) ??
+        false;
   }
 
   void _delete(BaseObject object) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: ThemeState.of(context).createDialog,
-            title: Text('Did you realy wanna delete this?'),
-            content: Text('If ypu delete this item , you can\'t return this.'),
-            actions: [
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(elevation: 0),
-                child: Text('No'),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              OutlinedButton(
-                onPressed: () {},
-                child: Text('Yes do it'),
-              ),
-            ],
-          );
-        });
+    context.read<Database>().delete(object);
   }
 }

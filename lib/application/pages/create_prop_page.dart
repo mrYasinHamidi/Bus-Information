@@ -12,7 +12,8 @@ import 'package:new_bus_information/application/widgets/driver_preview.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class CreatePropPage extends StatefulWidget {
-  const CreatePropPage({Key? key}) : super(key: key);
+  final Prop? prop;
+  const CreatePropPage({Key? key, this.prop}) : super(key: key);
 
   @override
   State<CreatePropPage> createState() => _CreatePropPageState();
@@ -22,6 +23,26 @@ class _CreatePropPageState extends State<CreatePropPage> {
   Driver? _firstDriver;
   Driver? _secondDriver;
   Bus? _bus;
+
+  bool get _editMode => widget.prop != null;
+
+  @override
+  void initState() {
+    ///Initialize data with old data for editing prop
+    if (_editMode) {
+      if (widget.prop!.driverId != null) {
+        _firstDriver = context.read<Database>().getObject(widget.prop!.driverId!, BaseObjectType.driver) as Driver;
+      }
+      if (widget.prop!.secondDriverId != null) {
+        _secondDriver =
+            context.read<Database>().getObject(widget.prop!.secondDriverId!, BaseObjectType.driver) as Driver;
+      }
+      if (widget.prop!.busId != null) {
+        _bus = context.read<Database>().getObject(widget.prop!.busId!, BaseObjectType.bus) as Bus;
+      }
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +126,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
 
   void _submit() {
     Prop prop = Prop(
+      id: widget.prop?.id,
       busId: _bus?.key,
       driverId: _firstDriver?.key,
       secondDriverId: _secondDriver?.key,

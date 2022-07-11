@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
   "name": "Name",
-  "appName":"Bus Information",
+  "appName": "Bus Information",
   "toggleLanguage": "Toggle Language",
   "busNumber": "Bus Number",
   "busStatus": "Bus Status",
@@ -26,5 +26,7 @@
   "firstOverTime": "First OverTime",
   "secondOverTime": "Second OverTime",
   "shiftSwitching": "Shift Switching",
-  "props":"Props"
+  "props": "Props",
+  "edite": "Edite",
+  "delete": "Delete"
 }
