@@ -28,5 +28,6 @@
   "shiftSwitching": "Shift Switching",
   "props": "Props",
   "edite": "Edite",
+  "searchHint": "Search Your Text here . . .",
   "delete": "Delete"
 }

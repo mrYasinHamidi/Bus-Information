@@ -330,6 +330,16 @@ class S {
     );
   }
 
+  /// `Search Your Text here . . .`
+  String get searchHint {
+    return Intl.message(
+      'Search Your Text here . . .',
+      name: 'searchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Delete`
   String get delete {
     return Intl.message(

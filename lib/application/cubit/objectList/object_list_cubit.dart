@@ -10,7 +10,7 @@ import 'package:new_bus_information/application/models/base_object_type.dart';
 
 part 'object_list_state.dart';
 
-class ObjectListCubit<T extends BaseObject> extends Cubit<ObjectListState> {
+class ObjectListCubit<T extends BaseObject> extends Cubit<ObjectListState<T>> {
   final Database database;
   final BaseObjectType type;
   late StreamSubscription<DatabaseEvent> streamSubscription;
@@ -18,18 +18,20 @@ class ObjectListCubit<T extends BaseObject> extends Cubit<ObjectListState> {
   ObjectListCubit({
     required this.database,
     required this.type,
-  }) : super(ObjectListState(objects: database.getObjects(type))) {
+  }) : super(ObjectListState(objects: database.getObjects(type).cast<T>())) {
     streamSubscription = database.listen().listen(_databaseListener);
   }
 
   void _databaseListener(DatabaseEvent event) {
-    switch (event.eventType) {
+    if(event.object is T) {
+      switch (event.eventType) {
       case DatabaseEventType.put:
-        emit(state.copyWith(objects: [event.object, ...state.objects]));
+        emit(state.copyWith(objects: [event.object as T, ...state.objects]));
         break;
       case DatabaseEventType.delete:
-        emit(state.copyWith(objects: state.objects..removeWhere((element) => element == event.object)));
+        emit(state.copyWith(objects: [...state.objects]..removeWhere((element) => element == event.object)));
         break;
+    }
     }
   }
 

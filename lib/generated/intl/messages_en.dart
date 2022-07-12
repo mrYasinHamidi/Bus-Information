@@ -46,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "repeatedName": MessageLookupByLibrary.simpleMessage("Repeated Name"),
         "repeatedNumber":
             MessageLookupByLibrary.simpleMessage("Repeated number"),
+        "searchHint":
+            MessageLookupByLibrary.simpleMessage("Search Your Text here . . ."),
         "secondOverTime":
             MessageLookupByLibrary.simpleMessage("Second OverTime"),
         "shiftSwitching":
