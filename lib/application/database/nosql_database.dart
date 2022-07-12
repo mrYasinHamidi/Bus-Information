@@ -56,13 +56,13 @@ class NoSqlDatabase implements Database {
   @override
   void put(BaseObject object) {
     _box(object.type).put(object.key, object.toJson());
-    _controller.add(DatabaseEvent(object: object,eventType: DatabaseEventType.put));
+    _controller.add(DatabaseEvent(object: object, eventType: DatabaseEventType.put));
   }
 
   @override
   Future<void> delete(BaseObject object) async {
     _box(object.type).delete(object.key);
-    _controller.add(DatabaseEvent(object: object,eventType: DatabaseEventType.delete));
+    _controller.add(DatabaseEvent(object: object, eventType: DatabaseEventType.delete));
   }
 
   @override
@@ -88,6 +88,13 @@ class NoSqlDatabase implements Database {
     if (data.isNotEmpty) {
       objects = data.map((e) => _object(type, e)).toList();
       objects.reSort();
+      if (type == BaseObjectType.prop) {
+        for (Prop prop in objects.cast<Prop>()) {
+          prop.bus = getObject(prop.busId ?? '', BaseObjectType.bus) as Bus;
+          prop.firstDriver = getObject(prop.driverId ?? '', BaseObjectType.driver) as Driver;
+          prop.secondDriver = getObject(prop.secondDriverId ?? '', BaseObjectType.driver) as Driver;
+        }
+      }
     }
     return objects;
   }

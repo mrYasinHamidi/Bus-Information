@@ -8,7 +8,7 @@ class SearchState extends Equatable {
     required this.isActive,
   });
   factory SearchState.initial() {
-    return const SearchState(searchTerm: '', isActive: true);
+    return const SearchState(searchTerm: '', isActive: false);
   }
 
   @override

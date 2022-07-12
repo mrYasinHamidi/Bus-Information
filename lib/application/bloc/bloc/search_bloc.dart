@@ -19,7 +19,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       emit(state.copyWith(isActive: true));
     });
     on<DeactiveSearchEvent>((event, emit) {
-      emit(state.copyWith(isActive: false));
+      emit(state.copyWith(isActive: false, searchTerm: ''));
     });
   }
 

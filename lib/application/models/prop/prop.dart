@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:objectid/objectid.dart';
 import '../base_object.dart';
 
@@ -8,6 +10,10 @@ class Prop implements BaseObject {
   final String? driverId;
   final String? busId;
   final String? secondDriverId;
+
+  Bus? bus;
+  Driver? firstDriver;
+  Driver? secondDriver;
 
   Prop({
     String? id,
