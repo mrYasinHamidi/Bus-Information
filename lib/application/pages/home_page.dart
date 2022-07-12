@@ -1,3 +1,4 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -24,8 +25,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return BackdropScaffold(
+      backLayerBackgroundColor: ThemeState.of(context).theme.primaryColor,
+      frontLayerBackgroundColor: ThemeState.of(context).scaffoldBackground,
+      appBar: BackdropAppBar(
+        elevation: 0,
         title: Text(S.of(context).appName),
         actions: [
           IconButton(
@@ -44,7 +48,12 @@ class _HomePageState extends State<HomePage> {
           openPage(context, const CreatePropPage()).then((value) => null);
         },
       ),
-      body: ValueListenableBuilder(
+      backLayer: Container(
+        child: Center(
+          child: Text('Back Layer'),
+        ),
+      ),
+      frontLayer: ValueListenableBuilder(
         valueListenable: context.read<Database>().listen(BaseObjectType.prop),
         builder: (BuildContext context, value, Widget? child) {
           return ListView.builder(

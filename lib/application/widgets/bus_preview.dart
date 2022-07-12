@@ -25,7 +25,7 @@ class BusPreviewer extends StatelessWidget {
         child: InkWell(
           splashColor: ThemeState.of(context).onTapSplash,
           splashFactory: InkSplash.splashFactory,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(4),
           onTap: onTap,
           child: bus == null ? _buildEmptyView(context) : _buildPreview(context),
         ),
