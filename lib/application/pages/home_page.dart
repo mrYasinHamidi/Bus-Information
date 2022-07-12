@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:new_bus_information/application/bloc/bloc/search_bloc.dart';
 import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
+import 'package:new_bus_information/application/cubit/filterTerms/filter_terms_cubit.dart';
 import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
 import 'package:new_bus_information/application/cubit/objectList/object_list_cubit.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
@@ -37,61 +38,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final searchState = context.watch<SearchBloc>().state;
     return BackdropScaffold(
-      backLayerBackgroundColor: ThemeState.of(context).theme.primaryColor,
-      frontLayerBackgroundColor: ThemeState.of(context).scaffoldBackground,
-      appBar: _buildAppBar(searchState.isActive),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          openPage(context, const CreatePropPage()).then((value) => null);
-        },
-      ),
-      backLayer: Container(height: 100),
-      frontLayer: Builder(builder: (context) {
-        final state = context.watch<FilterPropCubit>().state;
-        return ListView.builder(
-          itemCount: state.filteredList.length,
-          itemBuilder: (c, i) {
-            return Slidable(
-              key: ValueKey(state.filteredList[i].key),
-              startActionPane: ActionPane(
-                motion: const ScrollMotion(),
-                dismissible: DismissiblePane(
-                  confirmDismiss: _showDeleteDialog,
-                  onDismissed: () {
-                    _delete(state.filteredList[i]);
-                  },
-                  closeOnCancel: true,
-                ),
-                children: [
-                  SlidableAction(
-                    onPressed: (context) async {
-                      if (await _showDeleteDialog()) {
-                        _delete(state.filteredList[i]);
-                      }
-                    },
-                    backgroundColor: Color(0xFF21B7CA),
-                    foregroundColor: Colors.white,
-                    icon: Icons.delete_rounded,
-                    label: S.of(context).delete,
-                  ),
-                  SlidableAction(
-                    onPressed: (context) {
-                      _edit(state.filteredList[i]);
-                    },
-                    backgroundColor: Color(0xFF21B7CA),
-                    foregroundColor: Colors.white,
-                    icon: Icons.edit_rounded,
-                    label: S.of(context).edite,
-                  ),
-                ],
-              ),
-              child: PropItemWidget(state.filteredList[i]),
-            );
+        backLayerBackgroundColor: ThemeState.of(context).theme.primaryColor,
+        frontLayerBackgroundColor: ThemeState.of(context).scaffoldBackground,
+        appBar: _buildAppBar(searchState.isActive),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            openPage(context, const CreatePropPage()).then((value) => null);
           },
-        );
-      }),
-    );
+        ),
+        backLayer: _buildBackLayer(),
+        frontLayer: _buildFrontLayer());
   }
 
   PreferredSizeWidget _buildAppBar(bool searchMode) {
@@ -181,5 +138,90 @@ class _HomePageState extends State<HomePage> {
 
   void _delete(BaseObject object) {
     context.read<Database>().delete(object);
+  }
+
+  Widget _buildFrontLayer() {
+    return BlocBuilder<FilterPropCubit, FilterPropState>(
+      builder: (context, state) {
+        return ListView.builder(
+          itemCount: state.filteredList.length,
+          itemBuilder: (c, i) {
+            return Slidable(
+              key: ValueKey(state.filteredList[i].key),
+              startActionPane: ActionPane(
+                motion: const ScrollMotion(),
+                dismissible: DismissiblePane(
+                  confirmDismiss: _showDeleteDialog,
+                  onDismissed: () {
+                    _delete(state.filteredList[i]);
+                  },
+                  closeOnCancel: true,
+                ),
+                children: [
+                  SlidableAction(
+                    onPressed: (context) async {
+                      if (await _showDeleteDialog()) {
+                        _delete(state.filteredList[i]);
+                      }
+                    },
+                    backgroundColor: Color(0xFF21B7CA),
+                    foregroundColor: Colors.white,
+                    icon: Icons.delete_rounded,
+                    label: S.of(context).delete,
+                  ),
+                  SlidableAction(
+                    onPressed: (context) {
+                      _edit(state.filteredList[i]);
+                    },
+                    backgroundColor: Color(0xFF21B7CA),
+                    foregroundColor: Colors.white,
+                    icon: Icons.edit_rounded,
+                    label: S.of(context).edite,
+                  ),
+                ],
+              ),
+              child: PropItemWidget(state.filteredList[i]),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildBackLayer() {
+    return BlocBuilder<FilterTermsCubit, FilterTermsState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: ToggleButtons(
+                  color: Colors.black.withOpacity(0.60),
+                  selectedColor: Color(0xFF6200EE),
+                  selectedBorderColor: Color(0xFF6200EE),
+                  fillColor: Color(0xFF6200EE).withOpacity(0.08),
+                  splashColor: Color(0xFF6200EE).withOpacity(0.12),
+                  hoverColor: Color(0xFF6200EE).withOpacity(0.04),
+                  borderRadius: BorderRadius.circular(4.0),
+                  constraints: const BoxConstraints(minHeight: 36.0),
+                  isSelected: state.condidateAsBool,
+                  onPressed: (index) {
+                    context.read<FilterTermsCubit>().changeCondidate(SearchCondidateType.values[index]);
+                  },
+                  children: SearchCondidateType.values
+                      .map((e) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Text(e.text),
+                          ))
+                      .toList(),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

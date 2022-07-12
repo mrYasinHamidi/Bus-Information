@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'filter_terms_cubit.dart';
 
-enum SearchCondidateType { firstDriver, secondDriver, bus }
+enum SearchCondidateType { bus, firstDriver, secondDriver }
 
 class FilterTermsState extends Equatable {
   final Set<SearchCondidateType> searchCondidates;
@@ -9,12 +9,13 @@ class FilterTermsState extends Equatable {
   const FilterTermsState({required this.searchCondidates});
 
   factory FilterTermsState.initial() {
-    return const FilterTermsState(searchCondidates: {SearchCondidateType.firstDriver});
+    return const FilterTermsState(searchCondidates: {SearchCondidateType.bus});
   }
+
+  List<bool> get condidateAsBool => SearchCondidateType.values.map((e) => searchCondidates.contains(e)).toList();
 
   @override
   List<Object> get props => [searchCondidates];
-
 
   FilterTermsState copyWith({
     Set<SearchCondidateType>? searchCondidates,
@@ -22,5 +23,18 @@ class FilterTermsState extends Equatable {
     return FilterTermsState(
       searchCondidates: searchCondidates ?? this.searchCondidates,
     );
+  }
+}
+
+extension CondidateExtension on SearchCondidateType {
+  String get text {
+    switch (this) {
+      case SearchCondidateType.bus:
+        return S.current.bus;
+      case SearchCondidateType.firstDriver:
+        return S.current.driver;
+      case SearchCondidateType.secondDriver:
+        return S.current.alternativeDriver;
+    }
   }
 }
