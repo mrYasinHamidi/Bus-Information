@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:new_bus_information/application/database/database_event.dart';
 import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
 
@@ -15,5 +16,5 @@ abstract class Database {
 
   List<BaseObject> getObjects(BaseObjectType type);
 
-  ValueListenable listen(BaseObjectType type);
+  Stream<DatabaseEvent> listen();
 }

@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:new_bus_information/application/database/database_event.dart';
 import 'package:new_bus_information/application/extensions.dart';
 import 'package:new_bus_information/application/models/base_object.dart';
 import 'package:new_bus_information/application/models/base_object_type.dart';
@@ -15,6 +18,8 @@ class NoSqlDatabase implements Database {
   static const String driverBoxKey = 'driverBoxKey2';
   static const String busBoxKey = 'busBoxKey2';
   static const String propBoxKey = 'propBoxKey2';
+
+  final StreamController<DatabaseEvent> _controller = StreamController();
 
   final Box _busBox = Hive.box(busBoxKey);
   final Box _driverBox = Hive.box(driverBoxKey);
@@ -49,10 +54,16 @@ class NoSqlDatabase implements Database {
   }
 
   @override
-  void put(BaseObject object) => _box(object.type).put(object.key, object.toJson());
+  void put(BaseObject object) {
+    _box(object.type).put(object.key, object.toJson());
+    _controller.add(DatabaseEvent(object: object,eventType: DatabaseEventType.put));
+  }
 
   @override
-  Future<void> delete(BaseObject object) => _box(object.type).delete(object.key);
+  Future<void> delete(BaseObject object) async {
+    _box(object.type).delete(object.key);
+    _controller.add(DatabaseEvent(object: object,eventType: DatabaseEventType.delete));
+  }
 
   @override
   bool containName(String name) =>
@@ -82,7 +93,5 @@ class NoSqlDatabase implements Database {
   }
 
   @override
-  ValueListenable<Box> listen(BaseObjectType type) {
-    return _box(type).listenable();
-  }
+  Stream<DatabaseEvent> listen() => _controller.stream;
 }
