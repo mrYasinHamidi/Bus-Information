@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "alternativeDriver":
             MessageLookupByLibrary.simpleMessage("Alternative"),
         "appName": MessageLookupByLibrary.simpleMessage("Bus Information"),
-        "busNumber": MessageLookupByLibrary.simpleMessage("Bus Number"),
+        "busNumber": MessageLookupByLibrary.simpleMessage("شماره اتوبوس"),
         "busStatus": MessageLookupByLibrary.simpleMessage("Bus Status"),
         "buses": MessageLookupByLibrary.simpleMessage("Buses"),
         "coordination": MessageLookupByLibrary.simpleMessage("Coordination"),

@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
       create: (context) => NoSqlDatabase(),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => ThemeCubit()),
           BlocProvider(create: (context) => LanguageCubit()),
+          BlocProvider(create: (context) => ThemeCubit(languageCubit: context.read<LanguageCubit>())),
           BlocProvider(create: (context) => SearchBloc()),
           BlocProvider(create: (context) => FilterTermsCubit()),
           BlocProvider(
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               debugShowCheckedModeBanner: false,
-            );
+                        );
           },
         ),
       ),

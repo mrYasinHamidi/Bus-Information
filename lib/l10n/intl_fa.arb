@@ -3,7 +3,7 @@
   "name": "Name",
   "appName":"Bus Information",
   "toggleLanguage": "Toggle Language",
-  "busNumber": "Bus Number",
+  "busNumber": "شماره اتوبوس",
   "busStatus": "Bus Status",
   "driver": "Driver",
   "alternativeDriver": "Alternative",

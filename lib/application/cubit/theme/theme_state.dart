@@ -3,7 +3,7 @@ part of 'theme_cubit.dart';
 abstract class ThemeState {
   static ThemeState of(BuildContext context) => BlocProvider.of<ThemeCubit>(context).state;
 
-  ThemeData theme = ThemeData.dark();
+  ThemeData theme = ThemeData();
 
   Color get onCard;
 
@@ -27,14 +27,19 @@ abstract class ThemeState {
 }
 
 class DarkThemeState extends ThemeState {
+  final String? fontFamily;
+  DarkThemeState({this.fontFamily});
+
   @override
-  ThemeData get theme => ThemeData.dark().copyWith(
+  ThemeData get theme => ThemeData(
         appBarTheme: AppBarTheme(
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: primaryColor,
         ),
         primaryColor: primaryColor,
         scaffoldBackgroundColor: scaffoldBackground,
+        fontFamily: fontFamily,
+        brightness: Brightness.dark,
         cardColor: cardColor,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: secondaryColor,
@@ -79,15 +84,20 @@ class DarkThemeState extends ThemeState {
 }
 
 class LightThemeState extends ThemeState {
+  final String? fontFamily;
+  LightThemeState({this.fontFamily});
+
   @override
-  ThemeData get theme => ThemeData.light().copyWith(
+  ThemeData get theme => ThemeData(
         appBarTheme: AppBarTheme(
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: primaryColor,
         ),
         primaryIconTheme: const IconThemeData(color: Colors.black),
         primaryColor: primaryColor,
+        fontFamily: fontFamily,
         cardColor: cardColor,
+        brightness: Brightness.light,
         scaffoldBackgroundColor: scaffoldBackground,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: secondaryColor,

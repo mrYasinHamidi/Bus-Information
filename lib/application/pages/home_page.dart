@@ -25,6 +25,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
+  final FocusNode _searchFocusNode = FocusNode();
+
+  Size get size => MediaQuery.of(context).size;
 
   @override
   void initState() {
@@ -38,61 +41,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final searchState = context.watch<SearchBloc>().state;
     return BackdropScaffold(
-        backLayerBackgroundColor: ThemeState.of(context).theme.primaryColor,
-        frontLayerBackgroundColor: ThemeState.of(context).scaffoldBackground,
-        appBar: _buildAppBar(searchState.isActive),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            openPage(context, const CreatePropPage()).then((value) => null);
-          },
-        ),
-        backLayer: _buildBackLayer(),
-        frontLayer: _buildFrontLayer());
-  }
-
-  PreferredSizeWidget _buildAppBar(bool searchMode) {
-    if (searchMode) {
-      return AppBar(
-        elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.read<SearchBloc>().add(DeactiveSearchEvent());
-            },
-            icon: const Icon(Icons.close_rounded),
-          ),
-        ],
-        title: Center(
-          child: TextFormField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(borderSide: BorderSide.none),
-              hintText: S.of(context).searchHint,
-            ),
-          ),
-        ),
-      );
-    } else {
-      return BackdropAppBar(
-        actions: [
-          IconButton(
-            onPressed: context.read<ThemeCubit>().toggleTheme,
-            icon: Icon(context.watch<ThemeCubit>().state is DarkThemeState ? Icons.light_mode : Icons.dark_mode),
-          ),
-          IconButton(
-            onPressed: context.read<LanguageCubit>().toggleLanguage,
-            icon: const Icon(Icons.language),
-          ),
-          IconButton(
-            onPressed: () {
-              context.read<SearchBloc>().add(ActiveSearchEvent());
-            },
-            icon: const Icon(Icons.search_rounded),
-          ),
-        ],
-      );
-    }
+      backLayerBackgroundColor: ThemeState.of(context).theme.primaryColor,
+      frontLayerBackgroundColor: ThemeState.of(context).scaffoldBackground,
+      appBar: _buildAppBar(searchState.isActive),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          openPage(context, const CreatePropPage()).then((value) => null);
+        },
+      ),
+      backLayer: _buildBackLayer(),
+      frontLayer: _buildFrontLayer(),
+    );
   }
 
   Future<bool> _showDeleteDialog() async {
@@ -127,17 +87,50 @@ class _HomePageState extends State<HomePage> {
         false;
   }
 
-  void _edit(Prop object) {
-    openPage(
-      context,
-      CreatePropPage(
-        prop: object,
-      ),
-    );
-  }
-
-  void _delete(BaseObject object) {
-    context.read<Database>().delete(object);
+  PreferredSizeWidget _buildAppBar(bool searchMode) {
+    if (searchMode) {
+      _searchFocusNode.requestFocus();
+      return AppBar(
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<SearchBloc>().add(DeactiveSearchEvent());
+            },
+            icon: const Icon(Icons.close_rounded),
+          ),
+        ],
+        title: Center(
+          child: TextFormField(
+            controller: _searchController,
+            focusNode: _searchFocusNode,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(borderSide: BorderSide.none),
+              hintText: S.of(context).searchHint,
+            ),
+          ),
+        ),
+      );
+    } else {
+      return BackdropAppBar(
+        actions: [
+          IconButton(
+            onPressed: context.read<ThemeCubit>().toggleTheme,
+            icon: Icon(context.watch<ThemeCubit>().state is DarkThemeState ? Icons.light_mode : Icons.dark_mode),
+          ),
+          IconButton(
+            onPressed: context.read<LanguageCubit>().toggleLanguage,
+            icon: const Icon(Icons.language),
+          ),
+          IconButton(
+            onPressed: () {
+              context.read<SearchBloc>().add(ActiveSearchEvent());
+            },
+            icon: const Icon(Icons.search_rounded),
+          ),
+        ],
+      );
+    }
   }
 
   Widget _buildFrontLayer() {
@@ -191,37 +184,209 @@ class _HomePageState extends State<HomePage> {
   Widget _buildBackLayer() {
     return BlocBuilder<FilterTermsCubit, FilterTermsState>(
       builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        return ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: ToggleButtons(
-                  color: Colors.black.withOpacity(0.60),
-                  selectedColor: Color(0xFF6200EE),
-                  selectedBorderColor: Color(0xFF6200EE),
-                  fillColor: Color(0xFF6200EE).withOpacity(0.08),
-                  splashColor: Color(0xFF6200EE).withOpacity(0.12),
-                  hoverColor: Color(0xFF6200EE).withOpacity(0.04),
-                  borderRadius: BorderRadius.circular(4.0),
-                  constraints: const BoxConstraints(minHeight: 36.0),
-                  isSelected: state.condidateAsBool,
-                  onPressed: (index) {
-                    context.read<FilterTermsCubit>().changeCondidate(SearchCondidateType.values[index]);
-                  },
-                  children: SearchCondidateType.values
-                      .map((e) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Text(e.text),
-                          ))
-                      .toList(),
+            ExpansionTile(
+              title: Text('Bus Filtering'),
+              children: [
+                const SizedBox(height: 8,),
+                _buildTitle('Bus Status'),
+                Center(
+                  child: ToggledEnum(
+                    options: {
+                      'Active': false,
+                      'Inactive': false,
+                    },
+                    onTap: (int index) {},
+                  ),
                 ),
+                const SizedBox(height: 36,),
+              
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Driver Filtering'),
+              children: [
+                SizedBox(
+                  height: 8,
+                ),
+                _buildTitle('Status'),
+                Center(
+                  child: ToggledEnum(
+                    options: {
+                      'Active': false,
+                      'Inactive': false,
+                      'Vacation': false,
+                      'Coordinate': false,
+                    },
+                    onTap: (int index) {},
+                  ),
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+                _buildTitle('Shift'),
+                Center(
+                  child: ToggledEnum(
+                    options: {
+                      'Morning': false,
+                      'Evening': false,
+                      'First Ot': false,
+                      'Second Ot': false,
+                      'Switching': false,
+                    },
+                    onTap: (int index) {},
+                  ),
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Alternative Driver Filtering'),
+              children: [
+                const SizedBox(height: 8,),
+                _buildTitle('Status'),
+                Center(
+                  child: ToggledEnum(
+                    options: {
+                      'Active': false,
+                      'Inactive': false,
+                      'Vacation': false,
+                      'Coordinate': false,
+                    },
+                    onTap: (int index) {},
+                  ),
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+                _buildTitle('Shift Work'),
+                Center(
+                  child: ToggledEnum(
+                    options: {
+                      'Morning': false,
+                      'Evening': false,
+                      'First Ot': false,
+                      'Second Ot': false,
+                      'Switching': false,
+                    },
+                    onTap: (int index) {},
+                  ),
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            _buildTitle('Search on'),
+            Center(
+              child: ToggledEnum(
+                options: state.condidateAsMap,
+                onTap: (int index) {
+                  context.read<FilterTermsCubit>().changeCondidate(SearchCondidateType.values[index]);
+                },
               ),
             ),
+            const SizedBox(
+              height: 16,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    _buildTitle('From'),
+                    OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      ),
+                      child: const Text('21/02/2022'),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    _buildTitle('To'),
+                    OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      ),
+                      child: Text('21/02/2022'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            )
           ],
         );
-      },
+         },
+    );
+  }
+
+  Widget _buildTitle(String text) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.normal,
+        ),
+      ),
+    );
+  }
+
+  void _edit(Prop object) {
+    openPage(
+      context,
+      CreatePropPage(
+        prop: object,
+      ),
+    );
+  }
+
+  void _delete(BaseObject object) {
+    context.read<Database>().delete(object);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _searchFocusNode.dispose();
+    super.dispose();
+  }
+}
+
+class ToggledEnum extends StatelessWidget {
+  final Map<String, bool> options;
+  final Function(int index)? onTap;
+  const ToggledEnum({
+    Key? key,
+    required this.options,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    return ToggleButtons(
+      borderRadius: BorderRadius.circular(4.0),
+      constraints: BoxConstraints(minWidth: size.width * (1 / (options.length + 0.5)), minHeight: 36),
+      isSelected: options.values.toList(),
+      onPressed: onTap,
+      children: options.keys.map((e) => Text(e)).toList(),
     );
   }
 }

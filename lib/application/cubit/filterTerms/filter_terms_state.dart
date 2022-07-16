@@ -12,8 +12,9 @@ class FilterTermsState extends Equatable {
     return const FilterTermsState(searchCondidates: {SearchCondidateType.bus});
   }
 
-  List<bool> get condidateAsBool => SearchCondidateType.values.map((e) => searchCondidates.contains(e)).toList();
-
+  Map<String, bool> get condidateAsMap => {
+        for (SearchCondidateType e in SearchCondidateType.values) e.text: searchCondidates.contains(e),
+      };
   @override
   List<Object> get props => [searchCondidates];
 

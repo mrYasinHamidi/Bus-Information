@@ -45,6 +45,9 @@ flutter:
     - family: iranSansEnglish
       fonts:
         - asset: assets/fonts/IranianSans.ttf
+    - family: englishFont
+      fonts:
+        - asset: assets/fonts/englishFont.ttf
 
 flutter_intl:
   enabled: true

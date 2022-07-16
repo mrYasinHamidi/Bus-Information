@@ -15,9 +15,9 @@ import 'package:objectid/objectid.dart';
 import 'database.dart';
 
 class NoSqlDatabase implements Database {
-  static const String driverBoxKey = 'driverBoxKey2';
-  static const String busBoxKey = 'busBoxKey2';
-  static const String propBoxKey = 'propBoxKey2';
+  static const String driverBoxKey = 'driverBoxKey3';
+  static const String busBoxKey = 'busBoxKey3';
+  static const String propBoxKey = 'propBoxKey3';
 
   final StreamController<DatabaseEvent> _controller = StreamController();
 

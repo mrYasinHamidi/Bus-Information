@@ -43,7 +43,9 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     List<Prop> filteredProps = objectListCubit.state.objects;
 
     if (searchBloc.state.searchTerm.isNotEmpty) {
-      filteredProps = filteredProps.where((element) => isValid(element).toLowerCase().contains(searchBloc.state.searchTerm.toLowerCase())).toList();
+      filteredProps = filteredProps
+          .where((element) => isValid(element).toLowerCase().contains(searchBloc.state.searchTerm.toLowerCase()))
+          .toList();
     }
 
     emit(state.copyWith(filteredList: filteredProps));
@@ -67,6 +69,8 @@ class FilterPropCubit extends Cubit<FilterPropState> {
   @override
   Future<void> close() {
     objectListSubscription.cancel();
+    filterTermsSubscription.cancel();
+    searchSubscription.cancel();
     return super.close();
   }
 }
