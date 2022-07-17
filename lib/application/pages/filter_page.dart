@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_bus_information/application/cubit/filterTerms/filter_terms_cubit.dart';
+import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
+import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/widgets/toggled_enum.dart';
 import 'package:new_bus_information/application/widgets/toggled_grid_enum.dart';
 import 'package:new_bus_information/generated/l10n.dart';
@@ -27,9 +27,13 @@ class FilterPage extends StatelessWidget {
     );
   }
 
+  FilterTermsBloc _bloc(BuildContext context) {
+    return context.read<FilterTermsBloc>();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final FilterTermsState state = context.read<FilterTermsCubit>().state;
+    final FilterTermsState state = context.watch<FilterTermsBloc>().state;
 
     final Size size = MediaQuery.of(context).size;
 
@@ -49,11 +53,14 @@ class FilterPage extends StatelessWidget {
             space,
             Center(
               child: ToggledEnum(
-                options: {
-                  'Active': false,
-                  'Inactive': false,
+                options: state.busStatusCondidateAsMap,
+                onTap: (int index) {
+                  _bloc(context).add(
+                    SetBusStatusCondidateEvent(
+                      newStatus: BusStatus.values[index],
+                    ),
+                  );
                 },
-                onTap: (int index) {},
               ),
             ),
             downSpace,
@@ -133,9 +140,13 @@ class FilterPage extends StatelessWidget {
         _title(S.of(context).searchOn),
         Center(
           child: ToggledEnum(
-            options: state.condidateAsMap,
+            options: state.searchCondidateAsMap,
             onTap: (int index) {
-              context.read<FilterTermsCubit>().changeCondidate(SearchCondidateType.values[index]);
+              _bloc(context).add(
+                SetSearchCondidateEvent(
+                  newCondidate: SearchCondidateType.values[index],
+                ),
+              );
             },
           ),
         ),

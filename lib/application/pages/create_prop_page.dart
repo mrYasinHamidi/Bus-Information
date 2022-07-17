@@ -125,13 +125,23 @@ class _CreatePropPageState extends State<CreatePropPage> {
   }
 
   void _submit() {
+    final Database database = context.read<Database>();
     Prop prop = Prop(
       id: widget.prop?.id,
       busId: _bus?.key,
       driverId: _firstDriver?.key,
       secondDriverId: _secondDriver?.key,
     );
-    context.read<Database>().put(prop);
+    if(prop.busId != null) {
+      prop.bus = database.getObject(prop.busId!, BaseObjectType.bus) as Bus;
+    }
+    if(prop.firstDriver != null) {
+      prop.firstDriver = database.getObject(prop.driverId!, BaseObjectType.driver) as Driver;
+    }
+    if(prop.secondDriver != null) {
+      prop.secondDriver = database.getObject(prop.secondDriverId!, BaseObjectType.driver) as Driver;
+    }
+    database.put(prop);
     Navigator.pop(context);
   }
 }

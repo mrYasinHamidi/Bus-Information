@@ -23,15 +23,15 @@ class ObjectListCubit<T extends BaseObject> extends Cubit<ObjectListState<T>> {
   }
 
   void _databaseListener(DatabaseEvent event) {
-    if(event.object is T) {
+    if (event.object is T) {
       switch (event.eventType) {
-      case DatabaseEventType.put:
-        emit(state.copyWith(objects: [event.object as T, ...state.objects]));
-        break;
-      case DatabaseEventType.delete:
-        emit(state.copyWith(objects: [...state.objects]..removeWhere((element) => element == event.object)));
-        break;
-    }
+        case DatabaseEventType.put:
+          emit(state.copyWith(objects: [event.object as T, ...state.objects]));
+          break;
+        case DatabaseEventType.delete:
+          emit(state.copyWith(objects: [...state.objects]..removeWhere((element) => element == event.object)));
+          break;
+      }
     }
   }
 

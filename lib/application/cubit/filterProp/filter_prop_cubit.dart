@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:new_bus_information/application/bloc/bloc/search_bloc.dart';
-import 'package:new_bus_information/application/cubit/filterTerms/filter_terms_cubit.dart';
+import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
+import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
 import 'package:new_bus_information/application/cubit/objectList/object_list_cubit.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 
@@ -12,7 +12,7 @@ part 'filter_prop_state.dart';
 class FilterPropCubit extends Cubit<FilterPropState> {
   final ObjectListCubit<Prop> objectListCubit;
   final SearchBloc searchBloc;
-  final FilterTermsCubit filterTermsCubit;
+  final FilterTermsBloc filterTermsBloc;
 
   late StreamSubscription objectListSubscription;
   late StreamSubscription searchSubscription;
@@ -21,7 +21,7 @@ class FilterPropCubit extends Cubit<FilterPropState> {
   FilterPropCubit({
     required this.objectListCubit,
     required this.searchBloc,
-    required this.filterTermsCubit,
+    required this.filterTermsBloc,
   }) : super(FilterPropState.initial()) {
     objectListSubscription = objectListCubit.stream.listen((ObjectListState event) {
       _setFilteredProp();
@@ -29,7 +29,7 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     searchSubscription = searchBloc.stream.listen((SearchState event) {
       _setFilteredProp();
     });
-    filterTermsSubscription = filterTermsCubit.stream.listen((FilterTermsState event) {
+    filterTermsSubscription = filterTermsBloc.stream.listen((FilterTermsState event) {
       _setFilteredProp();
     });
 
@@ -48,12 +48,18 @@ class FilterPropCubit extends Cubit<FilterPropState> {
           .toList();
     }
 
+    if (filterTermsBloc.state.busStatusCondidate.isNotEmpty) {
+      filteredProps = filteredProps
+          .where((element) => filterTermsBloc.state.busStatusCondidate.contains(element.bus?.status))
+          .toList();
+    }
+
     emit(state.copyWith(filteredList: filteredProps));
   }
 
   String isValid(Prop prop) {
     String term = '';
-    Set condidates = filterTermsCubit.state.searchCondidates;
+    Set condidates = filterTermsBloc.state.searchCondidates;
     if (condidates.contains(SearchCondidateType.bus)) {
       term += prop.bus?.busCode ?? '';
     }

@@ -1,28 +1,41 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'filter_terms_cubit.dart';
+part of 'filter_terms_bloc.dart';
 
 enum SearchCondidateType { bus, firstDriver, secondDriver }
 
 class FilterTermsState extends Equatable {
   final Set<SearchCondidateType> searchCondidates;
+  final Set<BusStatus> busStatusCondidate;
 
-  const FilterTermsState({required this.searchCondidates});
+  const FilterTermsState({
+    required this.searchCondidates,
+    required this.busStatusCondidate,
+  });
 
   factory FilterTermsState.initial() {
-    return const FilterTermsState(searchCondidates: {SearchCondidateType.bus});
+    return const FilterTermsState(
+      searchCondidates: {},
+      busStatusCondidate: {},
+    );
   }
 
-  Map<String, bool> get condidateAsMap => {
+  Map<String, bool> get searchCondidateAsMap => {
         for (SearchCondidateType e in SearchCondidateType.values) e.text: searchCondidates.contains(e),
       };
+
+  Map<String, bool> get busStatusCondidateAsMap => {
+        for (BusStatus e in BusStatus.values) e.text: busStatusCondidate.contains(e),
+      };
+
   @override
-  List<Object> get props => [searchCondidates];
+  List<Object> get props => [searchCondidates,busStatusCondidate];
 
   FilterTermsState copyWith({
     Set<SearchCondidateType>? searchCondidates,
+    Set<BusStatus>? busStatusCondidate,
   }) {
     return FilterTermsState(
       searchCondidates: searchCondidates ?? this.searchCondidates,
+      busStatusCondidate: busStatusCondidate ?? this.busStatusCondidate,
     );
   }
 }
