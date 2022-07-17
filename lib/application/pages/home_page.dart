@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:new_bus_information/application/bloc/bloc/search_bloc.dart';
 import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
-import 'package:new_bus_information/application/cubit/filterTerms/filter_terms_cubit.dart';
 import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
-import 'package:new_bus_information/application/cubit/objectList/object_list_cubit.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/base_object.dart';
@@ -14,8 +12,6 @@ import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/pages/create_prop_page.dart';
 import 'package:new_bus_information/application/utils.dart';
 import 'package:new_bus_information/application/widgets/prop_item.dart';
-import 'package:new_bus_information/application/widgets/toggled_enum.dart';
-import 'package:new_bus_information/application/widgets/toggled_grid_enum.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,8 +39,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final searchState = context.watch<SearchBloc>().state;
     return BackdropScaffold(
-      // backLayerBackgroundColor: ThemeState.of(context).theme.primaryColor,
-      // frontLayerBackgroundColor: ThemeState.of(context).scaffoldBackground,
       appBar: _buildAppBar(searchState.isActive),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -52,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           openPage(context, const CreatePropPage()).then((value) => null);
         },
       ),
-      backLayer: _buildBackLayer(),
+      backLayer: const FilterPage(),
       frontLayer: _buildFrontLayer(),
     );
   }
@@ -180,178 +174,6 @@ class _HomePageState extends State<HomePage> {
           },
         );
       },
-    );
-  }
-
-  Widget _buildBackLayer() {
-    return BlocBuilder<FilterTermsCubit, FilterTermsState>(
-      builder: (context, state) {
-        return ListView(
-          children: [
-            ExpansionTile(
-              title: Text('Bus Filtering'),
-              children: [
-                const SizedBox(
-                  height: 8,
-                ),
-                _buildTitle('Bus Status'),
-                Center(
-                  child: ToggledEnum(
-                    options: {
-                      'Active': false,
-                      'Inactive': false,
-                    },
-                    onTap: (int index) {},
-                  ),
-                ),
-                const SizedBox(
-                  height: 36,
-                ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text('Driver Filtering'),
-              children: [
-                SizedBox(
-                  height: 8,
-                ),
-                _buildTitle('Status'),
-                Center(
-                  child: ToggledEnum(
-                    options: {
-                      'Active': false,
-                      'Inactive': false,
-                      'Vacation': false,
-                      'Coordinate': false,
-                    },
-                    onTap: (int index) {},
-                  ),
-                ),
-                const SizedBox(
-                  height: 36,
-                ),
-                _buildTitle('Shift'),
-                Center(
-                  child: ToggledEnum(
-                    options: {
-                      'Morning': false,
-                      'Evening': false,
-                      'First Ot': false,
-                      'Second Ot': false,
-                      'Switching': false,
-                    },
-                    onTap: (int index) {},
-                  ),
-                ),
-                const SizedBox(
-                  height: 36,
-                ),
-              ],
-            ),
-            ExpansionTile(
-              title: Text('Alternative Driver Filtering'),
-              children: [
-                const SizedBox(
-                  height: 8,
-                ),
-                _buildTitle('Status'),
-                Center(
-                  child: ToggledEnum(
-                    options: {
-                      'Active': false,
-                      'Inactive': false,
-                      'Vacation': false,
-                      'Coordinate': false,
-                    },
-                    onTap: (int index) {},
-                  ),
-                ),
-                const SizedBox(
-                  height: 36,
-                ),
-                _buildTitle('Shift Work'),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                  child: ToggledGridEnum(
-                    options: {
-                      'Morning': false,
-                      'Evening': true,
-                      'First Ot': false,
-                      'Second Ot': false,
-                      'Switching': false,
-                    },
-                  ),
-                ),
-                // const SizedBox(
-                // height: 36,
-                // ),
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            _buildTitle('Search on'),
-            Center(
-              child: ToggledEnum(
-                options: state.condidateAsMap,
-                onTap: (int index) {
-                  context.read<FilterTermsCubit>().changeCondidate(SearchCondidateType.values[index]);
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    _buildTitle('From'),
-                    OutlinedButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      ),
-                      child: const Text('21/02/2022'),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    _buildTitle('To'),
-                    OutlinedButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      ),
-                      child: Text('21/02/2022'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 50,
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildTitle(String text) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.normal,
-        ),
-      ),
     );
   }
 

@@ -2,10 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 
 class ToggledGridEnum extends StatelessWidget {
-  final int column;
-  final Map<String, bool> options;
   const ToggledGridEnum({Key? key, this.column = 3, required this.options}) : super(key: key);
 
+  ///count of columns
+  ///if column set to 4
+  ///response will be a grid of [_MyToggledButton] with 4 column
+  final int column;
+
+  /*
+  map of [text] and [selecting] status
+  Ex:
+    {
+      'button 1 txt' : false,
+      'button 2 txt' : true,
+      'button 3 txt : false,
+    }
+  */
+  final Map<String, bool> options;
+
+  ///create a [SliverGridDelegate] for shoving items in a Grid form 
   SliverGridDelegate _delegate(int crossAxisCount, double spaceBetween, double height) {
     return SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: crossAxisCount,
@@ -27,7 +42,7 @@ class ToggledGridEnum extends StatelessWidget {
         final isSelect = options.values.elementAt(index);
         final String text = options.keys.elementAt(index);
 
-        return _ToggledItem(
+        return _MyToggledButton(
           isSelect: isSelect,
           text: text,
         );
@@ -36,16 +51,21 @@ class ToggledGridEnum extends StatelessWidget {
   }
 }
 
-class _ToggledItem extends StatelessWidget {
-  final String text;
-  final bool isSelect;
+class _MyToggledButton extends StatelessWidget {
 
-  const _ToggledItem({
+  const _MyToggledButton({
     Key? key,
     required this.isSelect,
     required this.text,
   }) : super(key: key);
 
+  ///Text of Button
+  final String text;
+
+  ///select status of button
+  final bool isSelect;
+
+  ///create box decoration of button container
   BoxDecoration _boxDecoration(
     bool isSelect,
     ThemeData themeData,
@@ -60,6 +80,7 @@ class _ToggledItem extends StatelessWidget {
     );
   }
 
+  ///create [TextStyle] of button text
   TextStyle _textStyle(bool isSelect, ThemeData themeData) {
     return TextStyle(color: isSelect ? themeData.colorScheme.primary : null);
   }

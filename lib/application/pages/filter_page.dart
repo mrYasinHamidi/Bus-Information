@@ -1,0 +1,172 @@
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_bus_information/application/cubit/filterTerms/filter_terms_cubit.dart';
+import 'package:new_bus_information/application/widgets/toggled_enum.dart';
+import 'package:new_bus_information/application/widgets/toggled_grid_enum.dart';
+import 'package:new_bus_information/generated/l10n.dart';
+
+class FilterPage extends StatelessWidget {
+  const FilterPage({Key? key}) : super(key: key);
+
+  Widget _title(String text) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        fontStyle: FontStyle.normal,
+      ),
+    );
+  }
+
+  ButtonStyle _buttonStyle() {
+    return OutlinedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final FilterTermsState state = context.read<FilterTermsCubit>().state;
+
+    final Size size = MediaQuery.of(context).size;
+
+    const Widget space = SizedBox(height: 16);
+    const Widget downSpace = SizedBox(height: 36);
+    final EdgeInsets sideSpace = EdgeInsets.symmetric(horizontal: size.width * 0.07);
+
+    final ButtonStyle buttonStyle = _buttonStyle();
+
+    return ListView(
+      children: [
+        ExpansionTile(
+          title: Text(S.of(context).bus),
+          children: [
+            space,
+            _title(S.of(context).busStatus),
+            space,
+            Center(
+              child: ToggledEnum(
+                options: {
+                  'Active': false,
+                  'Inactive': false,
+                },
+                onTap: (int index) {},
+              ),
+            ),
+            downSpace,
+          ],
+        ),
+        ExpansionTile(
+          title: Text(S.of(context).driver),
+          children: [
+            space,
+            _title(S.of(context).driverStatus),
+            space,
+            Padding(
+              padding: sideSpace,
+              child: ToggledGridEnum(
+                options: {
+                  'Active': false,
+                  'Inactive': false,
+                  'Vacation': false,
+                  'Coordinate': false,
+                },
+              ),
+            ),
+            space,
+            _title(S.of(context).shiftWork),
+            space,
+            Padding(
+              padding: sideSpace,
+              child: ToggledGridEnum(
+                options: {
+                  'Morning': false,
+                  'Evening': false,
+                  'First Ot': false,
+                  'Second Ot': false,
+                  'Switching': false,
+                },
+              ),
+            ),
+            downSpace,
+          ],
+        ),
+        ExpansionTile(
+          title: Text(S.of(context).alternativeDriver),
+          children: [
+            space,
+            _title(S.of(context).driverStatus),
+            space,
+            Padding(
+              padding: sideSpace,
+              child: ToggledGridEnum(
+                options: {
+                  'Active': false,
+                  'Inactive': false,
+                  'Vacation': false,
+                  'Coordinate': false,
+                },
+              ),
+            ),
+            space,
+            _title(S.of(context).shiftWork),
+            space,
+            Padding(
+              padding: sideSpace,
+              child: ToggledGridEnum(
+                options: {
+                  'Morning': false,
+                  'Evening': true,
+                  'First Ot': false,
+                  'Second Ot': false,
+                  'Switching': false,
+                },
+              ),
+            ),
+            downSpace
+          ],
+        ),
+        space,
+        _title(S.of(context).searchOn),
+        Center(
+          child: ToggledEnum(
+            options: state.condidateAsMap,
+            onTap: (int index) {
+              context.read<FilterTermsCubit>().changeCondidate(SearchCondidateType.values[index]);
+            },
+          ),
+        ),
+        space,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              children: [
+                _title(S.of(context).from),
+                OutlinedButton(
+                  onPressed: () {},
+                  style: buttonStyle,
+                  child: const Text('21/02/2022'),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                _title(S.of(context).to),
+                OutlinedButton(
+                  onPressed: () {},
+                  style: buttonStyle,
+                  child: const Text('21/02/2022'),
+                ),
+              ],
+            ),
+          ],
+        ),
+        downSpace
+      ],
+    );
+  }
+}

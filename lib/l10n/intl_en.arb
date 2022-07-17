@@ -29,5 +29,8 @@
   "props": "Props",
   "edite": "Edite",
   "searchHint": "Search Your Text here . . .",
-  "delete": "Delete"
+  "delete": "Delete",
+  "from": "From",
+  "to": "To",
+  "searchOn": "Search On"
 }

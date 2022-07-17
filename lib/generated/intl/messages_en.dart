@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "edite": MessageLookupByLibrary.simpleMessage("Edite"),
         "eveningShift": MessageLookupByLibrary.simpleMessage("Evening Shift"),
         "firstOverTime": MessageLookupByLibrary.simpleMessage("First OverTime"),
+        "from": MessageLookupByLibrary.simpleMessage("From"),
         "inActive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "morningShift": MessageLookupByLibrary.simpleMessage("Morning Shift"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -48,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Repeated number"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search Your Text here . . ."),
+        "searchOn": MessageLookupByLibrary.simpleMessage("Search On"),
         "secondOverTime":
             MessageLookupByLibrary.simpleMessage("Second OverTime"),
         "shiftSwitching":
@@ -56,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shouldNotEmpty":
             MessageLookupByLibrary.simpleMessage("Should not empty"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "to": MessageLookupByLibrary.simpleMessage("To"),
         "toggleLanguage":
             MessageLookupByLibrary.simpleMessage("Toggle Language"),
         "vacation": MessageLookupByLibrary.simpleMessage("Vacation")
