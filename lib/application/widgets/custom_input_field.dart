@@ -32,31 +32,11 @@ class CustomInputField extends StatelessWidget {
       decoration: InputDecoration(
         label: label == null ? null : Text(label ?? ''),
         prefixIcon: icon,
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeState.of(context).enableInputBorder,
-            width: 1,
-          ),
+        enabledBorder:const OutlineInputBorder(
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeState.of(context).focusInputBorder,
-            width: 1,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeState.of(context).errorInputBorder,
-            width: 1,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-
-          borderSide: BorderSide(
-            color: ThemeState.of(context).errorInputBorder,
-            width: 1,
-          ),
-        ),
+        focusedBorder: const OutlineInputBorder(),
+        errorBorder: const OutlineInputBorder(),
+        focusedErrorBorder: const OutlineInputBorder(),
       ),
       keyboardType: inputType,
       validator: validator,

@@ -103,12 +103,6 @@ class _AddDriverFormState extends State<AddDriverForm> {
               onPressed: _onSubmit,
               child: Text(
                 S.of(context).submit,
-                style: TextStyle(color: ThemeState.of(context).enableInputBorder),
-              ),
-              style: ButtonStyle(
-                side: MaterialStateBorderSide.resolveWith(
-                  (states) => BorderSide(color: ThemeState.of(context).enableInputBorder),
-                ),
               ),
             ),
           ],

@@ -89,15 +89,11 @@ class _ItemChooserState extends State<ItemChooser> {
   TextField _buildSearchBox(BuildContext context) {
     return TextField(
       controller: _controller,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         isDense: true,
-        prefixIcon: const Icon(Icons.search),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: ThemeState.of(context).enableInputBorder),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: ThemeState.of(context).focusInputBorder),
-        ),
+        prefixIcon: Icon(Icons.search),
+        enabledBorder: UnderlineInputBorder(),
+        focusedBorder: UnderlineInputBorder(),
       ),
     );
   }

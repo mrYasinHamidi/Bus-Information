@@ -63,29 +63,13 @@ class _CustomDropDownState extends State<CustomDropDown> {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
         label: widget.label == null ? null : Text(widget.label ?? ''),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeState.of(context).enableInputBorder,
-            width: 1,
-          ),
+        enabledBorder:const OutlineInputBorder(
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeState.of(context).focusInputBorder,
-            width: 1,
-          ),
+        focusedBorder:const OutlineInputBorder(
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeState.of(context).errorInputBorder,
-            width: 1,
-          ),
+        errorBorder:const OutlineInputBorder(
         ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ThemeState.of(context).errorInputBorder,
-            width: 1,
-          ),
+        focusedErrorBorder:const OutlineInputBorder(
         ),
       ),
       value: _value,

@@ -14,6 +14,8 @@ import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/pages/create_prop_page.dart';
 import 'package:new_bus_information/application/utils.dart';
 import 'package:new_bus_information/application/widgets/prop_item.dart';
+import 'package:new_bus_information/application/widgets/toggled_enum.dart';
+import 'package:new_bus_information/application/widgets/toggled_grid_enum.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,8 +43,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final searchState = context.watch<SearchBloc>().state;
     return BackdropScaffold(
-      backLayerBackgroundColor: ThemeState.of(context).theme.primaryColor,
-      frontLayerBackgroundColor: ThemeState.of(context).scaffoldBackground,
+      // backLayerBackgroundColor: ThemeState.of(context).theme.primaryColor,
+      // frontLayerBackgroundColor: ThemeState.of(context).scaffoldBackground,
       appBar: _buildAppBar(searchState.isActive),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -189,7 +191,9 @@ class _HomePageState extends State<HomePage> {
             ExpansionTile(
               title: Text('Bus Filtering'),
               children: [
-                const SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 _buildTitle('Bus Status'),
                 Center(
                   child: ToggledEnum(
@@ -200,8 +204,9 @@ class _HomePageState extends State<HomePage> {
                     onTap: (int index) {},
                   ),
                 ),
-                const SizedBox(height: 36,),
-              
+                const SizedBox(
+                  height: 36,
+                ),
               ],
             ),
             ExpansionTile(
@@ -246,7 +251,9 @@ class _HomePageState extends State<HomePage> {
             ExpansionTile(
               title: Text('Alternative Driver Filtering'),
               children: [
-                const SizedBox(height: 8,),
+                const SizedBox(
+                  height: 8,
+                ),
                 _buildTitle('Status'),
                 Center(
                   child: ToggledEnum(
@@ -263,21 +270,21 @@ class _HomePageState extends State<HomePage> {
                   height: 36,
                 ),
                 _buildTitle('Shift Work'),
-                Center(
-                  child: ToggledEnum(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  child: ToggledGridEnum(
                     options: {
                       'Morning': false,
-                      'Evening': false,
+                      'Evening': true,
                       'First Ot': false,
                       'Second Ot': false,
                       'Switching': false,
                     },
-                    onTap: (int index) {},
                   ),
                 ),
-                const SizedBox(
-                  height: 36,
-                ),
+                // const SizedBox(
+                // height: 36,
+                // ),
               ],
             ),
             const SizedBox(
@@ -329,7 +336,7 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         );
-         },
+      },
     );
   }
 
@@ -366,27 +373,5 @@ class _HomePageState extends State<HomePage> {
     _searchController.dispose();
     _searchFocusNode.dispose();
     super.dispose();
-  }
-}
-
-class ToggledEnum extends StatelessWidget {
-  final Map<String, bool> options;
-  final Function(int index)? onTap;
-  const ToggledEnum({
-    Key? key,
-    required this.options,
-    this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    return ToggleButtons(
-      borderRadius: BorderRadius.circular(4.0),
-      constraints: BoxConstraints(minWidth: size.width * (1 / (options.length + 0.5)), minHeight: 36),
-      isSelected: options.values.toList(),
-      onPressed: onTap,
-      children: options.keys.map((e) => Text(e)).toList(),
-    );
   }
 }

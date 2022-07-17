@@ -40,15 +40,14 @@ class DriverPreviewer extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
+        const Icon(
           Icons.person_add_alt_1_rounded,
-          color: ThemeState.of(context).onCard,
           size: 60,
         ),
         Text(
           emptyTitle,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
+          style: const TextStyle(fontSize: 24,),
         ),
       ],
     );
@@ -61,14 +60,13 @@ class DriverPreviewer extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.person_rounded,
               size: 60,
-              color: ThemeState.of(context).onCard,
             ),
             Text(
               driver?.name ?? '',
-              style: TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
+              style:const TextStyle(fontSize: 24),
             ),
           ],
         ),

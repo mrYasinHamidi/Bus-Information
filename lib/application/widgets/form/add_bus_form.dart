@@ -97,12 +97,7 @@ class _AddDriverFormState extends State<AddBusForm> {
             const SizedBox(height: 16),
             OutlinedButton(
               onPressed: _onSubmit,
-              child: Text(S.of(context).submit,style: TextStyle(color: ThemeState.of(context).enableInputBorder),),
-              style: ButtonStyle(
-                side: MaterialStateBorderSide.resolveWith(
-                  (states) => BorderSide(color: ThemeState.of(context).enableInputBorder),
-                ),
-              ),
+              child: Text(S.of(context).submit),
             ),
           ],
         ),

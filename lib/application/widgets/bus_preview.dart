@@ -37,14 +37,13 @@ class BusPreviewer extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
+        const Icon(
           Icons.directions_bus,
           size: 60,
-          color: ThemeState.of(context).onCard,
         ),
         Text(
           emptyTitle,
-          style: TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
+          style: const TextStyle(fontSize: 24),
         ),
       ],
     );
@@ -57,14 +56,13 @@ class BusPreviewer extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.directions_bus,
               size: 60,
-              color: ThemeState.of(context).onCard,
             ),
             Text(
               bus?.busCode ?? '',
-              style: TextStyle(fontSize: 24, color: ThemeState.of(context).onCard),
+              style:const TextStyle(fontSize: 24,),
             ),
           ],
         ),
