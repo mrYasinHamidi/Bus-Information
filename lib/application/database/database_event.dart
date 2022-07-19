@@ -1,4 +1,4 @@
-import 'package:new_bus_information/application/models/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
 
 enum DatabaseEventType {
   put,
@@ -6,7 +6,6 @@ enum DatabaseEventType {
 }
 
 class DatabaseEvent {
-
   final BaseObject object;
   final DatabaseEventType eventType;
 

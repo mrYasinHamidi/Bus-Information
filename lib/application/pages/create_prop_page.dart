@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
@@ -132,13 +132,13 @@ class _CreatePropPageState extends State<CreatePropPage> {
       driverId: _firstDriver?.key,
       secondDriverId: _secondDriver?.key,
     );
-    if(prop.busId != null) {
+    if (prop.busId != null) {
       prop.bus = database.getObject(prop.busId!, BaseObjectType.bus) as Bus;
     }
-    if(prop.firstDriver != null) {
+    if (prop.firstDriver != null) {
       prop.firstDriver = database.getObject(prop.driverId!, BaseObjectType.driver) as Driver;
     }
-    if(prop.secondDriver != null) {
+    if (prop.secondDriver != null) {
       prop.secondDriver = database.getObject(prop.secondDriverId!, BaseObjectType.driver) as Driver;
     }
     database.put(prop);

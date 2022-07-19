@@ -1,7 +1,7 @@
 import 'package:new_bus_information/application/commands/command.dart';
 import 'package:new_bus_information/application/commands/database/database_command_type.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
 
 class DatabaseCommand implements Command {
   DatabaseCommandType type;
@@ -25,7 +25,7 @@ class DatabaseCommand implements Command {
       return;
     }
     if (type == DatabaseCommandType.update) {
-        dataBase.put(object);
+      dataBase.put(object);
       return;
     }
   }

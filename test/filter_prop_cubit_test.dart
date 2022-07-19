@@ -4,7 +4,7 @@ import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cub
 import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
 import 'package:new_bus_information/application/cubit/objectList/object_list_cubit.dart';
 import 'package:new_bus_information/application/database/nosql_database.dart';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 
 void main() {
   late FilterPropCubit sut;

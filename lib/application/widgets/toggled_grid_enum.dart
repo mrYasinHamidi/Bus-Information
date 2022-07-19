@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:new_bus_information/application/constants/numerics.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 
 class ToggledGridEnum extends StatelessWidget {
-  const ToggledGridEnum({Key? key, this.column = 3, required this.options}) : super(key: key);
+  const ToggledGridEnum({
+    Key? key,
+    this.column = 3,
+    required this.options,
+    this.onTap,
+  }) : super(key: key);
 
   ///count of columns
   ///if column set to 4
@@ -20,7 +26,11 @@ class ToggledGridEnum extends StatelessWidget {
   */
   final Map<String, bool> options;
 
-  ///create a [SliverGridDelegate] for shoving items in a Grid form 
+  ///onTap callback provide a callback whenever one of buttons clicked
+  ///we pass a int to this callback to determine which button at what index was clicked
+  final Function(int)? onTap;
+
+  ///create a [SliverGridDelegate] for shoving items in a Grid form
   SliverGridDelegate _delegate(int crossAxisCount, double spaceBetween, double height) {
     return SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: crossAxisCount,
@@ -33,10 +43,11 @@ class ToggledGridEnum extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SliverGridDelegate delegate = _delegate(column, 16, 40);
+
     return GridView.builder(
       itemCount: options.length,
-      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: delegate,
       itemBuilder: (BuildContext context, int index) {
         final isSelect = options.values.elementAt(index);
@@ -45,6 +56,9 @@ class ToggledGridEnum extends StatelessWidget {
         return _MyToggledButton(
           isSelect: isSelect,
           text: text,
+          onTap: () {
+            onTap?.call(index);
+          },
         );
       },
     );
@@ -52,11 +66,11 @@ class ToggledGridEnum extends StatelessWidget {
 }
 
 class _MyToggledButton extends StatelessWidget {
-
   const _MyToggledButton({
     Key? key,
     required this.isSelect,
     required this.text,
+    this.onTap,
   }) : super(key: key);
 
   ///Text of Button
@@ -65,15 +79,24 @@ class _MyToggledButton extends StatelessWidget {
   ///select status of button
   final bool isSelect;
 
+  ///on tap callback
+  final VoidCallback? onTap;
+
+  ///border radius for all subwidgets
+  BorderRadius _borderRadius() {
+    return BorderRadius.circular(NumericConstants.buttonRadius);
+  }
+
   ///create box decoration of button container
   BoxDecoration _boxDecoration(
     bool isSelect,
     ThemeData themeData,
     ToggleButtonsThemeData toggleButtonsThemeData,
+    BorderRadius borderRadius,
   ) {
     return BoxDecoration(
       color: isSelect ? themeData.colorScheme.primary.withOpacity(0.12) : null,
-      borderRadius: BorderRadius.circular(4),
+      borderRadius: borderRadius,
       border: Border.all(
         color: toggleButtonsThemeData.borderColor ?? themeData.colorScheme.onSurface.withOpacity(0.12),
       ),
@@ -94,18 +117,24 @@ class _MyToggledButton extends StatelessWidget {
       isSelect,
       theme,
     );
+    final borderRadius = _borderRadius();
     final BoxDecoration decoration = _boxDecoration(
       isSelect,
       theme,
       toggleTheme,
+      borderRadius,
     );
 
-    return Container(
-      decoration: decoration,
-      child: Center(
-        child: Text(
-          text,
-          style: textStyle,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: borderRadius,
+      child: Container(
+        decoration: decoration,
+        child: Center(
+          child: Text(
+            text,
+            style: textStyle,
+          ),
         ),
       ),
     );

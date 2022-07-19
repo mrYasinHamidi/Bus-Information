@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/models/base_object_extension.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/widgets/dot.dart';

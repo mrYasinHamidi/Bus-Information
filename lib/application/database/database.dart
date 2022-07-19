@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
-import 'package:new_bus_information/application/models/base_object.dart';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 
 abstract class Database {
   void put(BaseObject object);

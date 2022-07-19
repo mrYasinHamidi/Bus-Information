@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:new_bus_information/application/models/base_object.dart';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
 import 'package:objectid/objectid.dart';
@@ -28,7 +28,6 @@ class Driver implements BaseObject {
       shiftWork: ShiftWork.values[data['shiftWork'] ?? 0],
     );
   }
-
 
   @override
   List<Object?> get props => [name];

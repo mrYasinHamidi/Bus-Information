@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
+import 'package:new_bus_information/application/models/driver/driver_status.dart';
+import 'package:new_bus_information/application/models/driver/shift_work.dart';
+import 'package:new_bus_information/application/models/search_condidate_type.dart';
 import 'package:new_bus_information/application/widgets/toggled_enum.dart';
 import 'package:new_bus_information/application/widgets/toggled_grid_enum.dart';
 import 'package:new_bus_information/generated/l10n.dart';
@@ -44,6 +47,8 @@ class FilterPage extends StatelessWidget {
     final ButtonStyle buttonStyle = _buttonStyle();
 
     return ListView(
+      controller: ScrollController(),
+    
       children: [
         ExpansionTile(
           title: Text(S.of(context).bus),
@@ -75,11 +80,13 @@ class FilterPage extends StatelessWidget {
             Padding(
               padding: sideSpace,
               child: ToggledGridEnum(
-                options: {
-                  'Active': false,
-                  'Inactive': false,
-                  'Vacation': false,
-                  'Coordinate': false,
+                options: state.driverStatusCondidateAsMap,
+                onTap: (int index) {
+                  _bloc(context).add(
+                    SetDriverStatusCondidateEvent(
+                      newStatus: DriverStatus.values[index],
+                    ),
+                  );
                 },
               ),
             ),
@@ -89,12 +96,13 @@ class FilterPage extends StatelessWidget {
             Padding(
               padding: sideSpace,
               child: ToggledGridEnum(
-                options: {
-                  'Morning': false,
-                  'Evening': false,
-                  'First Ot': false,
-                  'Second Ot': false,
-                  'Switching': false,
+                options: state.driverShiftCondidateAsMap,
+                onTap: (index) {
+                  _bloc(context).add(
+                    SetDriverShiftCondidateEvent(
+                      newShift: ShiftWork.values[index],
+                    ),
+                  );
                 },
               ),
             ),
@@ -110,11 +118,13 @@ class FilterPage extends StatelessWidget {
             Padding(
               padding: sideSpace,
               child: ToggledGridEnum(
-                options: {
-                  'Active': false,
-                  'Inactive': false,
-                  'Vacation': false,
-                  'Coordinate': false,
+                options: state.secondDriverStatusCondidateAsMap,
+                onTap: (index) {
+                  _bloc(context).add(
+                    SetSecondDriverStatusCondidateEvent(
+                      newStatus: DriverStatus.values[index],
+                    ),
+                  );
                 },
               ),
             ),
@@ -124,12 +134,13 @@ class FilterPage extends StatelessWidget {
             Padding(
               padding: sideSpace,
               child: ToggledGridEnum(
-                options: {
-                  'Morning': false,
-                  'Evening': true,
-                  'First Ot': false,
-                  'Second Ot': false,
-                  'Switching': false,
+                options: state.secondDriverShiftCondidateAsMap,
+                onTap: (int index) {
+                  _bloc(context).add(
+                    SetSecondDriverShiftCondidateEvent(
+                      newShift: ShiftWork.values[index],
+                    ),
+                  );
                 },
               ),
             ),

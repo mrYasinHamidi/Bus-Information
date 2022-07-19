@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
-import 'package:new_bus_information/application/models/base_object.dart';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 
 part 'object_list_state.dart';
 

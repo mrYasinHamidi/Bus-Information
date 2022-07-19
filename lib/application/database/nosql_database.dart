@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
-import 'package:new_bus_information/application/extensions.dart';
-import 'package:new_bus_information/application/models/base_object.dart';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object_extension.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';

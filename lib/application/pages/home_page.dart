@@ -8,7 +8,7 @@ import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cub
 import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/pages/create_prop_page.dart';
 import 'package:new_bus_information/application/pages/filter_page.dart';

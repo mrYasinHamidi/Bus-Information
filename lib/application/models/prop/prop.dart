@@ -1,9 +1,10 @@
 import 'dart:convert';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:objectid/objectid.dart';
-import '../base_object.dart';
+
 
 class Prop implements BaseObject {
   final String id;

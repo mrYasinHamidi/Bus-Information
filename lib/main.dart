@@ -10,7 +10,7 @@ import 'package:new_bus_information/application/cubit/objectList/object_list_cub
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/database/nosql_database.dart';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/pages/home_page.dart';
 import 'package:new_bus_information/generated/l10n.dart';

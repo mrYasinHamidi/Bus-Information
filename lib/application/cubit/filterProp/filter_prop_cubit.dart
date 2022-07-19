@@ -6,6 +6,7 @@ import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bl
 import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
 import 'package:new_bus_information/application/cubit/objectList/object_list_cubit.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
+import 'package:new_bus_information/application/models/search_condidate_type.dart';
 
 part 'filter_prop_state.dart';
 

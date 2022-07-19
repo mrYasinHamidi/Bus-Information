@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:new_bus_information/application/models/base_object.dart';
-import 'package:new_bus_information/application/models/base_object_type.dart';
+import 'package:new_bus_information/application/models/base/base_object.dart';
+import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:objectid/objectid.dart';
 
@@ -24,7 +24,6 @@ class Bus implements BaseObject {
       status: BusStatus.values[data['status'] ?? 0],
     );
   }
-
 
   @override
   List<Object?> get props => [id];
