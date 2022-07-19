@@ -45,20 +45,40 @@ class FilterPropCubit extends Cubit<FilterPropState> {
 
     if (searchBloc.state.searchTerm.isNotEmpty) {
       filteredProps = filteredProps
-          .where((element) => isValid(element).toLowerCase().contains(searchBloc.state.searchTerm.toLowerCase()))
+          .where((element) => _getSearchTerm(element).toLowerCase().contains(searchBloc.state.searchTerm.toLowerCase()))
           .toList();
     }
-
     if (filterTermsBloc.state.busStatusCondidate.isNotEmpty) {
       filteredProps = filteredProps
           .where((element) => filterTermsBloc.state.busStatusCondidate.contains(element.bus?.status))
+          .toList();
+    }
+    if (filterTermsBloc.state.driverStatusCondidate.isNotEmpty) {
+      filteredProps = filteredProps
+          .where((element) => filterTermsBloc.state.driverStatusCondidate.contains(element.firstDriver?.status))
+          .toList();
+    }
+    if (filterTermsBloc.state.driverShiftCondidate.isNotEmpty) {
+      filteredProps = filteredProps
+          .where((element) => filterTermsBloc.state.driverShiftCondidate.contains(element.firstDriver?.shiftWork))
+          .toList();
+    }
+    if (filterTermsBloc.state.secondDriverStatusCondidate.isNotEmpty) {
+      filteredProps = filteredProps
+          .where((element) => filterTermsBloc.state.secondDriverStatusCondidate.contains(element.secondDriver?.status))
+          .toList();
+    }
+    if (filterTermsBloc.state.secondDriverShiftCondidate.isNotEmpty) {
+      filteredProps = filteredProps
+          .where(
+              (element) => filterTermsBloc.state.secondDriverShiftCondidate.contains(element.secondDriver?.shiftWork))
           .toList();
     }
 
     emit(state.copyWith(filteredList: filteredProps));
   }
 
-  String isValid(Prop prop) {
+  String _getSearchTerm(Prop prop) {
     String term = '';
     Set condidates = filterTermsBloc.state.searchCondidates;
     if (condidates.contains(SearchCondidateType.bus)) {

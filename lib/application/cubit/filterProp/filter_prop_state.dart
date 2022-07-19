@@ -8,7 +8,7 @@ class FilterPropState extends Equatable {
   factory FilterPropState.initial() {
     return const FilterPropState(filteredList: []);
   }
-  
+
   @override
   List<Object> get props => [filteredList];
 

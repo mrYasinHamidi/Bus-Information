@@ -46,9 +46,10 @@ class FilterPage extends StatelessWidget {
 
     final ButtonStyle buttonStyle = _buttonStyle();
 
-    return ListView(
-      controller: ScrollController(),
+    final ScrollController controller = ScrollController();
     
+    return ListView(
+      controller: controller,
       children: [
         ExpansionTile(
           title: Text(S.of(context).bus),
