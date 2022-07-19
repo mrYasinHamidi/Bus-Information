@@ -90,9 +90,15 @@ class NoSqlDatabase implements Database {
       objects.reSort();
       if (type == BaseObjectType.prop) {
         for (Prop prop in objects.cast<Prop>()) {
-          prop.bus = getObject(prop.busId ?? '', BaseObjectType.bus) as Bus;
-          prop.firstDriver = getObject(prop.driverId ?? '', BaseObjectType.driver) as Driver;
-          prop.secondDriver = getObject(prop.secondDriverId ?? '', BaseObjectType.driver) as Driver;
+          if (prop.busId != null) {
+            prop.bus = getObject(prop.busId!, BaseObjectType.bus) as Bus;
+          }
+          if (prop.driverId != null) {
+            prop.firstDriver = getObject(prop.driverId!, BaseObjectType.driver) as Driver;
+          }
+          if (prop.secondDriverId != null) {
+            prop.secondDriver = getObject(prop.secondDriverId!, BaseObjectType.driver) as Driver;
+          }
         }
       }
     }
