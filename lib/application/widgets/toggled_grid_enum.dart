@@ -105,7 +105,9 @@ class _MyToggledButton extends StatelessWidget {
 
   ///create [TextStyle] of button text
   TextStyle _textStyle(bool isSelect, ThemeData themeData) {
-    return TextStyle(color: isSelect ? themeData.colorScheme.primary : null);
+    return TextStyle(
+      color: isSelect ? themeData.colorScheme.primary : null,
+    );
   }
 
   @override
@@ -134,6 +136,7 @@ class _MyToggledButton extends StatelessWidget {
           child: Text(
             text,
             style: textStyle,
+            textAlign: TextAlign.center,
           ),
         ),
       ),

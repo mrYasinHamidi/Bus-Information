@@ -84,21 +84,15 @@ class NoSqlDatabase implements Database {
     List<BaseObject> objects = <BaseObject>[];
     Iterable data = _box(type).values;
     if (data.isNotEmpty) {
-      objects = data.map((e) => _object(type, e)).toList();
-      objects.reSort();
-      if (type == BaseObjectType.prop) {
-        for (Prop prop in objects.cast<Prop>()) {
-          if (prop.busId != null) {
-            prop.bus = getObject(prop.busId!, BaseObjectType.bus) as Bus;
-          }
-          if (prop.driverId != null) {
-            prop.firstDriver = getObject(prop.driverId!, BaseObjectType.driver) as Driver;
-          }
-          if (prop.secondDriverId != null) {
-            prop.secondDriver = getObject(prop.secondDriverId!, BaseObjectType.driver) as Driver;
-          }
+      objects = data.map((e) {
+        BaseObject object = _object(type, e);
+        if (object is Prop) {
+          object.addInstances(this);
         }
-      }
+        return object;
+      }).toList();
+
+      objects.reSort();
     }
     return objects;
   }

@@ -16,10 +16,6 @@ class PropItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Driver? _driver = context.read<Database>().getObject(prop.driverId ?? '', BaseObjectType.driver) as Driver?;
-    Driver? _secondDriver =
-        context.read<Database>().getObject(prop.secondDriverId ?? '', BaseObjectType.driver) as Driver?;
-    Bus? _bus = context.read<Database>().getObject(prop.busId ?? '', BaseObjectType.bus) as Bus?;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -29,12 +25,12 @@ class PropItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildProperty(S.of(context).busNumber, _bus?.busCode ?? ''),
-              Dot(color: _bus?.status.color),
+              _buildProperty(S.of(context).busNumber, prop.bus?.busCode ?? ''),
+              Dot(color: prop.bus?.status.color),
             ],
           ),
           const SizedBox(height: 4),
-          _buildProperty(S.of(context).busStatus, _bus?.status.text ?? ''),
+          _buildProperty(S.of(context).busStatus, prop.bus?.status.text ?? ''),
           const SizedBox(height: 8),
           Row(
             children: [
@@ -48,7 +44,7 @@ class PropItemWidget extends StatelessWidget {
                     contentPadding: const EdgeInsets.symmetric(horizontal: 4),
                     horizontalTitleGap: 8,
                     minVerticalPadding: 4,
-                    title: Text(_driver?.name ?? ''),
+                    title: Text(prop.firstDriver?.name ?? ''),
                     subtitle: Text(S.of(context).driver),
                     dense: true,
                   ),
@@ -64,7 +60,7 @@ class PropItemWidget extends StatelessWidget {
                       child: Icon(Icons.person),
                       radius: 18,
                     ),
-                    title: Text(_secondDriver?.name ?? ''),
+                    title: Text(prop.secondDriver?.name ?? ''),
                     subtitle: Text(S.of(context).alternativeDriver),
                     dense: true,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 4),

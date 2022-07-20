@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
+import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
+import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
@@ -47,7 +49,7 @@ class FilterPage extends StatelessWidget {
     final ButtonStyle buttonStyle = _buttonStyle();
 
     final ScrollController controller = ScrollController();
-    
+
     return ListView(
       controller: controller,
       children: [
@@ -188,7 +190,23 @@ class FilterPage extends StatelessWidget {
             ),
           ],
         ),
-        downSpace
+        downSpace,
+        downSpace,
+        Text(
+          '${context.read<FilterPropCubit>().state.filteredList.length} Item Filtered',
+          textAlign: TextAlign.center,
+          style: ThemeState.of(context).smokeTitleLarge,
+        ),
+        Center(
+          child: TextButton(
+            onPressed: () {
+              _bloc(context).add(ClearAllFiltersEvent());
+            },
+            child: Text(S.of(context).clearFilters),
+          ),
+        ),
+        downSpace,
+        downSpace,
       ],
     );
   }

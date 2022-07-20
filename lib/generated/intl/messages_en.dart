@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "busNumber": MessageLookupByLibrary.simpleMessage("Bus Number"),
         "busStatus": MessageLookupByLibrary.simpleMessage("Bus Status"),
         "buses": MessageLookupByLibrary.simpleMessage("Buses"),
+        "clearFilters":
+            MessageLookupByLibrary.simpleMessage("Clear all Filters"),
         "coordination": MessageLookupByLibrary.simpleMessage("Coordination"),
         "createProp": MessageLookupByLibrary.simpleMessage("Create Prop"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),

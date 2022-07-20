@@ -379,6 +379,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Clear all Filters`
+  String get clearFilters {
+    return Intl.message(
+      'Clear all Filters',
+      name: 'clearFilters',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -30,16 +30,11 @@ class _CreatePropPageState extends State<CreatePropPage> {
   void initState() {
     ///Initialize data with old data for editing prop
     if (_editMode) {
-      if (widget.prop!.driverId != null) {
-        _firstDriver = context.read<Database>().getObject(widget.prop!.driverId!, BaseObjectType.driver) as Driver;
+      _firstDriver = context.read<Database>().getObject(widget.prop!.driverId, BaseObjectType.driver) as Driver?;
+      if(widget.prop!.secondDriverId.isNotEmpty) {
+        _secondDriver = context.read<Database>().getObject(widget.prop!.secondDriverId, BaseObjectType.driver) as Driver?;
       }
-      if (widget.prop!.secondDriverId != null) {
-        _secondDriver =
-            context.read<Database>().getObject(widget.prop!.secondDriverId!, BaseObjectType.driver) as Driver;
-      }
-      if (widget.prop!.busId != null) {
-        _bus = context.read<Database>().getObject(widget.prop!.busId!, BaseObjectType.bus) as Bus;
-      }
+      _bus = context.read<Database>().getObject(widget.prop!.busId, BaseObjectType.bus) as Bus?;
     }
     super.initState();
   }
@@ -128,19 +123,10 @@ class _CreatePropPageState extends State<CreatePropPage> {
     final Database database = context.read<Database>();
     Prop prop = Prop(
       id: widget.prop?.id,
-      busId: _bus?.key,
-      driverId: _firstDriver?.key,
-      secondDriverId: _secondDriver?.key,
+      busId: _bus?.key ?? '',
+      driverId: _firstDriver?.key ?? '',
+      secondDriverId: _secondDriver?.key ?? '',
     );
-    if (prop.busId != null) {
-      prop.bus = database.getObject(prop.busId!, BaseObjectType.bus) as Bus;
-    }
-    if (prop.firstDriver != null) {
-      prop.firstDriver = database.getObject(prop.driverId!, BaseObjectType.driver) as Driver;
-    }
-    if (prop.secondDriver != null) {
-      prop.secondDriver = database.getObject(prop.secondDriverId!, BaseObjectType.driver) as Driver;
-    }
     database.put(prop);
     Navigator.pop(context);
   }

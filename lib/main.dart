@@ -6,7 +6,6 @@ import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
 import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
 import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
 import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
-import 'package:new_bus_information/application/cubit/objectList/object_list_cubit.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/database/nosql_database.dart';
@@ -35,14 +34,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => SearchBloc()),
           BlocProvider(create: (context) => FilterTermsBloc()),
           BlocProvider(
-            create: (context) => ObjectListCubit<Prop>(
-              database: context.read<Database>(),
-              type: BaseObjectType.prop,
-            ),
-          ),
-          BlocProvider(
             create: (context) => FilterPropCubit(
-              objectListCubit: context.read<ObjectListCubit<Prop>>(),
+              database: context.read<Database>(),
               searchBloc: context.read<SearchBloc>(),
               filterTermsBloc: context.read<FilterTermsBloc>(),
             ),

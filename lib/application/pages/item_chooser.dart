@@ -1,4 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/base/base_object.dart';
 import 'package:new_bus_information/application/models/base/base_object_extension.dart';
 import 'package:new_bus_information/application/models/base/base_object_type.dart';
@@ -63,11 +68,21 @@ class _ItemChooserState extends State<ItemChooser> {
             Expanded(
               child: ListView.builder(
                 itemCount: _searchedItems.length,
-                itemBuilder: (BuildContext context, int index) => InkWell(
-                  onTap: () {
-                    _onItemSelect(_searchedItems[index]);
+                itemBuilder: (BuildContext context, int index) => Dismissible(
+                  key: ValueKey(_searchedItems[index].key),
+                  confirmDismiss: (d) async {
+                    if (await _confirmDelete(d)) {
+                      await context.read<Database>().delete(_searchedItems[index]);
+                      return true;
+                    }
+                    return false;
                   },
-                  child: _buildItemWidget(_searchedItems[index]),
+                  child: InkWell(
+                    onTap: () {
+                      _onItemSelect(_searchedItems[index]);
+                    },
+                    child: _buildItemWidget(_searchedItems[index]),
+                  ),
                 ),
               ),
             ),
@@ -121,4 +136,27 @@ class _ItemChooserState extends State<ItemChooser> {
   }
 
   void _search(String text) {}
+
+  Future<bool> _confirmDelete(DismissDirection direction) async {
+    return await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Delete Item ?'),
+        actions: [
+          OutlinedButton(
+            onPressed: () {
+              Navigator.pop(context, true);
+            },
+            child: Text('yes'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context, false);
+            },
+            child: Text('No'),
+          ),
+        ],
+      ),
+    );
+  }
 }

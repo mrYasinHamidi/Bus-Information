@@ -18,6 +18,7 @@ class FilterTermsBloc extends Bloc<FilterTermsEvent, FilterTermsState> {
     on<SetDriverShiftCondidateEvent>(changeDriverShiftCondidate);
     on<SetSecondDriverStatusCondidateEvent>(changeSecondDriverStatusCondidate);
     on<SetSecondDriverShiftCondidateEvent>(changeSecondDriverShiftCondidate);
+    on<ClearAllFiltersEvent>(clearAllFilters);
   }
 
   FutureOr<void> changeSearchCondidate(
@@ -85,5 +86,9 @@ class FilterTermsBloc extends Bloc<FilterTermsEvent, FilterTermsState> {
     } else {
       emit(state.copyWith(secondDriverShiftCondidate: {...state.secondDriverShiftCondidate, event.newShift}));
     }
+  }
+
+  FutureOr<void> clearAllFilters(ClearAllFiltersEvent event, Emitter<FilterTermsState> emit) {
+    emit(FilterTermsState.initial());
   }
 }

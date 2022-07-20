@@ -5,6 +5,7 @@ abstract class ThemeState {
 
   ThemeData theme = ThemeData();
 
+  TextStyle get smokeTitleLarge;
   Color get onTapSplash;
 
   Color get createDialog;
@@ -43,6 +44,12 @@ class DarkThemeState extends ThemeState {
 
   @override
   Color get createDialog => const Color(0xff343434);
+
+  @override
+  TextStyle get smokeTitleLarge => const TextStyle(
+        color: Colors.white24,
+        fontSize: 26,
+      );
 }
 
 class LightThemeState extends ThemeState {
@@ -80,4 +87,10 @@ class LightThemeState extends ThemeState {
 
   @override
   Color get createDialog => theme.primaryColorLight;
+
+  @override
+  TextStyle get smokeTitleLarge => const TextStyle(
+        color: Colors.black26,
+        fontSize: 26,
+      );
 }

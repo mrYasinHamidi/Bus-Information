@@ -50,23 +50,6 @@ class _HomePageState extends State<HomePage> {
       ),
       backLayer: const FilterPage(),
       frontLayer: _buildFrontLayer(),
-      subHeader: Builder(builder: (context) {
-        final state = context.watch<FilterPropCubit>().state;
-        
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Total Count : ${state.filteredList.length}'),
-            ),
-            const Divider(
-              height: 2,
-              thickness: 2,
-            ),
-          ],
-        );
-      }),
     );
   }
 

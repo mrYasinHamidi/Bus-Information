@@ -32,5 +32,6 @@
   "delete": "Delete",
   "from": "From",
   "to": "To",
-  "searchOn": "Search On"
+  "searchOn": "Search On",
+  "clearFilters": "Clear all Filters"
 }

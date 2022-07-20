@@ -36,3 +36,5 @@ class SetSecondDriverShiftCondidateEvent extends FilterTermsEvent {
   final ShiftWork newShift;
   const SetSecondDriverShiftCondidateEvent({required this.newShift});
 }
+
+class ClearAllFiltersEvent extends FilterTermsEvent {}
