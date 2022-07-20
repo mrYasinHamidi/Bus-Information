@@ -9,8 +9,7 @@ import 'package:new_bus_information/application/cubit/language/language_cubit.da
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/database/nosql_database.dart';
-import 'package:new_bus_information/application/models/base/base_object_type.dart';
-import 'package:new_bus_information/application/models/prop/prop.dart';
+import 'package:new_bus_information/application/models/new_models.dart';
 import 'package:new_bus_information/application/pages/home_page.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
@@ -25,40 +24,59 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<Database>(
-      create: (context) => NoSqlDatabase(),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => LanguageCubit()),
-          BlocProvider(create: (context) => ThemeCubit(languageCubit: context.read<LanguageCubit>())),
-          BlocProvider(create: (context) => SearchBloc()),
-          BlocProvider(create: (context) => FilterTermsBloc()),
-          BlocProvider(
-            create: (context) => FilterPropCubit(
-              database: context.read<Database>(),
-              searchBloc: context.read<SearchBloc>(),
-              filterTermsBloc: context.read<FilterTermsBloc>(),
+    Future<NewHiveDatabase> getDatabase() async {
+      return NewHiveDatabase(
+        await Hive.openBox('buses'),
+        await Hive.openBox('drivers'),
+        await Hive.openBox('props'),
+      );
+    }
+
+    return FutureBuilder(
+      future: getDatabase(),
+      builder: (BuildContext context, AsyncSnapshot<NewDatabase> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return RepositoryProvider(
+            create: (context) => snapshot.data,
+            child: RepositoryProvider<Database>(
+              create: (context) => NoSqlDatabase(),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(create: (context) => LanguageCubit()),
+                  BlocProvider(create: (context) => ThemeCubit(languageCubit: context.read<LanguageCubit>())),
+                  BlocProvider(create: (context) => SearchBloc()),
+                  BlocProvider(create: (context) => FilterTermsBloc()),
+                  BlocProvider(
+                    create: (context) => FilterPropCubit(
+                      database: context.read<Database>(),
+                      searchBloc: context.read<SearchBloc>(),
+                      filterTermsBloc: context.read<FilterTermsBloc>(),
+                    ),
+                  ),
+                ],
+                child: Builder(
+                  builder: (context) {
+                    return MaterialApp(
+                      home: const HomePage(),
+                      theme: context.watch<ThemeCubit>().state.theme,
+                      supportedLocales: S.delegate.supportedLocales,
+                      locale: context.watch<LanguageCubit>().state.locale,
+                      localizationsDelegates: const [
+                        S.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                      ],
+                      debugShowCheckedModeBanner: false,
+                    );
+                  },
+                ),
+              ),
             ),
-          ),
-        ],
-        child: Builder(
-          builder: (context) {
-            return MaterialApp(
-              home: const HomePage(),
-              theme: context.watch<ThemeCubit>().state.theme,
-              supportedLocales: S.delegate.supportedLocales,
-              locale: context.watch<LanguageCubit>().state.locale,
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              debugShowCheckedModeBanner: false,
-            );
-          },
-        ),
-      ),
+          );
+        }
+        return const SizedBox();
+      },
     );
   }
 }
