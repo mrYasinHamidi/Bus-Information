@@ -116,7 +116,7 @@ class _AddDriverFormState extends State<AddDriverForm> {
     value = value?.trim();
     if (value == null) return '';
     if (value.isEmpty) return S.of(context).shouldNotEmpty;
-    if (!NewDatabase.of(context).containsDriver(value)) return S.of(context).repeatedName;
+    if (NewDatabase.of(context).containsDriver(value)) return S.of(context).repeatedName;
     return null;
   }
 

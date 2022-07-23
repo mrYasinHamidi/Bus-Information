@@ -19,7 +19,7 @@ class NewHiveDatabase implements NewDatabase {
   final Box<NewDriver> drivers;
   final Box<NewBus> buses;
 
-  final StreamController<NewDatabaseEvent> _notifier = StreamController();
+  final StreamController<NewDatabaseEvent> _controller = StreamController();
 
   @override
   bool containsBus(String code) {
@@ -47,47 +47,47 @@ class NewHiveDatabase implements NewDatabase {
   void deleteBus(NewBus bus) async {
     _requireInitialized();
     await buses.delete(bus.id);
-    _notifier.add(NewDatabaseEvent(NewDatabaseEventType.bus));
+    _controller.add(NewDatabaseEvent(NewDatabaseEventType.bus));
   }
 
   @override
   void deleteDriver(NewDriver driver) async {
     _requireInitialized();
     await drivers.delete(driver.id);
-    _notifier.add(NewDatabaseEvent(NewDatabaseEventType.driver));
+    _controller.add(NewDatabaseEvent(NewDatabaseEventType.driver));
   }
 
   @override
   void deleteProp(NewProp prop) async {
     _requireInitialized();
     await props.delete(prop.id);
-    _notifier.add(NewDatabaseEvent(NewDatabaseEventType.prop));
+    _controller.add(NewDatabaseEvent(NewDatabaseEventType.prop));
   }
 
   @override
   Stream<NewDatabaseEvent> stream() {
-    return _notifier.stream;
+    return _controller.stream;
   }
 
   @override
   void putBus(NewBus bus) async {
     _requireInitialized();
     await buses.put(bus.id, bus);
-    _notifier.add(NewDatabaseEvent(NewDatabaseEventType.bus));
+    _controller.add(NewDatabaseEvent(NewDatabaseEventType.bus));
   }
 
   @override
   void putDriver(NewDriver driver) async {
     _requireInitialized();
     await drivers.put(driver.id, driver);
-    _notifier.add(NewDatabaseEvent(NewDatabaseEventType.driver));
+    _controller.add(NewDatabaseEvent(NewDatabaseEventType.driver));
   }
 
   @override
   void putProp(NewProp prop) async {
     _requireInitialized();
     await props.put(prop.id, prop);
-    _notifier.add(NewDatabaseEvent(NewDatabaseEventType.prop));
+    _controller.add(NewDatabaseEvent(NewDatabaseEventType.prop));
   }
 
   void _requireInitialized() {

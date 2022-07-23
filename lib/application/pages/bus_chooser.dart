@@ -65,6 +65,18 @@ class _BusChooserState extends State<BusChooser> {
                 itemCount: _searchedItems.length,
                 itemBuilder: (BuildContext context, int index) => Dismissible(
                   key: ValueKey(_searchedItems[index].id),
+                  direction: DismissDirection.startToEnd,
+                  background: Container(
+                    color: Colors.red,
+                    child: Row(
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal:8.0),
+                          child: Icon(Icons.delete,size: 24,),
+                        ),
+                      ],
+                    ),
+                  ),
                   confirmDismiss: (d) async {
                     if (await _confirmDelete(d)) {
                       NewDatabase.of(context).deleteBus(_searchedItems[index]);

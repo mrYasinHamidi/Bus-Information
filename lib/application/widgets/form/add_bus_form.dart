@@ -108,7 +108,7 @@ class _AddDriverFormState extends State<AddBusForm> {
     value = value?.trim();
     if (value == null) return '';
     if (value.isEmpty) return S.of(context).shouldNotEmpty;
-    if (!NewDatabase.of(context).containsBus(value)) {
+    if (NewDatabase.of(context).containsBus(value)) {
       return S.of(context).repeatedNumber;
     }
     return null;

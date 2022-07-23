@@ -41,7 +41,7 @@ class NewProp extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id,bus,driver,alternativeDriver];
 
   NewProp copyWith({
     String? id,
