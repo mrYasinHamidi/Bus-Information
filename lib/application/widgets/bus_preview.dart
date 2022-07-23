@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
+import 'package:new_bus_information/application/models/new_bus.dart';
 import 'package:new_bus_information/application/widgets/dot.dart';
 
 class BusPreviewer extends StatelessWidget {
-  final Bus? bus;
+  final NewBus? bus;
   final String emptyTitle;
   final VoidCallback? onTap;
 
@@ -61,7 +62,7 @@ class BusPreviewer extends StatelessWidget {
               size: 60,
             ),
             Text(
-              bus?.busCode ?? '',
+              bus?.code ?? '',
               style:const TextStyle(fontSize: 24,),
             ),
           ],

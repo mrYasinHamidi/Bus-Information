@@ -1,17 +1,17 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
+import 'package:new_bus_information/application/models/new_bus.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/widgets/custom_drop_down.dart';
 import 'package:new_bus_information/application/widgets/custom_input_field.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class AddBusForm extends StatefulWidget {
-  final Function(Bus)? onSubmit;
+  final Function(NewBus)? onSubmit;
   final Duration splashDelay;
 
   const AddBusForm({
@@ -29,7 +29,7 @@ class _AddDriverFormState extends State<AddBusForm> {
   late Size size;
   bool _show = false;
 
-  late String id;
+  late String code;
   late BusStatus status = BusStatus.active;
 
   @override
@@ -115,7 +115,7 @@ class _AddDriverFormState extends State<AddBusForm> {
   }
 
   void _onBusNumberChange(String value) {
-    id = value.trim();
+    code = value.trim();
   }
 
   void _onStatusChange(int value) {
@@ -124,8 +124,8 @@ class _AddDriverFormState extends State<AddBusForm> {
 
   void _onSubmit() {
     if (globalKey.currentState!.validate()) {
-      Bus bus = Bus(busCode: id, status: status);
-      context.read<Database>().put(bus);
+      NewBus bus = NewBus(code: code, status: status);
+      NewDatabase.of(context).putBus(bus);
       widget.onSubmit?.call(bus);
     }
   }

@@ -3,17 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/models/base/base_object.dart';
 import 'package:new_bus_information/application/models/base/base_object_type.dart';
+import 'package:new_bus_information/application/models/new_bus.dart';
+import 'package:new_bus_information/application/models/new_driver.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/widgets/form/add_bus_form.dart';
 import 'package:new_bus_information/application/widgets/form/add_driver_form.dart';
 
 class CreatorDialog extends StatefulWidget {
-  final Function(BaseObject)? onAddItem;
-  final BaseObjectType type;
+  final Function(NewDriver)? onAddDriver;
+  final Function(NewBus)? onAddBus;
+  final bool isDriverChooser;
 
   const CreatorDialog({
     Key? key,
-    this.onAddItem,
-    this.type = BaseObjectType.driver,
+    this.onAddBus,
+    this.onAddDriver,
+    this.isDriverChooser = true,
   }) : super(key: key);
 
   @override
@@ -45,22 +50,16 @@ class _CreatorDialogState extends State<CreatorDialog> {
 
   Widget? get _child {
     if (_isOpen) {
-      switch (widget.type) {
-        case BaseObjectType.bus:
-          return AddBusForm(
-            onSubmit: _onSubmit,
-            splashDelay: _duration,
-          );
-        case BaseObjectType.driver:
-          return AddDriverForm(
-            onSubmit: _onSubmit,
-            splashDelay: _duration,
-          );
-        default:
-          return AddDriverForm(
-            onSubmit: _onSubmit,
-            splashDelay: _duration,
-          );
+      if (widget.isDriverChooser) {
+        return AddDriverForm(
+          onSubmit: _onDriverSubmit,
+          splashDelay: _duration,
+        );
+      } else {
+        return AddBusForm(
+          onSubmit: _onBusSubmit,
+          splashDelay: _duration,
+        );
       }
     }
     return const Icon(
@@ -133,8 +132,13 @@ class _CreatorDialogState extends State<CreatorDialog> {
     });
   }
 
-  _onSubmit(BaseObject object) {
+  _onBusSubmit(NewBus bus) {
     _close();
-    widget.onAddItem?.call(object);
+    widget.onAddBus?.call(bus);
+  }
+
+  _onDriverSubmit(NewDriver driver) {
+    _close();
+    widget.onAddDriver?.call(driver);
   }
 }

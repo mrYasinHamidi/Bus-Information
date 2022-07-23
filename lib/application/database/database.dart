@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
 import 'package:new_bus_information/application/models/base/base_object.dart';
 import 'package:new_bus_information/application/models/base/base_object_type.dart';
-import 'package:new_bus_information/application/models/new_models.dart';
+import 'package:new_bus_information/application/models/new_bus.dart';
+import 'package:new_bus_information/application/models/new_driver.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 
 abstract class Database {
   void put(BaseObject object);
@@ -21,6 +24,8 @@ abstract class Database {
 }
 
 abstract class NewDatabase {
+  static NewDatabase of(BuildContext context) => context.read<NewDatabase>();
+
   void putBus(NewBus bus);
   void putDriver(NewDriver driver);
   void putProp(NewProp prop);
@@ -37,5 +42,9 @@ abstract class NewDatabase {
   Iterable<NewDriver> getDrivers();
   Iterable<NewProp> getProps();
 
-  ValueNotifier<NewDatabaseEventType> listen();
+  NewBus? getBus(String id);
+  NewDriver? getDriver(String id);
+  NewProp? getProp(String id);
+
+  Stream<NewDatabaseEvent> stream();
 }

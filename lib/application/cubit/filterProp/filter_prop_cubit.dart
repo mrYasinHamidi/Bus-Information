@@ -6,13 +6,14 @@ import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bl
 import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/base/base_object_type.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/models/search_condidate_type.dart';
 
 part 'filter_prop_state.dart';
 
 class FilterPropCubit extends Cubit<FilterPropState> {
-  final Database database;
+  final NewDatabase database;
   final SearchBloc searchBloc;
   final FilterTermsBloc filterTermsBloc;
 
@@ -25,8 +26,10 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     required this.searchBloc,
     required this.filterTermsBloc,
   }) : super(FilterPropState.initial()) {
-    databaseSubscription = database.listen().listen((event) {
-      _setFilteredProp();
+    databaseSubscription = database.stream().listen((NewDatabaseEvent event) {
+      if (event.type == NewDatabaseEventType.prop) {
+        _setFilteredProp();
+      }
     });
     searchSubscription = searchBloc.stream.listen((SearchState event) {
       _setFilteredProp();
@@ -42,54 +45,74 @@ class FilterPropCubit extends Cubit<FilterPropState> {
   }
 
   _setFilteredProp() {
-    List<Prop> filteredProps = database.getObjects(BaseObjectType.prop).cast();
+    List<NewProp> filteredProps = database.getProps().toList();
 
     if (searchBloc.state.searchTerm.isNotEmpty) {
       filteredProps = filteredProps
-          .where((element) => _getSearchTerm(element).toLowerCase().contains(searchBloc.state.searchTerm.toLowerCase()))
+          .where((element) =>
+              getSearchTerm(database, element).toLowerCase().contains(searchBloc.state.searchTerm.toLowerCase()))
           .toList();
     }
     if (filterTermsBloc.state.busStatusCondidate.isNotEmpty) {
       filteredProps = filteredProps
-          .where((element) => filterTermsBloc.state.busStatusCondidate.contains(element.bus?.status))
+          .where(
+            (element) => filterTermsBloc.state.busStatusCondidate.contains(
+              database.getBus(element.bus)?.status,
+            ),
+          )
           .toList();
     }
     if (filterTermsBloc.state.driverStatusCondidate.isNotEmpty) {
       filteredProps = filteredProps
-          .where((element) => filterTermsBloc.state.driverStatusCondidate.contains(element.firstDriver?.status))
+          .where(
+            (element) => filterTermsBloc.state.driverStatusCondidate.contains(
+              database.getDriver(element.driver)?.status,
+            ),
+          )
           .toList();
     }
     if (filterTermsBloc.state.driverShiftCondidate.isNotEmpty) {
       filteredProps = filteredProps
-          .where((element) => filterTermsBloc.state.driverShiftCondidate.contains(element.firstDriver?.shiftWork))
+          .where(
+            (element) => filterTermsBloc.state.driverShiftCondidate.contains(
+              database.getDriver(element.driver)?.shiftWork,
+            ),
+          )
           .toList();
     }
     if (filterTermsBloc.state.secondDriverStatusCondidate.isNotEmpty) {
       filteredProps = filteredProps
-          .where((element) => filterTermsBloc.state.secondDriverStatusCondidate.contains(element.secondDriver?.status))
+          .where(
+            (element) => filterTermsBloc.state.secondDriverStatusCondidate.contains(
+              database.getDriver(element.alternativeDriver)?.status,
+            ),
+          )
           .toList();
     }
     if (filterTermsBloc.state.secondDriverShiftCondidate.isNotEmpty) {
       filteredProps = filteredProps
           .where(
-              (element) => filterTermsBloc.state.secondDriverShiftCondidate.contains(element.secondDriver?.shiftWork))
+            (element) => filterTermsBloc.state.secondDriverShiftCondidate.contains(
+              database.getDriver(element.alternativeDriver)?.shiftWork,
+            ),
+          )
           .toList();
     }
 
     emit(state.copyWith(filteredList: filteredProps));
   }
 
-  String _getSearchTerm(Prop prop) {
+  String getSearchTerm(NewDatabase database, NewProp prop) {
     String term = '';
     Set condidates = filterTermsBloc.state.searchCondidates;
     if (condidates.contains(SearchCondidateType.bus)) {
-      term += prop.bus?.busCode ?? '';
+      term += database.getBus(prop.bus)?.code ?? '';
     }
     if (condidates.contains(SearchCondidateType.firstDriver)) {
-      term += prop.firstDriver?.name ?? '';
+      term += database.getDriver(prop.driver)?.name ?? '';
     }
     if (condidates.contains(SearchCondidateType.secondDriver)) {
-      term += prop.secondDriver?.name ?? '';
+      term += database.getDriver(prop.alternativeDriver)?.name ?? '';
     }
     return term;
   }

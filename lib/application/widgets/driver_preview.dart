@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
+import 'package:new_bus_information/application/models/new_driver.dart';
 
 import 'dot.dart';
 
 class DriverPreviewer extends StatelessWidget {
-  final Driver? driver;
+  final NewDriver? driver;
   final String emptyTitle;
   final VoidCallback? onTap;
 

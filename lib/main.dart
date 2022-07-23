@@ -9,13 +9,24 @@ import 'package:new_bus_information/application/cubit/language/language_cubit.da
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/database/nosql_database.dart';
-import 'package:new_bus_information/application/models/new_models.dart';
+import 'package:new_bus_information/application/models/bus/bus_status.dart';
+import 'package:new_bus_information/application/models/driver/driver_status.dart';
+import 'package:new_bus_information/application/models/driver/shift_work.dart';
+import 'package:new_bus_information/application/models/new_bus.dart';
+import 'package:new_bus_information/application/models/new_driver.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/pages/home_page.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 void main() async {
   await Hive.initFlutter();
   await NoSqlDatabase.open();
+  Hive.registerAdapter(BusStatusAdapter());
+  Hive.registerAdapter(DriverStatusAdapter());
+  Hive.registerAdapter(ShiftWorkAdapter());
+  Hive.registerAdapter(NewDriverAdapter());
+  Hive.registerAdapter(NewBusAdapter());
+  Hive.registerAdapter(NewPropAdapter());
   runApp(const MyApp());
 }
 
@@ -48,7 +59,7 @@ class MyApp extends StatelessWidget {
                   BlocProvider(create: (context) => FilterTermsBloc()),
                   BlocProvider(
                     create: (context) => FilterPropCubit(
-                      database: context.read<Database>(),
+                      database: NewDatabase.of(context),
                       searchBloc: context.read<SearchBloc>(),
                       filterTermsBloc: context.read<FilterTermsBloc>(),
                     ),

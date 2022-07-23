@@ -4,15 +4,19 @@ import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/new_bus.dart';
+import 'package:new_bus_information/application/models/new_driver.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
-import 'package:new_bus_information/application/pages/item_chooser.dart';
+import 'package:new_bus_information/application/pages/driver_chooser.dart';
+import 'package:new_bus_information/application/pages/bus_chooser.dart';
 import 'package:new_bus_information/application/utils.dart';
 import 'package:new_bus_information/application/widgets/bus_preview.dart';
 import 'package:new_bus_information/application/widgets/driver_preview.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class CreatePropPage extends StatefulWidget {
-  final Prop? prop;
+  final NewProp? prop;
   const CreatePropPage({Key? key, this.prop}) : super(key: key);
 
   @override
@@ -20,9 +24,9 @@ class CreatePropPage extends StatefulWidget {
 }
 
 class _CreatePropPageState extends State<CreatePropPage> {
-  Driver? _firstDriver;
-  Driver? _secondDriver;
-  Bus? _bus;
+  NewDriver? _firstDriver;
+  NewDriver? _secondDriver;
+  NewBus? _bus;
 
   bool get _editMode => widget.prop != null;
 
@@ -30,11 +34,9 @@ class _CreatePropPageState extends State<CreatePropPage> {
   void initState() {
     ///Initialize data with old data for editing prop
     if (_editMode) {
-      _firstDriver = context.read<Database>().getObject(widget.prop!.driverId, BaseObjectType.driver) as Driver?;
-      if(widget.prop!.secondDriverId.isNotEmpty) {
-        _secondDriver = context.read<Database>().getObject(widget.prop!.secondDriverId, BaseObjectType.driver) as Driver?;
-      }
-      _bus = context.read<Database>().getObject(widget.prop!.busId, BaseObjectType.bus) as Bus?;
+      _firstDriver = NewDatabase.of(context).getDriver(widget.prop!.driver);
+      _secondDriver = NewDatabase.of(context).getDriver(widget.prop!.alternativeDriver);
+      _bus = NewDatabase.of(context).getBus(widget.prop!.bus);
     }
     super.initState();
   }
@@ -99,35 +101,32 @@ class _CreatePropPageState extends State<CreatePropPage> {
     setState(() {});
   }
 
-  Future<Driver?> _chooseDriver() async {
+  Future<NewDriver?> _chooseDriver() async {
     return await openPage(
       context,
-      ItemChooser(
-        items: context.read<Database>().getObjects(BaseObjectType.driver),
-        type: BaseObjectType.driver,
+      DriverChooser(
+        drivers: NewDatabase.of(context).getDrivers().toList(),
       ),
     );
   }
 
-  Future<Bus?> _chooseBus() async {
+  Future<NewBus?> _chooseBus() async {
     return await openPage(
       context,
-      ItemChooser(
-        items: context.read<Database>().getObjects(BaseObjectType.bus),
-        type: BaseObjectType.bus,
+      BusChooser(
+        buses: NewDatabase.of(context).getBuses().toList(),
       ),
     );
   }
 
   void _submit() {
-    final Database database = context.read<Database>();
-    Prop prop = Prop(
+    NewProp prop = NewProp.from(
       id: widget.prop?.id,
-      busId: _bus?.key ?? '',
-      driverId: _firstDriver?.key ?? '',
-      secondDriverId: _secondDriver?.key ?? '',
+      bus: _bus?.id,
+      driver: _firstDriver?.id,
+      alternativeDriver: _secondDriver?.id,
     );
-    database.put(prop);
+    NewDatabase.of(context).putProp(prop);
     Navigator.pop(context);
   }
 }

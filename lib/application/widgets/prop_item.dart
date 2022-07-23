@@ -5,17 +5,24 @@ import 'package:new_bus_information/application/models/base/base_object_type.dar
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/new_bus.dart';
+import 'package:new_bus_information/application/models/new_driver.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/widgets/dot.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class PropItemWidget extends StatelessWidget {
-  final Prop prop;
+  final NewProp prop;
 
   const PropItemWidget(this.prop, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final NewBus? bus = NewDatabase.of(context).getBus(prop.bus);
+    final NewDriver? driver = NewDatabase.of(context).getDriver(prop.driver);
+    final NewDriver? alternative = NewDatabase.of(context).getDriver(prop.alternativeDriver);
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -25,12 +32,12 @@ class PropItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildProperty(S.of(context).busNumber, prop.bus?.busCode ?? ''),
-              Dot(color: prop.bus?.status.color),
+              _buildProperty(S.of(context).busNumber, bus?.code ?? ''),
+              Dot(color: bus?.status.color),
             ],
           ),
           const SizedBox(height: 4),
-          _buildProperty(S.of(context).busStatus, prop.bus?.status.text ?? ''),
+          _buildProperty(S.of(context).busStatus, bus?.status.text ?? ''),
           const SizedBox(height: 8),
           Row(
             children: [
@@ -44,7 +51,7 @@ class PropItemWidget extends StatelessWidget {
                     contentPadding: const EdgeInsets.symmetric(horizontal: 4),
                     horizontalTitleGap: 8,
                     minVerticalPadding: 4,
-                    title: Text(prop.firstDriver?.name ?? ''),
+                    title: Text(driver?.name ?? ''),
                     subtitle: Text(S.of(context).driver),
                     dense: true,
                   ),
@@ -60,7 +67,7 @@ class PropItemWidget extends StatelessWidget {
                       child: Icon(Icons.person),
                       radius: 18,
                     ),
-                    title: Text(prop.secondDriver?.name ?? ''),
+                    title: Text(alternative?.name ?? ''),
                     subtitle: Text(S.of(context).alternativeDriver),
                     dense: true,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 4),

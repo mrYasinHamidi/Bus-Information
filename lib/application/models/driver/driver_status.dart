@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:new_bus_information/generated/l10n.dart';
+part 'driver_status.g.dart';
 
+@HiveType(typeId: 5)
 enum DriverStatus {
+  @HiveField(0)
   active,
+  @HiveField(1)
   inActive,
+  @HiveField(2)
   vacation,
+  @HiveField(3)
   coordination,
 }
 extension DriverStatusEx on DriverStatus {

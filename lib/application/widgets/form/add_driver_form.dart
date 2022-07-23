@@ -6,12 +6,14 @@ import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
+import 'package:new_bus_information/application/models/new_driver.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/widgets/custom_drop_down.dart';
 import 'package:new_bus_information/application/widgets/custom_input_field.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class AddDriverForm extends StatefulWidget {
-  final Function(Driver)? onSubmit;
+  final Function(NewDriver)? onSubmit;
   final Duration splashDelay;
 
   const AddDriverForm({
@@ -120,8 +122,8 @@ class _AddDriverFormState extends State<AddDriverForm> {
 
   void _onSubmit() {
     if (globalKey.currentState!.validate()) {
-      Driver driver = Driver(name: name, status: status, shiftWork: shiftWork);
-      context.read<Database>().put(driver);
+      NewDriver driver = NewDriver(name: name, status: status, shiftWork: shiftWork);
+      NewDatabase.of(context).putDriver(driver);
       widget.onSubmit?.call(driver);
     }
   }

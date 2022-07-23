@@ -2,7 +2,7 @@
 part of 'filter_prop_cubit.dart';
 
 class FilterPropState extends Equatable {
-  final List<Prop> filteredList;
+  final List<NewProp> filteredList;
   const FilterPropState({required this.filteredList});
 
   factory FilterPropState.initial() {
@@ -13,7 +13,7 @@ class FilterPropState extends Equatable {
   List<Object> get props => [filteredList];
 
   FilterPropState copyWith({
-    List<Prop>? filteredList,
+    List<NewProp>? filteredList,
   }) {
     return FilterPropState(
       filteredList: filteredList ?? this.filteredList,

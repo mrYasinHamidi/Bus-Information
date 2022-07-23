@@ -9,6 +9,7 @@ import 'package:new_bus_information/application/cubit/language/language_cubit.da
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/base/base_object.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/pages/create_prop_page.dart';
 import 'package:new_bus_information/application/pages/filter_page.dart';
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          openPage(context, const CreatePropPage()).then((value) => null);
+          openPage(context, const CreatePropPage());
         },
       ),
       backLayer: const FilterPage(),
@@ -138,7 +139,7 @@ class _HomePageState extends State<HomePage> {
           itemCount: state.filteredList.length,
           itemBuilder: (c, i) {
             return Slidable(
-              key: ValueKey(state.filteredList[i].key),
+              key: ValueKey(state.filteredList[i].id),
               startActionPane: ActionPane(
                 motion: const ScrollMotion(),
                 dismissible: DismissiblePane(
@@ -179,17 +180,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _edit(Prop object) {
+  void _edit(NewProp prop) {
     openPage(
       context,
       CreatePropPage(
-        prop: object,
+        prop: prop,
       ),
     );
   }
 
-  void _delete(BaseObject object) {
-    context.read<Database>().delete(object);
+  void _delete(NewProp prop) {
+    NewDatabase.of(context).deleteProp(prop);
   }
 
   @override

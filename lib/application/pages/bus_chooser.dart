@@ -9,33 +9,33 @@ import 'package:new_bus_information/application/models/base/base_object_extensio
 import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/new_bus.dart';
+import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/widgets/bus_item.dart';
 import 'package:new_bus_information/application/widgets/create_dialog.dart';
 import 'package:new_bus_information/application/widgets/driver_item.dart';
 import 'package:new_bus_information/application/widgets/lottie/lottie_viewer.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
-class ItemChooser extends StatefulWidget {
-  final List<BaseObject> items;
-  final BaseObjectType type;
+class BusChooser extends StatefulWidget {
+  final List<NewBus> buses;
 
-  const ItemChooser({
+  const BusChooser({
     Key? key,
-    required this.items,
-    this.type = BaseObjectType.bus,
+    required this.buses,
   }) : super(key: key);
 
   @override
-  State<ItemChooser> createState() => _ItemChooserState();
+  State<BusChooser> createState() => _BusChooserState();
 }
 
-class _ItemChooserState extends State<ItemChooser> {
+class _BusChooserState extends State<BusChooser> {
   Size get size => MediaQuery.of(context).size;
+
   final TextEditingController _controller = TextEditingController();
 
-  List<BaseObject> get _searchedItems => widget.items
-      .where((element) => element.searchTerm.toLowerCase().contains(_controller.text.trim().toLowerCase()))
-      .toList();
+  List<NewBus> get _searchedItems =>
+      widget.buses.where((element) => element.code.contains(_controller.text.trim().toLowerCase())).toList();
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _ItemChooserState extends State<ItemChooser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.type.text),
+        title: Text(S.of(context).bus),
       ),
       body: Column(
         children: [
@@ -58,7 +58,7 @@ class _ItemChooserState extends State<ItemChooser> {
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: _buildSearchBox(context),
           ),
-          if (widget.items.isEmpty)
+          if (widget.buses.isEmpty)
             Expanded(
               child: LottieViewer(
                 width: size.width * .5,
@@ -69,10 +69,10 @@ class _ItemChooserState extends State<ItemChooser> {
               child: ListView.builder(
                 itemCount: _searchedItems.length,
                 itemBuilder: (BuildContext context, int index) => Dismissible(
-                  key: ValueKey(_searchedItems[index].key),
+                  key: ValueKey(_searchedItems[index].id),
                   confirmDismiss: (d) async {
                     if (await _confirmDelete(d)) {
-                      await context.read<Database>().delete(_searchedItems[index]);
+                      NewDatabase.of(context).deleteBus(_searchedItems[index]);
                       return true;
                     }
                     return false;
@@ -90,13 +90,11 @@ class _ItemChooserState extends State<ItemChooser> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: CreatorDialog(
-        onAddItem: _onAddItem,
-        type: widget.type,
+        isDriverChooser: false,
+        onAddBus: _onAddItem,
       ),
     );
   }
-
-  Stream<List<BaseObject>> _stream() async* {}
 
   TextField _buildSearchBox(BuildContext context) {
     return TextField(
@@ -110,32 +108,23 @@ class _ItemChooserState extends State<ItemChooser> {
     );
   }
 
-  Widget _buildItemWidget(BaseObject item) {
-    switch (item.type) {
-      case BaseObjectType.bus:
-        return BusItemWidget(item as Bus);
-      case BaseObjectType.driver:
-        return DriverItemWidget(item as Driver);
-      default:
-        return BusItemWidget(item as Bus);
-    }
+  Widget _buildItemWidget(NewBus bus) {
+    return BusItemWidget(bus);
   }
 
-  void _onItemSelect(BaseObject item) {
-    Navigator.pop(context, item);
+  void _onItemSelect(NewBus bus) {
+    Navigator.pop(context, bus);
   }
 
-  void _onAddItem(BaseObject item) {
+  void _onAddItem(NewBus bus) {
     setState(() {
-      if (widget.items.isEmpty) {
-        widget.items.add(item);
+      if (widget.buses.isEmpty) {
+        widget.buses.add(bus);
       } else {
-        widget.items.insert(0, item);
+        widget.buses.insert(0, bus);
       }
     });
   }
-
-  void _search(String text) {}
 
   Future<bool> _confirmDelete(DismissDirection direction) async {
     return await showDialog(
