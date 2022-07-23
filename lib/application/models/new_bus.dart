@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:objectid/objectid.dart';
+
 part 'new_bus.g.dart';
 
 @HiveType(typeId: 1)
@@ -12,6 +13,7 @@ class NewBus extends Equatable {
   final String code;
   @HiveField(2)
   final BusStatus status;
+
   NewBus({
     String? id,
     this.code = '',
@@ -39,5 +41,8 @@ class NewBus extends Equatable {
 
   bool isEmpty() {
     return code.isEmpty;
+  }
+  bool isNotEmpty() {
+    return code.isNotEmpty;
   }
 }

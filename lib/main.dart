@@ -20,7 +20,6 @@ import 'package:new_bus_information/generated/l10n.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await NoSqlDatabase.open();
   Hive.registerAdapter(BusStatusAdapter());
   Hive.registerAdapter(DriverStatusAdapter());
   Hive.registerAdapter(ShiftWorkAdapter());
@@ -49,39 +48,36 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return RepositoryProvider(
             create: (context) => snapshot.data,
-            child: RepositoryProvider<Database>(
-              create: (context) => NoSqlDatabase(),
-              child: MultiBlocProvider(
-                providers: [
-                  BlocProvider(create: (context) => LanguageCubit()),
-                  BlocProvider(create: (context) => ThemeCubit(languageCubit: context.read<LanguageCubit>())),
-                  BlocProvider(create: (context) => SearchBloc()),
-                  BlocProvider(create: (context) => FilterTermsBloc()),
-                  BlocProvider(
-                    create: (context) => FilterPropCubit(
-                      database: NewDatabase.of(context),
-                      searchBloc: context.read<SearchBloc>(),
-                      filterTermsBloc: context.read<FilterTermsBloc>(),
-                    ),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => LanguageCubit()),
+                BlocProvider(create: (context) => ThemeCubit(languageCubit: context.read<LanguageCubit>())),
+                BlocProvider(create: (context) => SearchBloc()),
+                BlocProvider(create: (context) => FilterTermsBloc()),
+                BlocProvider(
+                  create: (context) => FilterPropCubit(
+                    database: NewDatabase.of(context),
+                    searchBloc: context.read<SearchBloc>(),
+                    filterTermsBloc: context.read<FilterTermsBloc>(),
                   ),
-                ],
-                child: Builder(
-                  builder: (context) {
-                    return MaterialApp(
-                      home: const HomePage(),
-                      theme: context.watch<ThemeCubit>().state.theme,
-                      supportedLocales: S.delegate.supportedLocales,
-                      locale: context.watch<LanguageCubit>().state.locale,
-                      localizationsDelegates: const [
-                        S.delegate,
-                        GlobalMaterialLocalizations.delegate,
-                        GlobalWidgetsLocalizations.delegate,
-                        GlobalCupertinoLocalizations.delegate,
-                      ],
-                      debugShowCheckedModeBanner: false,
-                    );
-                  },
                 ),
+              ],
+              child: Builder(
+                builder: (context) {
+                  return MaterialApp(
+                    home: const HomePage(),
+                    theme: context.watch<ThemeCubit>().state.theme,
+                    supportedLocales: S.delegate.supportedLocales,
+                    locale: context.watch<LanguageCubit>().state.locale,
+                    localizationsDelegates: const [
+                      S.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    debugShowCheckedModeBanner: false,
+                  );
+                },
               ),
             ),
           );

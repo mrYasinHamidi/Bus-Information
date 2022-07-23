@@ -5,9 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
 import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/base/base_object_type.dart';
+import 'package:new_bus_information/application/database/database_event.dart';
 import 'package:new_bus_information/application/models/new_prop.dart';
-import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/models/search_condidate_type.dart';
 
 part 'filter_prop_state.dart';

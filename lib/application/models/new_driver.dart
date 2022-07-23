@@ -46,4 +46,8 @@ class NewDriver extends Equatable {
   bool isEmpty() {
     return name.isEmpty;
   }
+
+  bool isNotEmpty() {
+    return name.isNotEmpty;
+  }
 }

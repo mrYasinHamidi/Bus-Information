@@ -1,17 +1,7 @@
-import 'package:new_bus_information/application/models/base/base_object.dart';
+enum NewDatabaseEventType { prop, driver, bus }
 
-enum DatabaseEventType {
-  put,
-  delete,
-  update,
-}
+class NewDatabaseEvent {
+  final NewDatabaseEventType type;
 
-class DatabaseEvent {
-  final BaseObject object;
-  final DatabaseEventType eventType;
-
-  const DatabaseEvent({
-    required this.object,
-    required this.eventType,
-  });
+  NewDatabaseEvent(this.type);
 }

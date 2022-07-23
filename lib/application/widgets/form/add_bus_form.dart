@@ -2,7 +2,6 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/models/new_bus.dart';
 import 'package:new_bus_information/application/models/new_prop.dart';
@@ -106,9 +105,10 @@ class _AddDriverFormState extends State<AddBusForm> {
   }
 
   String? _busNumberValidator(String? value) {
+    value = value?.trim();
     if (value == null) return '';
     if (value.isEmpty) return S.of(context).shouldNotEmpty;
-    if (context.read<Database>().containBusCode(value.trim())) {
+    if (!NewDatabase.of(context).containsBus(value)) {
       return S.of(context).repeatedNumber;
     }
     return null;

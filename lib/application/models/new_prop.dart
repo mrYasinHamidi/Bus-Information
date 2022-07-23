@@ -61,11 +61,3 @@ class NewProp extends Equatable {
     return bus.isEmpty && driver.isEmpty && alternativeDriver.isEmpty;
   }
 }
-
-enum NewDatabaseEventType { prop, driver, bus }
-
-class NewDatabaseEvent {
-  final NewDatabaseEventType type;
-
-  NewDatabaseEvent(this.type);
-}

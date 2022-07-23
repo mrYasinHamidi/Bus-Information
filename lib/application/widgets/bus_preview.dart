@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/models/new_bus.dart';
 import 'package:new_bus_information/application/widgets/dot.dart';

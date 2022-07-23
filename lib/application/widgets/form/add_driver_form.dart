@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
 import 'package:new_bus_information/application/models/new_driver.dart';
@@ -114,9 +113,10 @@ class _AddDriverFormState extends State<AddDriverForm> {
   }
 
   String? _personNameValidator(String? value) {
+    value = value?.trim();
     if (value == null) return '';
     if (value.isEmpty) return S.of(context).shouldNotEmpty;
-    if (context.read<Database>().containName(value)) return S.of(context).repeatedName;
+    if (!NewDatabase.of(context).containsDriver(value)) return S.of(context).repeatedName;
     return null;
   }
 

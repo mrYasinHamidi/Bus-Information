@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/models/base/base_object.dart';
-import 'package:new_bus_information/application/models/base/base_object_type.dart';
 import 'package:new_bus_information/application/models/new_bus.dart';
 import 'package:new_bus_information/application/models/new_driver.dart';
 import 'package:new_bus_information/application/models/new_prop.dart';
