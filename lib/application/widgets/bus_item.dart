@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/widgets/dot.dart';
 
 class BusItemWidget extends StatelessWidget {
-  final NewBus bus;
+  final Bus bus;
 
   const BusItemWidget(this.bus, {Key? key}) : super(key: key);
 
@@ -18,7 +18,7 @@ class BusItemWidget extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(bus.code) ,
+          Text(bus.code),
           Dot(color: bus.status.color),
         ],
       ),

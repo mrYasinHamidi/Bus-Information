@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:new_bus_information/application/database/database_error.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 
 import 'database.dart';
 
@@ -15,9 +15,9 @@ class NewHiveDatabase implements NewDatabase {
     this.props,
   );
 
-  final Box<NewProp> props;
-  final Box<NewDriver> drivers;
-  final Box<NewBus> buses;
+  final Box<Prop> props;
+  final Box<Driver> drivers;
+  final Box<Bus> buses;
 
   final StreamController<NewDatabaseEvent> _controller = StreamController();
 
@@ -27,7 +27,7 @@ class NewHiveDatabase implements NewDatabase {
     return buses.values
         .firstWhere(
           (element) => element.code == code,
-          orElse: () => NewBus(),
+          orElse: () => Bus(),
         )
         .isNotEmpty();
   }
@@ -38,27 +38,27 @@ class NewHiveDatabase implements NewDatabase {
     return drivers.values
         .firstWhere(
           (element) => element.name == name,
-          orElse: () => NewDriver(),
+          orElse: () => Driver(),
         )
         .isNotEmpty();
   }
 
   @override
-  void deleteBus(NewBus bus) async {
+  void deleteBus(Bus bus) async {
     _requireInitialized();
     await buses.delete(bus.id);
     _controller.add(NewDatabaseEvent(NewDatabaseEventType.bus));
   }
 
   @override
-  void deleteDriver(NewDriver driver) async {
+  void deleteDriver(Driver driver) async {
     _requireInitialized();
     await drivers.delete(driver.id);
     _controller.add(NewDatabaseEvent(NewDatabaseEventType.driver));
   }
 
   @override
-  void deleteProp(NewProp prop) async {
+  void deleteProp(Prop prop) async {
     _requireInitialized();
     await props.delete(prop.id);
     _controller.add(NewDatabaseEvent(NewDatabaseEventType.prop));
@@ -70,21 +70,21 @@ class NewHiveDatabase implements NewDatabase {
   }
 
   @override
-  void putBus(NewBus bus) async {
+  void putBus(Bus bus) async {
     _requireInitialized();
     await buses.put(bus.id, bus);
     _controller.add(NewDatabaseEvent(NewDatabaseEventType.bus));
   }
 
   @override
-  void putDriver(NewDriver driver) async {
+  void putDriver(Driver driver) async {
     _requireInitialized();
     await drivers.put(driver.id, driver);
     _controller.add(NewDatabaseEvent(NewDatabaseEventType.driver));
   }
 
   @override
-  void putProp(NewProp prop) async {
+  void putProp(Prop prop) async {
     _requireInitialized();
     await props.put(prop.id, prop);
     _controller.add(NewDatabaseEvent(NewDatabaseEventType.prop));
@@ -106,37 +106,37 @@ class NewHiveDatabase implements NewDatabase {
   }
 
   @override
-  Iterable<NewBus> getBuses() {
+  Iterable<Bus> getBuses() {
     _requireInitialized();
     return buses.values;
   }
 
   @override
-  Iterable<NewDriver> getDrivers() {
+  Iterable<Driver> getDrivers() {
     _requireInitialized();
     return drivers.values;
   }
 
   @override
-  Iterable<NewProp> getProps() {
+  Iterable<Prop> getProps() {
     _requireInitialized();
     return props.values;
   }
 
   @override
-  NewBus? getBus(String id) {
+  Bus? getBus(String id) {
     _requireInitialized();
     return buses.get(id);
   }
 
   @override
-  NewDriver? getDriver(String id) {
+  Driver? getDriver(String id) {
     _requireInitialized();
     return drivers.get(id);
   }
 
   @override
-  NewProp? getProp(String id) {
+  Prop? getProp(String id) {
     _requireInitialized();
     return props.get(id);
   }

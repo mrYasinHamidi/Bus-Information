@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/widgets/form/add_bus_form.dart';
 import 'package:new_bus_information/application/widgets/form/add_driver_form.dart';
 
 class CreatorDialog extends StatefulWidget {
-  final Function(NewDriver)? onAddDriver;
-  final Function(NewBus)? onAddBus;
+  final Function(Driver)? onAddDriver;
+  final Function(Bus)? onAddBus;
   final bool isDriverChooser;
 
   const CreatorDialog({
@@ -130,12 +129,12 @@ class _CreatorDialogState extends State<CreatorDialog> {
     });
   }
 
-  _onBusSubmit(NewBus bus) {
+  _onBusSubmit(Bus bus) {
     _close();
     widget.onAddBus?.call(bus);
   }
 
-  _onDriverSubmit(NewDriver driver) {
+  _onDriverSubmit(Driver driver) {
     _close();
     widget.onAddDriver?.call(driver);
   }

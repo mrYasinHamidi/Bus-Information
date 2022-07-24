@@ -1,18 +1,15 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/widgets/custom_drop_down.dart';
 import 'package:new_bus_information/application/widgets/custom_input_field.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class AddDriverForm extends StatefulWidget {
-  final Function(NewDriver)? onSubmit;
+  final Function(Driver)? onSubmit;
   final Duration splashDelay;
 
   const AddDriverForm({
@@ -122,7 +119,7 @@ class _AddDriverFormState extends State<AddDriverForm> {
 
   void _onSubmit() {
     if (globalKey.currentState!.validate()) {
-      NewDriver driver = NewDriver(name: name, status: status, shiftWork: shiftWork);
+      Driver driver = Driver(name: name, status: status, shiftWork: shiftWork);
       NewDatabase.of(context).putDriver(driver);
       widget.onSubmit?.call(driver);
     }

@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:objectid/objectid.dart';
 
-part 'new_prop.g.dart';
+part 'prop.g.dart';
 
 @HiveType(typeId: 3)
-class NewProp extends Equatable {
+class Prop extends Equatable {
   @HiveField(0)
   final String id;
   @HiveField(1)
@@ -15,20 +15,20 @@ class NewProp extends Equatable {
   @HiveField(3)
   final String alternativeDriver;
 
-  NewProp({
+  Prop({
     String? id,
     this.bus = '',
     this.driver = '',
     this.alternativeDriver = '',
   }) : id = id ?? ObjectId().hexString;
 
-  factory NewProp.from({
+  factory Prop.from({
     String? id,
     String? bus,
     String? driver,
     String? alternativeDriver,
   }) {
-    return NewProp(
+    return Prop(
       id: id ?? ObjectId().hexString,
       bus: bus ?? '',
       driver: driver ?? '',
@@ -41,15 +41,15 @@ class NewProp extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id,bus,driver,alternativeDriver];
+  List<Object?> get props => [id, bus, driver, alternativeDriver];
 
-  NewProp copyWith({
+  Prop copyWith({
     String? id,
     String? bus,
     String? driver,
     String? alternativeDriver,
   }) {
-    return NewProp(
+    return Prop(
       id: id ?? this.id,
       bus: bus ?? this.bus,
       driver: driver ?? this.driver,

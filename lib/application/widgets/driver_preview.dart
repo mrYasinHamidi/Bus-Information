@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
 
 import 'dot.dart';
 
 class DriverPreviewer extends StatelessWidget {
-  final NewDriver? driver;
+  final Driver? driver;
   final String emptyTitle;
   final VoidCallback? onTap;
 
@@ -47,7 +47,9 @@ class DriverPreviewer extends StatelessWidget {
         Text(
           emptyTitle,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 24,),
+          style: const TextStyle(
+            fontSize: 24,
+          ),
         ),
       ],
     );
@@ -66,7 +68,7 @@ class DriverPreviewer extends StatelessWidget {
             ),
             Text(
               driver?.name ?? '',
-              style:const TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
           ],
         ),

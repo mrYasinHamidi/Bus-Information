@@ -1,19 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
-import 'package:new_bus_information/application/widgets/bus_item.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/widgets/create_dialog.dart';
 import 'package:new_bus_information/application/widgets/driver_item.dart';
 import 'package:new_bus_information/application/widgets/lottie/lottie_viewer.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class DriverChooser extends StatefulWidget {
-  final List<NewDriver> drivers;
+  final List<Driver> drivers;
 
   const DriverChooser({
     Key? key,
@@ -29,7 +25,7 @@ class _DriverChooserState extends State<DriverChooser> {
 
   final TextEditingController _controller = TextEditingController();
 
-  List<NewDriver> get _searchedItems => widget.drivers
+  List<Driver> get _searchedItems => widget.drivers
       .where((element) => element.name.toLowerCase().contains(_controller.text.trim().toLowerCase()))
       .toList();
 
@@ -84,6 +80,7 @@ class _DriverChooserState extends State<DriverChooser> {
                   confirmDismiss: (d) async {
                     if (await _confirmDelete(d)) {
                       NewDatabase.of(context).deleteDriver(_searchedItems[index]);
+                      widget.drivers.removeAt(index);
                       return true;
                     }
                     return false;
@@ -119,15 +116,15 @@ class _DriverChooserState extends State<DriverChooser> {
     );
   }
 
-  Widget _buildItemWidget(NewDriver driver) {
+  Widget _buildItemWidget(Driver driver) {
     return DriverItemWidget(driver);
   }
 
-  void _onItemSelect(NewDriver driver) {
+  void _onItemSelect(Driver driver) {
     Navigator.pop(context, driver);
   }
 
-  void _onAddItem(NewDriver driver) {
+  void _onAddItem(Driver driver) {
     setState(() {
       if (widget.drivers.isEmpty) {
         widget.drivers.add(driver);
@@ -141,19 +138,20 @@ class _DriverChooserState extends State<DriverChooser> {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Delete Item ?'),
+        title: Text(S.of(context).deleteBus),
+        content: Text(S.of(context).deleteWarning),
         actions: [
           OutlinedButton(
             onPressed: () {
               Navigator.pop(context, true);
             },
-            child: Text('yes'),
+            child: Text(S.of(context).yes),
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context, false);
             },
-            child: Text('No'),
+            child: Text(S.of(context).no),
           ),
         ],
       ),

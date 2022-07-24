@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/pages/driver_chooser.dart';
 import 'package:new_bus_information/application/pages/bus_chooser.dart';
 import 'package:new_bus_information/application/utils.dart';
@@ -12,7 +11,7 @@ import 'package:new_bus_information/application/widgets/driver_preview.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class CreatePropPage extends StatefulWidget {
-  final NewProp? prop;
+  final Prop? prop;
   const CreatePropPage({Key? key, this.prop}) : super(key: key);
 
   @override
@@ -20,9 +19,9 @@ class CreatePropPage extends StatefulWidget {
 }
 
 class _CreatePropPageState extends State<CreatePropPage> {
-  NewDriver? _firstDriver;
-  NewDriver? _secondDriver;
-  NewBus? _bus;
+  Driver? _firstDriver;
+  Driver? _secondDriver;
+  Bus? _bus;
 
   bool get _editMode => widget.prop != null;
 
@@ -97,7 +96,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
     setState(() {});
   }
 
-  Future<NewDriver?> _chooseDriver() async {
+  Future<Driver?> _chooseDriver() async {
     return await openPage(
       context,
       DriverChooser(
@@ -106,7 +105,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
     );
   }
 
-  Future<NewBus?> _chooseBus() async {
+  Future<Bus?> _chooseBus() async {
     return await openPage(
       context,
       BusChooser(
@@ -116,7 +115,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
   }
 
   void _submit() {
-    NewProp prop = NewProp.from(
+    Prop prop = Prop.from(
       id: widget.prop?.id,
       bus: _bus?.id,
       driver: _firstDriver?.id,

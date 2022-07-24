@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 
 abstract class NewDatabase {
   static NewDatabase of(BuildContext context) => context.read<NewDatabase>();
 
-  void putBus(NewBus bus);
-  void putDriver(NewDriver driver);
-  void putProp(NewProp prop);
+  void putBus(Bus bus);
+  void putDriver(Driver driver);
+  void putProp(Prop prop);
 
-  void deleteBus(NewBus bus);
-  void deleteDriver(NewDriver driver);
-  void deleteProp(NewProp prop);
+  void deleteBus(Bus bus);
+  void deleteDriver(Driver driver);
+  void deleteProp(Prop prop);
 
   bool containsBus(String code);
   bool containsDriver(String name);
 
-  Iterable<NewBus> getBuses();
-  Iterable<NewDriver> getDrivers();
-  Iterable<NewProp> getProps();
+  Iterable<Bus> getBuses();
+  Iterable<Driver> getDrivers();
+  Iterable<Prop> getProps();
 
-  NewBus? getBus(String id);
-  NewDriver? getDriver(String id);
-  NewProp? getProp(String id);
+  Bus? getBus(String id);
+  Driver? getDriver(String id);
+  Prop? getProp(String id);
 
   Stream<NewDatabaseEvent> stream();
 }

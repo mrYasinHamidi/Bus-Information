@@ -4,9 +4,10 @@ import 'package:new_bus_information/application/models/driver/driver_status.dart
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
 import 'package:objectid/objectid.dart';
 
-part 'new_driver.g.dart';
+part 'driver.g.dart';
+
 @HiveType(typeId: 2)
-class NewDriver extends Equatable {
+class Driver extends Equatable {
   @HiveField(0)
   final String id;
   @HiveField(1)
@@ -15,7 +16,7 @@ class NewDriver extends Equatable {
   final DriverStatus status;
   @HiveField(3)
   final ShiftWork shiftWork;
-  NewDriver({
+  Driver({
     String? id,
     this.name = '',
     this.shiftWork = ShiftWork.morning,
@@ -25,13 +26,13 @@ class NewDriver extends Equatable {
   @override
   List<Object?> get props => [id];
 
-  NewDriver copyWith({
+  Driver copyWith({
     String? id,
     String? name,
     DriverStatus? status,
     ShiftWork? shiftWork,
   }) {
-    return NewDriver(
+    return Driver(
       id: id ?? this.id,
       name: name ?? this.name,
       status: status ?? this.status,

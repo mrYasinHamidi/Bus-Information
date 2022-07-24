@@ -35,6 +35,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "coordination": MessageLookupByLibrary.simpleMessage("Coordination"),
         "createProp": MessageLookupByLibrary.simpleMessage("Create Prop"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteBus": MessageLookupByLibrary.simpleMessage("Delete Bus"),
+        "deleteDriver": MessageLookupByLibrary.simpleMessage("Delete Driver"),
+        "deleteProp": MessageLookupByLibrary.simpleMessage("Delete Prop"),
+        "deleteWarning": MessageLookupByLibrary.simpleMessage(
+            "Do you wanna delete this item ?"),
         "driver": MessageLookupByLibrary.simpleMessage("Driver"),
         "driverStatus": MessageLookupByLibrary.simpleMessage("driver Status"),
         "drivers": MessageLookupByLibrary.simpleMessage("Drivers"),
@@ -45,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "inActive": MessageLookupByLibrary.simpleMessage("Inactive"),
         "morningShift": MessageLookupByLibrary.simpleMessage("Morning Shift"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
         "props": MessageLookupByLibrary.simpleMessage("Props"),
         "repeatedName": MessageLookupByLibrary.simpleMessage("Repeated Name"),
         "repeatedNumber":
@@ -63,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "toggleLanguage":
             MessageLookupByLibrary.simpleMessage("Toggle Language"),
-        "vacation": MessageLookupByLibrary.simpleMessage("Vacation")
+        "vacation": MessageLookupByLibrary.simpleMessage("Vacation"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

@@ -3,10 +3,10 @@ import 'package:hive/hive.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:objectid/objectid.dart';
 
-part 'new_bus.g.dart';
+part 'bus.g.dart';
 
 @HiveType(typeId: 1)
-class NewBus extends Equatable {
+class Bus extends Equatable {
   @HiveField(0)
   final String id;
   @HiveField(1)
@@ -14,7 +14,7 @@ class NewBus extends Equatable {
   @HiveField(2)
   final BusStatus status;
 
-  NewBus({
+  Bus({
     String? id,
     this.code = '',
     this.status = BusStatus.active,
@@ -23,12 +23,12 @@ class NewBus extends Equatable {
   @override
   List<Object?> get props => [id];
 
-  NewBus copyWith({
+  Bus copyWith({
     String? id,
     String? code,
     BusStatus? status,
   }) {
-    return NewBus(
+    return Bus(
       id: id ?? this.id,
       code: code ?? this.code,
       status: status ?? this.status,
@@ -42,6 +42,7 @@ class NewBus extends Equatable {
   bool isEmpty() {
     return code.isEmpty;
   }
+
   bool isNotEmpty() {
     return code.isNotEmpty;
   }

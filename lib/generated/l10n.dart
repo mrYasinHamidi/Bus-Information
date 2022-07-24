@@ -389,6 +389,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Delete Bus`
+  String get deleteBus {
+    return Intl.message(
+      'Delete Bus',
+      name: 'deleteBus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Driver`
+  String get deleteDriver {
+    return Intl.message(
+      'Delete Driver',
+      name: 'deleteDriver',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Prop`
+  String get deleteProp {
+    return Intl.message(
+      'Delete Prop',
+      name: 'deleteProp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you wanna delete this item ?`
+  String get deleteWarning {
+    return Intl.message(
+      'Do you wanna delete this item ?',
+      name: 'deleteWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

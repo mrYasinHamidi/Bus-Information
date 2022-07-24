@@ -1,19 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/widgets/bus_item.dart';
 import 'package:new_bus_information/application/widgets/create_dialog.dart';
-import 'package:new_bus_information/application/widgets/driver_item.dart';
 import 'package:new_bus_information/application/widgets/lottie/lottie_viewer.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class BusChooser extends StatefulWidget {
-  final List<NewBus> buses;
+  final List<Bus> buses;
 
   const BusChooser({
     Key? key,
@@ -29,7 +25,7 @@ class _BusChooserState extends State<BusChooser> {
 
   final TextEditingController _controller = TextEditingController();
 
-  List<NewBus> get _searchedItems =>
+  List<Bus> get _searchedItems =>
       widget.buses.where((element) => element.code.contains(_controller.text.trim().toLowerCase())).toList();
 
   @override
@@ -71,8 +67,11 @@ class _BusChooserState extends State<BusChooser> {
                     child: Row(
                       children: const [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal:8.0),
-                          child: Icon(Icons.delete,size: 24,),
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Icon(
+                            Icons.delete,
+                            size: 24,
+                          ),
                         ),
                       ],
                     ),
@@ -80,6 +79,7 @@ class _BusChooserState extends State<BusChooser> {
                   confirmDismiss: (d) async {
                     if (await _confirmDelete(d)) {
                       NewDatabase.of(context).deleteBus(_searchedItems[index]);
+                      widget.buses.removeAt(index);
                       return true;
                     }
                     return false;
@@ -115,15 +115,15 @@ class _BusChooserState extends State<BusChooser> {
     );
   }
 
-  Widget _buildItemWidget(NewBus bus) {
+  Widget _buildItemWidget(Bus bus) {
     return BusItemWidget(bus);
   }
 
-  void _onItemSelect(NewBus bus) {
+  void _onItemSelect(Bus bus) {
     Navigator.pop(context, bus);
   }
 
-  void _onAddItem(NewBus bus) {
+  void _onAddItem(Bus bus) {
     setState(() {
       if (widget.buses.isEmpty) {
         widget.buses.add(bus);
@@ -135,24 +135,26 @@ class _BusChooserState extends State<BusChooser> {
 
   Future<bool> _confirmDelete(DismissDirection direction) async {
     return await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Delete Item ?'),
-        actions: [
-          OutlinedButton(
-            onPressed: () {
-              Navigator.pop(context, true);
-            },
-            child: Text('yes'),
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(S.of(context).deleteBus),
+            content: Text(S.of(context).deleteWarning),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Text(S.of(context).yes),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: Text(S.of(context).no),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
-            child: Text('No'),
-          ),
-        ],
-      ),
-    );
+        ) ??
+        false;
   }
 }

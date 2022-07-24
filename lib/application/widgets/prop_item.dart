@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/widgets/dot.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class PropItemWidget extends StatelessWidget {
-  final NewProp prop;
+  final Prop prop;
 
   const PropItemWidget(this.prop, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final NewBus? bus = NewDatabase.of(context).getBus(prop.bus);
-    final NewDriver? driver = NewDatabase.of(context).getDriver(prop.driver);
-    final NewDriver? alternative = NewDatabase.of(context).getDriver(prop.alternativeDriver);
+    final Bus? bus = NewDatabase.of(context).getBus(prop.bus);
+    final Driver? driver = NewDatabase.of(context).getDriver(prop.driver);
+    final Driver? alternative = NewDatabase.of(context).getDriver(prop.alternativeDriver);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

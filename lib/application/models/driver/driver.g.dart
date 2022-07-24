@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'new_driver.dart';
+part of 'driver.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class NewDriverAdapter extends TypeAdapter<NewDriver> {
+class DriverAdapter extends TypeAdapter<Driver> {
   @override
   final int typeId = 2;
 
   @override
-  NewDriver read(BinaryReader reader) {
+  Driver read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return NewDriver(
+    return Driver(
       id: fields[0] as String?,
       name: fields[1] as String,
       shiftWork: fields[3] as ShiftWork,
@@ -25,7 +25,7 @@ class NewDriverAdapter extends TypeAdapter<NewDriver> {
   }
 
   @override
-  void write(BinaryWriter writer, NewDriver obj) {
+  void write(BinaryWriter writer, Driver obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
@@ -43,8 +43,5 @@ class NewDriverAdapter extends TypeAdapter<NewDriver> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is NewDriverAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      identical(this, other) || other is DriverAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

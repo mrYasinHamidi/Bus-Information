@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
 import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/models/search_condidate_type.dart';
 
 part 'filter_prop_state.dart';
@@ -26,9 +25,7 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     required this.filterTermsBloc,
   }) : super(FilterPropState.initial()) {
     databaseSubscription = database.stream().listen((NewDatabaseEvent event) {
-      if (event.type == NewDatabaseEventType.prop) {
-        _setFilteredProp();
-      }
+      _setFilteredProp();
     });
     searchSubscription = searchBloc.stream.listen((SearchState event) {
       _setFilteredProp();
@@ -44,7 +41,7 @@ class FilterPropCubit extends Cubit<FilterPropState> {
   }
 
   _setFilteredProp() {
-    List<NewProp> filteredProps = database.getProps().toList();
+    List<Prop> filteredProps = database.getProps().toList();
 
     if (searchBloc.state.searchTerm.isNotEmpty) {
       filteredProps = filteredProps
@@ -101,7 +98,7 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     emit(state.copyWith(filteredList: filteredProps));
   }
 
-  String getSearchTerm(NewDatabase database, NewProp prop) {
+  String getSearchTerm(NewDatabase database, Prop prop) {
     String term = '';
     Set condidates = filterTermsBloc.state.searchCondidates;
     if (condidates.contains(SearchCondidateType.bus)) {

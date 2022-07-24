@@ -1,16 +1,14 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/widgets/custom_drop_down.dart';
 import 'package:new_bus_information/application/widgets/custom_input_field.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class AddBusForm extends StatefulWidget {
-  final Function(NewBus)? onSubmit;
+  final Function(Bus)? onSubmit;
   final Duration splashDelay;
 
   const AddBusForm({
@@ -124,7 +122,7 @@ class _AddDriverFormState extends State<AddBusForm> {
 
   void _onSubmit() {
     if (globalKey.currentState!.validate()) {
-      NewBus bus = NewBus(code: code, status: status);
+      Bus bus = Bus(code: code, status: status);
       NewDatabase.of(context).putBus(bus);
       widget.onSubmit?.call(bus);
     }

@@ -1,38 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'new_bus.dart';
+part of 'prop.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class NewBusAdapter extends TypeAdapter<NewBus> {
+class PropAdapter extends TypeAdapter<Prop> {
   @override
-  final int typeId = 1;
+  final int typeId = 3;
 
   @override
-  NewBus read(BinaryReader reader) {
+  Prop read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return NewBus(
+    return Prop(
       id: fields[0] as String?,
-      code: fields[1] as String,
-      status: fields[2] as BusStatus,
+      bus: fields[1] as String,
+      driver: fields[2] as String,
+      alternativeDriver: fields[3] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, NewBus obj) {
+  void write(BinaryWriter writer, Prop obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.code)
+      ..write(obj.bus)
       ..writeByte(2)
-      ..write(obj.status);
+      ..write(obj.driver)
+      ..writeByte(3)
+      ..write(obj.alternativeDriver);
   }
 
   @override
@@ -40,8 +43,5 @@ class NewBusAdapter extends TypeAdapter<NewBus> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is NewBusAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      identical(this, other) || other is PropAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

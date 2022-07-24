@@ -12,9 +12,9 @@ import 'package:new_bus_information/application/database/nosql_database.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
-import 'package:new_bus_information/application/models/new_bus.dart';
-import 'package:new_bus_information/application/models/new_driver.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
+import 'package:new_bus_information/application/models/bus/bus.dart';
+import 'package:new_bus_information/application/models/driver/driver.dart';
+import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/pages/home_page.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
@@ -23,9 +23,9 @@ void main() async {
   Hive.registerAdapter(BusStatusAdapter());
   Hive.registerAdapter(DriverStatusAdapter());
   Hive.registerAdapter(ShiftWorkAdapter());
-  Hive.registerAdapter(NewDriverAdapter());
-  Hive.registerAdapter(NewBusAdapter());
-  Hive.registerAdapter(NewPropAdapter());
+  Hive.registerAdapter(DriverAdapter());
+  Hive.registerAdapter(BusAdapter());
+  Hive.registerAdapter(PropAdapter());
   runApp(const MyApp());
 }
 

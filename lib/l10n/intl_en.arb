@@ -33,5 +33,11 @@
   "from": "From",
   "to": "To",
   "searchOn": "Search On",
-  "clearFilters": "Clear all Filters"
+  "clearFilters": "Clear all Filters",
+  "deleteBus": "Delete Bus",
+  "deleteDriver": "Delete Driver",
+  "deleteProp": "Delete Prop",
+  "deleteWarning": "Do you wanna delete this item ?",
+  "yes": "Yes",
+  "no": "No"
 }

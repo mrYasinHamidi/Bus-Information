@@ -1,18 +1,13 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
-import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
-import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
 import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/new_prop.dart';
 import 'package:new_bus_information/application/pages/create_prop_page.dart';
 import 'package:new_bus_information/application/pages/filter_page.dart';
+import 'package:new_bus_information/application/pages/prop_list_page.dart';
 import 'package:new_bus_information/application/utils.dart';
-import 'package:new_bus_information/application/widgets/prop_item.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,55 +31,16 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final searchState = context.watch<SearchBloc>().state;
-    return BackdropScaffold(
-      appBar: _buildAppBar(searchState.isActive),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          openPage(context, const CreatePropPage());
-        },
-      ),
-      backLayer: const FilterPage(),
-      frontLayer: _buildFrontLayer(),
+  Widget buildFloatinButton(BuildContext context) {
+    return FloatingActionButton(
+      child: const Icon(Icons.add),
+      onPressed: () {
+        openPage(context, const CreatePropPage());
+      },
     );
   }
 
-  Future<bool> _showDeleteDialog() async {
-    return await showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              backgroundColor: ThemeState.of(context).createDialog,
-              title: Text('Did you realy wanna delete this?'),
-              content: Text('If ypu delete this item , you can\'t return this.'),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
-                  style: ElevatedButton.styleFrom(elevation: 0),
-                  child: Text('No'),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                  child: Text('Yes do it'),
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
-  }
-
-  PreferredSizeWidget _buildAppBar(bool searchMode) {
+  PreferredSizeWidget buildAppBar(bool searchMode) {
     if (searchMode) {
       _searchFocusNode.requestFocus();
       return AppBar(
@@ -130,65 +86,15 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Widget _buildFrontLayer() {
-    return BlocBuilder<FilterPropCubit, FilterPropState>(
-      builder: (context, state) {
-        return ListView.builder(
-          itemCount: state.filteredList.length,
-          itemBuilder: (c, i) {
-            return Slidable(
-              key: ValueKey(state.filteredList[i].id),
-              startActionPane: ActionPane(
-                motion: const ScrollMotion(),
-                dismissible: DismissiblePane(
-                  confirmDismiss: _showDeleteDialog,
-                  onDismissed: () {
-                    _delete(state.filteredList[i]);
-                  },
-                  closeOnCancel: true,
-                ),
-                children: [
-                  SlidableAction(
-                    onPressed: (context) async {
-                      if (await _showDeleteDialog()) {
-                        _delete(state.filteredList[i]);
-                      }
-                    },
-                    backgroundColor: Color(0xFF21B7CA),
-                    foregroundColor: Colors.white,
-                    icon: Icons.delete_rounded,
-                    label: S.of(context).delete,
-                  ),
-                  SlidableAction(
-                    onPressed: (context) {
-                      _edit(state.filteredList[i]);
-                    },
-                    backgroundColor: Color(0xFF21B7CA),
-                    foregroundColor: Colors.white,
-                    icon: Icons.edit_rounded,
-                    label: S.of(context).edite,
-                  ),
-                ],
-              ),
-              child: PropItemWidget(state.filteredList[i]),
-            );
-          },
-        );
-      },
+  @override
+  Widget build(BuildContext context) {
+    final searchState = context.watch<SearchBloc>().state;
+    return BackdropScaffold(
+      appBar: buildAppBar(searchState.isActive),
+      floatingActionButton: buildFloatinButton(context),
+      backLayer: const FilterPage(),
+      frontLayer: const PropListPage(),
     );
-  }
-
-  void _edit(NewProp prop) {
-    openPage(
-      context,
-      CreatePropPage(
-        prop: prop,
-      ),
-    );
-  }
-
-  void _delete(NewProp prop) {
-    NewDatabase.of(context).deleteProp(prop);
   }
 
   @override
