@@ -1,6 +1,6 @@
-part of 'prop.dart';
+part of 'bus.dart';
 
-extension PropListExtension on List<Prop> {
+extension BusListExtension on List<Bus> {
   reSort() {
     sort(
       (a, b) => b.getCreationTime().compareTo(a.getCreationTime()),

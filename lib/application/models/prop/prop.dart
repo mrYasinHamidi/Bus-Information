@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:objectid/objectid.dart';
 
 part 'prop.g.dart';
+part 'prop_list_extension.dart';
 
 @HiveType(typeId: 3)
 class Prop extends Equatable {

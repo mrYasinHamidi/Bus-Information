@@ -100,7 +100,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
     return await openPage(
       context,
       DriverChooser(
-        drivers: NewDatabase.of(context).getDrivers().toList(),
+        drivers: NewDatabase.of(context).getDrivers().toList().reSort(),
       ),
     );
   }
@@ -109,7 +109,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
     return await openPage(
       context,
       BusChooser(
-        buses: NewDatabase.of(context).getBuses().toList(),
+        buses: NewDatabase.of(context).getBuses().toList().reSort(),
       ),
     );
   }

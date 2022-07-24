@@ -82,7 +82,7 @@ class PropListPage extends StatelessWidget {
 
     var child = state.filteredList.isEmpty
         ? emptyWiew(size: MediaQuery.of(context).size)
-        : propListView(props: state.filteredList, onDismissItem: (p0) {});
+        : propListView(props: state.filteredList.reSort(), onDismissItem: (p0) {});
 
     return child;
   }

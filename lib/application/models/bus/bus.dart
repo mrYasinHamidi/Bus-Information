@@ -4,6 +4,7 @@ import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:objectid/objectid.dart';
 
 part 'bus.g.dart';
+part 'bus_list_extension.dart';
 
 @HiveType(typeId: 1)
 class Bus extends Equatable {

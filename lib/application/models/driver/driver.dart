@@ -5,7 +5,7 @@ import 'package:new_bus_information/application/models/driver/shift_work.dart';
 import 'package:objectid/objectid.dart';
 
 part 'driver.g.dart';
-
+part 'driver_list_extension.dart';
 @HiveType(typeId: 2)
 class Driver extends Equatable {
   @HiveField(0)
