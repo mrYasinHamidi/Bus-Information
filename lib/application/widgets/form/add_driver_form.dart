@@ -44,23 +44,27 @@ class _AddDriverFormState extends State<AddDriverForm> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    return PageTransitionSwitcher(
-      duration: const Duration(milliseconds: 300),
-      reverse: !_show,
-      transitionBuilder: (
-        Widget child,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-      ) {
-        return SharedAxisTransition(
-          fillColor: Colors.transparent,
-          child: child,
-          animation: animation,
-          secondaryAnimation: secondaryAnimation,
-          transitionType: SharedAxisTransitionType.vertical,
-        );
-      },
-      child: _show ? _form : const SizedBox(),
+    return Column(
+      children: [
+        PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 300),
+          reverse: !_show,
+          transitionBuilder: (
+            Widget child,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) {
+            return SharedAxisTransition(
+              fillColor: Colors.transparent,
+              child: child,
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              transitionType: SharedAxisTransitionType.vertical,
+            );
+          },
+          child: _show ? _form : const SizedBox(),
+        ),
+      ],
     );
   }
 

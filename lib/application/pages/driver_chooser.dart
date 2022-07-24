@@ -138,7 +138,7 @@ class _DriverChooserState extends State<DriverChooser> {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(S.of(context).deleteBus),
+        title: Text(S.of(context).deleteDriver),
         content: Text(S.of(context).deleteWarning),
         actions: [
           OutlinedButton(

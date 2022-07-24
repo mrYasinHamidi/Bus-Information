@@ -28,7 +28,7 @@ class FilterPage extends StatelessWidget {
 
   ButtonStyle _buttonStyle() {
     return OutlinedButton.styleFrom(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     );
   }
 
@@ -49,7 +49,6 @@ class FilterPage extends StatelessWidget {
     final ButtonStyle buttonStyle = _buttonStyle();
 
     final ScrollController controller = ScrollController();
-
     return ListView(
       controller: controller,
       children: [
@@ -152,6 +151,7 @@ class FilterPage extends StatelessWidget {
         ),
         space,
         _title(S.of(context).searchOn),
+        space,
         Center(
           child: ToggledEnum(
             options: state.searchCondidateAsMap,
@@ -191,12 +191,14 @@ class FilterPage extends StatelessWidget {
           ],
         ),
         downSpace,
-        downSpace,
-        Text(
-          '${context.read<FilterPropCubit>().state.filteredList.length} Item Filtered',
-          textAlign: TextAlign.center,
-          style: ThemeState.of(context).smokeTitleLarge,
-        ),
+        Builder(builder: (context) {
+          return Text(
+            S.of(context).totalCount(context.read<FilterPropCubit>().state.filteredList.length),
+            textAlign: TextAlign.center,
+            style: context.watch<ThemeCubit>().state.smokeTitleLarge,
+          );
+        }),
+        space,
         Center(
           child: TextButton(
             onPressed: () {

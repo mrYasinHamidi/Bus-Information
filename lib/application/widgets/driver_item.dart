@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
-import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/widgets/dot.dart';
 
 class DriverItemWidget extends StatelessWidget {

@@ -449,6 +449,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Total Count : {count}`
+  String totalCount(Object count) {
+    return Intl.message(
+      'Total Count : $count',
+      name: 'totalCount',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

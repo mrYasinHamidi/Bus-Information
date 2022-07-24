@@ -39,5 +39,6 @@
   "deleteProp": "Delete Prop",
   "deleteWarning": "Do you wanna delete this item ?",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "totalCount": "Total Count : {count}"
 }

@@ -18,7 +18,7 @@ class DarkThemeState extends ThemeState {
   @override
   ThemeData get theme => ThemeData(
         fontFamily: fontFamily,
-        colorScheme: ColorScheme(
+        colorScheme: const ColorScheme(
           brightness: Brightness.dark,
           primary: Colors.orange,
           onPrimary: Colors.white,
@@ -31,12 +31,6 @@ class DarkThemeState extends ThemeState {
           surface: Color(0xff212121),
           onSurface: Colors.white,
         ),
-        // inputDecorationTheme: InputDecorationTheme(
-        // iconColor: enableInputBorder,
-        // floatingLabelStyle: TextStyle(
-        // color: enableInputBorder,
-        // ),
-        // ),
       );
 
   @override
@@ -58,29 +52,22 @@ class LightThemeState extends ThemeState {
 
   @override
   ThemeData get theme => ThemeData(
-        fontFamily: fontFamily,
-        // primaryColor: Colors.yellow,
-        colorScheme: ColorScheme(
-          brightness: Brightness.light,
-          primary: Colors.green,
-          onPrimary: Colors.white,
-          secondary: Colors.blueAccent,
-          onSecondary: Colors.white,
-          error: Colors.redAccent,
-          onError: Colors.white,
-          background: Colors.lightGreen,
-          onBackground: Colors.white,
-          surface: Color(0xff212121),
-          onSurface: Colors.white,
-        ),
-
-        // inputDecorationTheme: InputDecorationTheme(
-        // iconColor: enableInputBorder,
-        // floatingLabelStyle: TextStyle(
-        // color: enableInputBorder,
-        // ),
-        // ),
-      );
+      fontFamily: fontFamily,
+      colorScheme: const ColorScheme(
+        brightness: Brightness.light,
+        primary: Colors.yellowAccent,
+        onPrimary: Colors.white,
+        secondary: Colors.orange,
+        onSecondary: Colors.white,
+        error: Colors.redAccent,
+        onError: Colors.white,
+        background: Colors.lightGreen,
+        onBackground: Colors.white,
+        surface: Colors.blue,
+        onSurface: Colors.white,
+      ),
+      appBarTheme: const AppBarTheme(color: Colors.blue),
+      toggleButtonsTheme: const ToggleButtonsThemeData(color: Colors.black));
 
   @override
   Color get onTapSplash => Colors.black26;

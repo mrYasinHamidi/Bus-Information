@@ -20,39 +20,54 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'fa';
 
+  static String m0(count) => "مجموع آیتم ها : ${count}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "active": MessageLookupByLibrary.simpleMessage("Active"),
+        "active": MessageLookupByLibrary.simpleMessage("فعال"),
         "alternativeDriver":
-            MessageLookupByLibrary.simpleMessage("Alternative"),
-        "appName": MessageLookupByLibrary.simpleMessage("Bus Information"),
+            MessageLookupByLibrary.simpleMessage("راننده جایگزین"),
+        "appName": MessageLookupByLibrary.simpleMessage("اتوبوسرانی"),
+        "bus": MessageLookupByLibrary.simpleMessage("اتوبوس"),
         "busNumber": MessageLookupByLibrary.simpleMessage("شماره اتوبوس"),
-        "busStatus": MessageLookupByLibrary.simpleMessage("Bus Status"),
-        "buses": MessageLookupByLibrary.simpleMessage("Buses"),
-        "coordination": MessageLookupByLibrary.simpleMessage("Coordination"),
-        "createProp": MessageLookupByLibrary.simpleMessage("Create Prop"),
-        "driver": MessageLookupByLibrary.simpleMessage("Driver"),
-        "driverStatus": MessageLookupByLibrary.simpleMessage("driver Status"),
-        "drivers": MessageLookupByLibrary.simpleMessage("Drivers"),
-        "eveningShift": MessageLookupByLibrary.simpleMessage("Evening Shift"),
-        "firstOverTime": MessageLookupByLibrary.simpleMessage("First OverTime"),
-        "inActive": MessageLookupByLibrary.simpleMessage("Inactive"),
-        "morningShift": MessageLookupByLibrary.simpleMessage("Morning Shift"),
-        "name": MessageLookupByLibrary.simpleMessage("Name"),
-        "props": MessageLookupByLibrary.simpleMessage("Props"),
-        "repeatedName": MessageLookupByLibrary.simpleMessage("Repeated Name"),
-        "repeatedNumber":
-            MessageLookupByLibrary.simpleMessage("Repeated number"),
-        "secondOverTime":
-            MessageLookupByLibrary.simpleMessage("Second OverTime"),
-        "shiftSwitching":
-            MessageLookupByLibrary.simpleMessage("Shift Switching"),
-        "shiftWork": MessageLookupByLibrary.simpleMessage("Shift Work"),
+        "busStatus": MessageLookupByLibrary.simpleMessage("وضعیت اتوبوس"),
+        "buses": MessageLookupByLibrary.simpleMessage("اتوبوس ها"),
+        "clearFilters":
+            MessageLookupByLibrary.simpleMessage("پاک کردن فیلتر ها"),
+        "coordination": MessageLookupByLibrary.simpleMessage("هماهنگی"),
+        "createProp": MessageLookupByLibrary.simpleMessage("ساخت مشخصه"),
+        "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+        "deleteBus": MessageLookupByLibrary.simpleMessage("حذف اتوبوس"),
+        "deleteDriver": MessageLookupByLibrary.simpleMessage("حذف راننده"),
+        "deleteProp": MessageLookupByLibrary.simpleMessage("حذف مشخصه"),
+        "deleteWarning": MessageLookupByLibrary.simpleMessage(
+            "آیا مایل به حذف این مورد هستید ؟"),
+        "driver": MessageLookupByLibrary.simpleMessage("راننده"),
+        "driverStatus": MessageLookupByLibrary.simpleMessage("وضعیت راننده"),
+        "drivers": MessageLookupByLibrary.simpleMessage("رانندگان"),
+        "edite": MessageLookupByLibrary.simpleMessage("ویرایش"),
+        "eveningShift": MessageLookupByLibrary.simpleMessage("شیفت عصر"),
+        "firstOverTime": MessageLookupByLibrary.simpleMessage("اضافه کار اول"),
+        "from": MessageLookupByLibrary.simpleMessage("از"),
+        "inActive": MessageLookupByLibrary.simpleMessage("غیر فعال"),
+        "morningShift": MessageLookupByLibrary.simpleMessage("شبفت صبح"),
+        "name": MessageLookupByLibrary.simpleMessage("نام"),
+        "no": MessageLookupByLibrary.simpleMessage("خیر"),
+        "props": MessageLookupByLibrary.simpleMessage("مشخصه ها"),
+        "repeatedName": MessageLookupByLibrary.simpleMessage("نام تکراری"),
+        "repeatedNumber": MessageLookupByLibrary.simpleMessage("شماره تکراری"),
+        "searchHint": MessageLookupByLibrary.simpleMessage("جستجو کنید . . ."),
+        "searchOn": MessageLookupByLibrary.simpleMessage("جستجو بر اساس"),
+        "secondOverTime": MessageLookupByLibrary.simpleMessage("اضافه کار دوم"),
+        "shiftSwitching": MessageLookupByLibrary.simpleMessage("تغیر شیفت"),
+        "shiftWork": MessageLookupByLibrary.simpleMessage("شیفت کاری"),
         "shouldNotEmpty":
-            MessageLookupByLibrary.simpleMessage("Should not empty"),
-        "submit": MessageLookupByLibrary.simpleMessage("Submit"),
-        "toggleLanguage":
-            MessageLookupByLibrary.simpleMessage("Toggle Language"),
-        "vacation": MessageLookupByLibrary.simpleMessage("Vacation")
+            MessageLookupByLibrary.simpleMessage("نباید خالی باشد"),
+        "submit": MessageLookupByLibrary.simpleMessage("تایید"),
+        "to": MessageLookupByLibrary.simpleMessage("تا"),
+        "toggleLanguage": MessageLookupByLibrary.simpleMessage("تغیر زبان"),
+        "totalCount": m0,
+        "vacation": MessageLookupByLibrary.simpleMessage("مرخصی"),
+        "yes": MessageLookupByLibrary.simpleMessage("بله")
       };
 }

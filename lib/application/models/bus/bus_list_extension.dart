@@ -1,7 +1,7 @@
 part of 'bus.dart';
 
 extension BusListExtension on List<Bus> {
-  reSort() {
+  void reSort() {
     sort(
       (a, b) => b.getCreationTime().compareTo(a.getCreationTime()),
     );

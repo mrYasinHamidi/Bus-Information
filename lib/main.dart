@@ -6,6 +6,7 @@ import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
 import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
 import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
 import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
+import 'package:new_bus_information/application/cubit/settings/settings_cubit.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/database/nosql_database.dart';
@@ -19,6 +20,11 @@ import 'package:new_bus_information/application/pages/home_page.dart';
 import 'package:new_bus_information/generated/l10n.dart';
 
 void main() async {
+  await initHive();
+  runApp(const MyApp());
+}
+
+Future<void> initHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(BusStatusAdapter());
   Hive.registerAdapter(DriverStatusAdapter());
@@ -26,7 +32,6 @@ void main() async {
   Hive.registerAdapter(DriverAdapter());
   Hive.registerAdapter(BusAdapter());
   Hive.registerAdapter(PropAdapter());
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -35,6 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<NewHiveDatabase> getDatabase() async {
+      await Hive.openBox<bool>('settings');
       return NewHiveDatabase(
         await Hive.openBox('buses'),
         await Hive.openBox('drivers'),
@@ -46,14 +52,24 @@ class MyApp extends StatelessWidget {
       future: getDatabase(),
       builder: (BuildContext context, AsyncSnapshot<NewDatabase> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          final Settings settings = Settings(settingsBox: Hive.box('settings'));
           return RepositoryProvider(
             create: (context) => snapshot.data,
             child: MultiBlocProvider(
               providers: [
-                BlocProvider(create: (context) => LanguageCubit()),
-                BlocProvider(create: (context) => ThemeCubit(languageCubit: context.read<LanguageCubit>())),
                 BlocProvider(create: (context) => SearchBloc()),
                 BlocProvider(create: (context) => FilterTermsBloc()),
+                BlocProvider(
+                  create: (context) => LanguageCubit(
+                    settings: settings,
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => ThemeCubit(
+                    languageCubit: context.read<LanguageCubit>(),
+                    settings: settings,
+                  ),
+                ),
                 BlocProvider(
                   create: (context) => FilterPropCubit(
                     database: NewDatabase.of(context),

@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final searchState = context.watch<SearchBloc>().state;
     return BackdropScaffold(
+      backLayerBackgroundColor: ThemeState.of(context).theme.colorScheme.surface,
       appBar: buildAppBar(searchState.isActive),
       floatingActionButton: buildFloatinButton(context),
       backLayer: const FilterPage(),

@@ -1,9 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:new_bus_information/application/cubit/settings/settings_cubit.dart';
 part 'language_state.dart';
 
 class LanguageCubit extends Cubit<LanguageState> {
-  LanguageCubit() : super(EnglishState());
+  final Settings settings;
+  LanguageCubit({required this.settings})
+      : super(
+          settings.isEnglish ? EnglishState() : PersianState(),
+        );
 
   void toggleLanguage() {
     switch (state.runtimeType) {
@@ -14,5 +19,6 @@ class LanguageCubit extends Cubit<LanguageState> {
         emit(EnglishState());
         break;
     }
+    settings.isEnglish = state is EnglishState;
   }
 }
