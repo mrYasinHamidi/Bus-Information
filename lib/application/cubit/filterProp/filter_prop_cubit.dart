@@ -5,6 +5,7 @@ import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bl
 import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
 import 'package:new_bus_information/application/database/database.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
+import 'package:new_bus_information/application/models/date/date.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'package:new_bus_information/application/models/search_condidate_type.dart';
 
@@ -91,6 +92,20 @@ class FilterPropCubit extends Cubit<FilterPropState> {
             (element) => filterTermsBloc.state.secondDriverShiftCondidate.contains(
               database.getDriver(element.alternativeDriver)?.shiftWork,
             ),
+          )
+          .toList();
+    }
+    if (!filterTermsBloc.state.startDate.isZero()) {
+      filteredProps = filteredProps
+          .where(
+            (element) => Date.fromDateTime(element.getCreationTime()).isAfterOrEqual(filterTermsBloc.state.startDate),
+          )
+          .toList();
+    }
+    if (!filterTermsBloc.state.endDate.isZero()) {
+      filteredProps = filteredProps
+          .where(
+            (element) => Date.fromDateTime(element.getCreationTime()).isBeforeOrEqual(filterTermsBloc.state.endDate),
           )
           .toList();
     }

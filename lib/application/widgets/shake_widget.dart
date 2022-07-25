@@ -27,6 +27,7 @@ class ShakeWidget extends StatefulWidget {
   final Duration shakeDuration;
 
   @override
+  // ignore: no_logic_in_create_state
   ShakeWidgetState createState() => ShakeWidgetState(shakeDuration);
 }
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
+import 'package:new_bus_information/application/models/date/date.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
 import 'package:new_bus_information/application/models/search_condidate_type.dart';
@@ -18,6 +19,8 @@ class FilterTermsBloc extends Bloc<FilterTermsEvent, FilterTermsState> {
     on<SetDriverShiftCondidateEvent>(changeDriverShiftCondidate);
     on<SetSecondDriverStatusCondidateEvent>(changeSecondDriverStatusCondidate);
     on<SetSecondDriverShiftCondidateEvent>(changeSecondDriverShiftCondidate);
+    on<SetStartDate>(changeStartDate);
+    on<SetEndDate>(changeEndDate);
     on<ClearAllFiltersEvent>(clearAllFilters);
   }
 
@@ -86,6 +89,14 @@ class FilterTermsBloc extends Bloc<FilterTermsEvent, FilterTermsState> {
     } else {
       emit(state.copyWith(secondDriverShiftCondidate: {...state.secondDriverShiftCondidate, event.newShift}));
     }
+  }
+
+  FutureOr<void> changeStartDate(SetStartDate event, Emitter<FilterTermsState> emit) {
+    emit(state.copyWith(startDate: event.date));
+  }
+
+  FutureOr<void> changeEndDate(SetEndDate event, Emitter<FilterTermsState> emit) {
+    emit(state.copyWith(endDate: event.date));
   }
 
   FutureOr<void> clearAllFilters(ClearAllFiltersEvent event, Emitter<FilterTermsState> emit) {

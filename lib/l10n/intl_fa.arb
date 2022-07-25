@@ -40,5 +40,7 @@
   "deleteWarning": "آیا مایل به حذف این مورد هستید ؟",
   "yes": "بله",
   "no": "خیر",
-  "totalCount": "مجموع آیتم ها : {count}"
+  "totalCount": "مجموع آیتم ها : {count}",
+  "startDate": "تاریخ شروع",
+  "endDate": "تاریخ پایان"
 }

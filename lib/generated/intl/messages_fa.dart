@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "driverStatus": MessageLookupByLibrary.simpleMessage("وضعیت راننده"),
         "drivers": MessageLookupByLibrary.simpleMessage("رانندگان"),
         "edite": MessageLookupByLibrary.simpleMessage("ویرایش"),
+        "endDate": MessageLookupByLibrary.simpleMessage("تاریخ پایان"),
         "eveningShift": MessageLookupByLibrary.simpleMessage("شیفت عصر"),
         "firstOverTime": MessageLookupByLibrary.simpleMessage("اضافه کار اول"),
         "from": MessageLookupByLibrary.simpleMessage("از"),
@@ -62,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shiftWork": MessageLookupByLibrary.simpleMessage("شیفت کاری"),
         "shouldNotEmpty":
             MessageLookupByLibrary.simpleMessage("نباید خالی باشد"),
+        "startDate": MessageLookupByLibrary.simpleMessage("تاریخ شروع"),
         "submit": MessageLookupByLibrary.simpleMessage("تایید"),
         "to": MessageLookupByLibrary.simpleMessage("تا"),
         "toggleLanguage": MessageLookupByLibrary.simpleMessage("تغیر زبان"),

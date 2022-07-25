@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "driverStatus": MessageLookupByLibrary.simpleMessage("driver Status"),
         "drivers": MessageLookupByLibrary.simpleMessage("Drivers"),
         "edite": MessageLookupByLibrary.simpleMessage("Edite"),
+        "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "eveningShift": MessageLookupByLibrary.simpleMessage("Evening Shift"),
         "firstOverTime": MessageLookupByLibrary.simpleMessage("First OverTime"),
         "from": MessageLookupByLibrary.simpleMessage("From"),
@@ -67,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shiftWork": MessageLookupByLibrary.simpleMessage("Shift Work"),
         "shouldNotEmpty":
             MessageLookupByLibrary.simpleMessage("Should not empty"),
+        "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "toggleLanguage":

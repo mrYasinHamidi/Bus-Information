@@ -40,5 +40,7 @@
   "deleteWarning": "Do you wanna delete this item ?",
   "yes": "Yes",
   "no": "No",
-  "totalCount": "Total Count : {count}"
+  "totalCount": "Total Count : {count}",
+  "startDate": "Start Date",
+  "endDate": "End Date"
 }

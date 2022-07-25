@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
 import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
+import 'package:new_bus_information/application/models/date/date.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
 import 'package:new_bus_information/application/models/search_condidate_type.dart';
@@ -32,6 +34,10 @@ class FilterPage extends StatelessWidget {
     );
   }
 
+  BoxConstraints _buttonConstraints() {
+    return const BoxConstraints(minWidth: 130);
+  }
+
   FilterTermsBloc _bloc(BuildContext context) {
     return context.read<FilterTermsBloc>();
   }
@@ -47,6 +53,7 @@ class FilterPage extends StatelessWidget {
     final EdgeInsets sideSpace = EdgeInsets.symmetric(horizontal: size.width * 0.07);
 
     final ButtonStyle buttonStyle = _buttonStyle();
+    final BoxConstraints buttonConstraints = _buttonConstraints();
 
     final ScrollController controller = ScrollController();
     return ListView(
@@ -171,20 +178,35 @@ class FilterPage extends StatelessWidget {
             Column(
               children: [
                 _title(S.of(context).from),
-                OutlinedButton(
-                  onPressed: () {},
-                  style: buttonStyle,
-                  child: const Text('21/02/2022'),
+                ConstrainedBox(
+                  constraints: buttonConstraints,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      Date date = Date.fromDateTime(await getDateTime(
+                        context,
+                        state.startDate,
+                      ));
+                      _bloc(context).add(SetStartDate(date: date));
+                    },
+                    style: buttonStyle,
+                    child: Text(state.startDate.isZero() ? S.of(context).startDate : state.startDate.toString()),
+                  ),
                 ),
               ],
             ),
             Column(
               children: [
                 _title(S.of(context).to),
-                OutlinedButton(
-                  onPressed: () {},
-                  style: buttonStyle,
-                  child: const Text('21/02/2022'),
+                ConstrainedBox(
+                  constraints: buttonConstraints,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      Date date = Date.fromDateTime(await getDateTime(context, state.endDate));
+                      _bloc(context).add(SetEndDate(date: date));
+                    },
+                    style: buttonStyle,
+                    child: Text(state.endDate.isZero() ? S.of(context).endDate : state.endDate.toString()),
+                  ),
                 ),
               ],
             ),
@@ -210,6 +232,20 @@ class FilterPage extends StatelessWidget {
         downSpace,
         downSpace,
       ],
+    );
+  }
+
+  Future<DateTime?> getDateTime(
+    BuildContext context,
+    Date initDate, {
+    Date start = const Date.zero(),
+    Date end = const Date.zero(),
+  }) {
+    return showDatePicker(
+      context: context,
+      initialDate: initDate.isZero() ? DateTime.now() : initDate.toDatetime(),
+      firstDate: start.isZero() ? DateTime.fromMillisecondsSinceEpoch(0) : start.toDatetime(),
+      lastDate: start.isZero() ? DateTime.now() : start.toDatetime(),
     );
   }
 }
