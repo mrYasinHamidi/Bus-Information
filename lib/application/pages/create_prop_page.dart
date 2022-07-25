@@ -19,6 +19,8 @@ class CreatePropPage extends StatefulWidget {
 }
 
 class _CreatePropPageState extends State<CreatePropPage> {
+  final GlobalKey<BusPreviewerState> _busPreviewKey = GlobalKey<BusPreviewerState>();
+  final GlobalKey<DriverPreviewerState> _driverPreviewKey = GlobalKey<DriverPreviewerState>();
   Driver? _firstDriver;
   Driver? _secondDriver;
   Bus? _bus;
@@ -56,10 +58,14 @@ class _CreatePropPageState extends State<CreatePropPage> {
               children: [
                 Expanded(
                   child: DriverPreviewer(
-                    driver: _firstDriver,
-                    emptyTitle: S.of(context).driver,
-                    onTap: _selectFirstDriver,
-                  ),
+                      key: _driverPreviewKey,
+                      driver: _firstDriver,
+                      emptyTitle: S.of(context).driver,
+                      onTap: _selectFirstDriver,
+                      validator: () {
+                        if (_firstDriver != null) return null;
+                        return S.of(context).shouldNotEmpty;
+                      }),
                 ),
                 Expanded(
                   child: DriverPreviewer(
@@ -71,9 +77,16 @@ class _CreatePropPageState extends State<CreatePropPage> {
               ],
             ),
             BusPreviewer(
+              key: _busPreviewKey,
               onTap: _selectBus,
               emptyTitle: S.of(context).bus,
               bus: _bus,
+              validator: () {
+                if (_bus == null) {
+                  return S.of(context).shouldNotEmpty;
+                }
+                return null;
+              },
             ),
           ],
         ),
@@ -115,6 +128,11 @@ class _CreatePropPageState extends State<CreatePropPage> {
   }
 
   void _submit() {
+    bool a = _busPreviewKey.currentState?.save() ?? true;
+    bool b = _driverPreviewKey.currentState?.save() ?? true;
+    if (!a || !b) {
+      return;
+    }
     Prop prop = Prop.from(
       id: widget.prop?.id,
       bus: _bus?.id,
