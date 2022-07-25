@@ -33,6 +33,7 @@ class CustomInputField extends StatelessWidget {
         prefixIcon: icon,
         enabledBorder:const OutlineInputBorder(
         ),
+        contentPadding: EdgeInsets.zero,
         focusedBorder: const OutlineInputBorder(),
         errorBorder: const OutlineInputBorder(),
         focusedErrorBorder: const OutlineInputBorder(),

@@ -95,23 +95,29 @@ class _BusChooserState extends State<BusChooser> {
             ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: CreatorDialog(
         isDriverChooser: false,
         onAddBus: _onAddItem,
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      resizeToAvoidBottomInset: false,
     );
   }
 
-  TextField _buildSearchBox(BuildContext context) {
-    return TextField(
-      controller: _controller,
-      decoration: const InputDecoration(
-        isDense: true,
-        prefixIcon: Icon(Icons.search),
-        enabledBorder: UnderlineInputBorder(),
-        focusedBorder: UnderlineInputBorder(),
-      ),
+  Widget _buildSearchBox(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          controller: _controller,
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.zero,
+            icon: Icon(Icons.search),
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+          ),
+        ),
+        const Divider(height: 0),
+      ],
     );
   }
 

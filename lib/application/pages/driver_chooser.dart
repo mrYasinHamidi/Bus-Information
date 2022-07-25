@@ -96,6 +96,7 @@ class _DriverChooserState extends State<DriverChooser> {
             ),
         ],
       ),
+      resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: CreatorDialog(
         onAddDriver: _onAddItem,
@@ -104,15 +105,20 @@ class _DriverChooserState extends State<DriverChooser> {
     );
   }
 
-  TextField _buildSearchBox(BuildContext context) {
-    return TextField(
-      controller: _controller,
-      decoration: const InputDecoration(
-        isDense: true,
-        prefixIcon: Icon(Icons.search),
-        enabledBorder: UnderlineInputBorder(),
-        focusedBorder: UnderlineInputBorder(),
-      ),
+  Widget _buildSearchBox(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          controller: _controller,
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.zero,
+            icon: Icon(Icons.search),
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+          ),
+        ),
+        const Divider(height: 0),
+      ],
     );
   }
 
