@@ -25,8 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "active": MessageLookupByLibrary.simpleMessage("فعال"),
-        "alternativeDriver":
-            MessageLookupByLibrary.simpleMessage("راننده جایگزین"),
+        "alternativeDriver": MessageLookupByLibrary.simpleMessage("جایگزین"),
         "appName": MessageLookupByLibrary.simpleMessage("اتوبوسرانی"),
         "bus": MessageLookupByLibrary.simpleMessage("اتوبوس"),
         "busNumber": MessageLookupByLibrary.simpleMessage("شماره اتوبوس"),
@@ -50,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "firstOverTime": MessageLookupByLibrary.simpleMessage("اضافه کار اول"),
         "from": MessageLookupByLibrary.simpleMessage("از"),
         "inActive": MessageLookupByLibrary.simpleMessage("غیر فعال"),
-        "morningShift": MessageLookupByLibrary.simpleMessage("شبفت صبح"),
+        "morningShift": MessageLookupByLibrary.simpleMessage("شیفت صبح"),
         "name": MessageLookupByLibrary.simpleMessage("نام"),
         "no": MessageLookupByLibrary.simpleMessage("خیر"),
         "props": MessageLookupByLibrary.simpleMessage("مشخصه ها"),

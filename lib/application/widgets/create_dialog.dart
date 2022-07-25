@@ -31,9 +31,11 @@ class _CreatorDialogState extends State<CreatorDialog> {
 
   bool _isOpen = false;
 
-  double get _width => _isOpen ? size.width * 0.9 : 50;
+  bool get _isVertical => MediaQuery.of(context).orientation == Orientation.portrait;
 
-  double get _height => _isOpen ? size.height * .5 : 50;
+  double get _width => _isOpen ? size.width * (_isVertical ? 0.9 : 0.8) : 50;
+
+  double get _height => _isOpen ? size.height * (_isVertical ? 0.5 : 0.75) : 50;
 
   Color get _color => context.read<ThemeCubit>().state.createDialog;
 
@@ -81,11 +83,11 @@ class _CreatorDialogState extends State<CreatorDialog> {
             ignoring: !_isOpen,
             child: GestureDetector(
                 onTap: _close,
-                child: AnimatedContainer(
+                child: Container(
                   width: size.width,
                   height: size.height,
                   color: _backgroundColor,
-                  duration: _duration,
+                  // duration: _duration,
                 )),
           ),
           Align(

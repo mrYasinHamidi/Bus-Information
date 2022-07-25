@@ -142,25 +142,26 @@ class _DriverChooserState extends State<DriverChooser> {
 
   Future<bool> _confirmDelete(DismissDirection direction) async {
     return await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(S.of(context).deleteDriver),
-        content: Text(S.of(context).deleteWarning),
-        actions: [
-          OutlinedButton(
-            onPressed: () {
-              Navigator.pop(context, true);
-            },
-            child: Text(S.of(context).yes),
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(S.of(context).deleteDriver),
+            content: Text(S.of(context).deleteWarning),
+            actions: [
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+                child: Text(S.of(context).yes),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+                child: Text(S.of(context).no),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
-            child: Text(S.of(context).no),
-          ),
-        ],
-      ),
-    );
+        ) ??
+        false;
   }
 }

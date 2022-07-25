@@ -24,7 +24,6 @@ class AddDriverForm extends StatefulWidget {
 
 class _AddDriverFormState extends State<AddDriverForm> {
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
-  late Size size;
 
   late String name;
   DriverStatus status = DriverStatus.active;
@@ -43,72 +42,72 @@ class _AddDriverFormState extends State<AddDriverForm> {
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        PageTransitionSwitcher(
-          duration: const Duration(milliseconds: 300),
-          reverse: !_show,
-          transitionBuilder: (
-            Widget child,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-          ) {
-            return SharedAxisTransition(
-              fillColor: Colors.transparent,
-              child: child,
-              animation: animation,
-              secondaryAnimation: secondaryAnimation,
-              transitionType: SharedAxisTransitionType.vertical,
-            );
-          },
-          child: _show ? _form : const SizedBox(),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          PageTransitionSwitcher(
+            duration: const Duration(milliseconds: 300),
+            reverse: !_show,
+            transitionBuilder: (
+              Widget child,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+            ) {
+              return SharedAxisTransition(
+                fillColor: Colors.transparent,
+                child: child,
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                transitionType: SharedAxisTransitionType.vertical,
+              );
+            },
+            child: _show ? _form : const SizedBox(),
+          ),
+        ],
+      ),
     );
   }
 
   Form get _form {
     return Form(
       key: globalKey,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: CustomInputField(
-                label: S.of(context).name,
-                validator: _personNameValidator,
-                onChange: _onPersonNameChange,
-              ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: CustomInputField(
+              label: S.of(context).name,
+              maxLength: 20,
+              validator: _personNameValidator,
+              onChange: _onPersonNameChange,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomDropDown(
-                items: ShiftWork.values.asTextList,
-                onChange: _onShiftWorkChange,
-                label: S.of(context).shiftWork,
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomDropDown(
+              items: ShiftWork.values.asTextList,
+              onChange: _onShiftWorkChange,
+              label: S.of(context).shiftWork,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomDropDown(
-                items: DriverStatus.values.asTextList,
-                label: S.of(context).driverStatus,
-                onChange: _onStatusChange,
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomDropDown(
+              items: DriverStatus.values.asTextList,
+              label: S.of(context).driverStatus,
+              onChange: _onStatusChange,
             ),
-            const SizedBox(
-              height: 16,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          OutlinedButton(
+            onPressed: _onSubmit,
+            child: Text(
+              S.of(context).submit,
             ),
-            OutlinedButton(
-              onPressed: _onSubmit,
-              child: Text(
-                S.of(context).submit,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -69,6 +69,7 @@ class DriverPreviewer extends StatelessWidget {
             Text(
               driver?.name ?? '',
               style: const TextStyle(fontSize: 24),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
