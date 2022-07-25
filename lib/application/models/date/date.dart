@@ -10,7 +10,7 @@ class Date {
   });
 
   factory Date.fromDateTime(DateTime? dateTime) {
-    if (dateTime == null) return Date.zero();
+    if (dateTime == null) return const Date.zero();
     return Date(year: dateTime.year, month: dateTime.month, day: dateTime.day);
   }
 
