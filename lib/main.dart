@@ -9,7 +9,7 @@ import 'package:new_bus_information/application/cubit/language/language_cubit.da
 import 'package:new_bus_information/application/cubit/settings/settings_cubit.dart';
 import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
 import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/database/nosql_database.dart';
+import 'package:new_bus_information/application/database/hive_database.dart';
 import 'package:new_bus_information/application/models/bus/bus_status.dart';
 import 'package:new_bus_information/application/models/driver/driver_status.dart';
 import 'package:new_bus_information/application/models/driver/shift_work.dart';
@@ -39,9 +39,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<NewHiveDatabase> getDatabase() async {
+    Future<HiveDatabase> getDatabase() async {
       await Hive.openBox<bool>('settings');
-      return NewHiveDatabase(
+      return HiveDatabase(
         await Hive.openBox('buses'),
         await Hive.openBox('drivers'),
         await Hive.openBox('props'),
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
 
     return FutureBuilder(
       future: getDatabase(),
-      builder: (BuildContext context, AsyncSnapshot<NewDatabase> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Database> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final Settings settings = Settings(settingsBox: Hive.box('settings'));
           return RepositoryProvider(
@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
                 ),
                 BlocProvider(
                   create: (context) => FilterPropCubit(
-                    database: NewDatabase.of(context),
+                    database: Database.of(context),
                     searchBloc: context.read<SearchBloc>(),
                     filterTermsBloc: context.read<FilterTermsBloc>(),
                   ),

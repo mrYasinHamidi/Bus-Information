@@ -2,14 +2,15 @@ import 'dart:async';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:new_bus_information/application/database/database_error.dart';
 import 'package:new_bus_information/application/database/database_event.dart';
+import 'package:new_bus_information/application/database/database_event_type.dart';
 import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 
 import 'database.dart';
 
-class NewHiveDatabase implements NewDatabase {
-  NewHiveDatabase(
+class HiveDatabase implements Database {
+  HiveDatabase(
     this.buses,
     this.drivers,
     this.props,
@@ -19,7 +20,7 @@ class NewHiveDatabase implements NewDatabase {
   final Box<Driver> drivers;
   final Box<Bus> buses;
 
-  final StreamController<NewDatabaseEvent> _controller = StreamController();
+  final StreamController<DatabaseEvent> _controller = StreamController();
 
   @override
   bool containsBus(String code) {
@@ -47,25 +48,25 @@ class NewHiveDatabase implements NewDatabase {
   void deleteBus(Bus bus) async {
     _requireInitialized();
     await buses.delete(bus.id);
-    _controller.add(NewDatabaseEvent(NewDatabaseEventType.bus));
+    _controller.add(DatabaseEvent(DatabaseEventType.bus));
   }
 
   @override
   void deleteDriver(Driver driver) async {
     _requireInitialized();
     await drivers.delete(driver.id);
-    _controller.add(NewDatabaseEvent(NewDatabaseEventType.driver));
+    _controller.add(DatabaseEvent(DatabaseEventType.driver));
   }
 
   @override
   void deleteProp(Prop prop) async {
     _requireInitialized();
     await props.delete(prop.id);
-    _controller.add(NewDatabaseEvent(NewDatabaseEventType.prop));
+    _controller.add(DatabaseEvent(DatabaseEventType.prop));
   }
 
   @override
-  Stream<NewDatabaseEvent> stream() {
+  Stream<DatabaseEvent> stream() {
     return _controller.stream;
   }
 
@@ -73,21 +74,21 @@ class NewHiveDatabase implements NewDatabase {
   void putBus(Bus bus) async {
     _requireInitialized();
     await buses.put(bus.id, bus);
-    _controller.add(NewDatabaseEvent(NewDatabaseEventType.bus));
+    _controller.add(DatabaseEvent(DatabaseEventType.bus));
   }
 
   @override
   void putDriver(Driver driver) async {
     _requireInitialized();
     await drivers.put(driver.id, driver);
-    _controller.add(NewDatabaseEvent(NewDatabaseEventType.driver));
+    _controller.add(DatabaseEvent(DatabaseEventType.driver));
   }
 
   @override
   void putProp(Prop prop) async {
     _requireInitialized();
     await props.put(prop.id, prop);
-    _controller.add(NewDatabaseEvent(NewDatabaseEventType.prop));
+    _controller.add(DatabaseEvent(DatabaseEventType.prop));
   }
 
   void _requireInitialized() {

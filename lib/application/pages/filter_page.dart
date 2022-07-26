@@ -214,7 +214,7 @@ class FilterPage extends StatelessWidget {
         downSpace,
         Builder(builder: (context) {
           return Text(
-            S.of(context).totalCount(context.read<FilterPropCubit>().state.filteredList.length),
+            S.of(context).totalCount(context.watch<FilterPropCubit>().state.filteredList.length),
             textAlign: TextAlign.center,
             style: context.watch<ThemeCubit>().state.smokeTitleLarge,
           );
@@ -234,17 +234,12 @@ class FilterPage extends StatelessWidget {
     );
   }
 
-  Future<DateTime?> getDateTime(
-    BuildContext context,
-    Date initDate, {
-    Date start = const Date.zero(),
-    Date end = const Date.zero(),
-  }) {
+  Future<DateTime?> getDateTime(BuildContext context, Date initDate) {
     return showDatePicker(
       context: context,
       initialDate: initDate.isZero() ? DateTime.now() : initDate.toDatetime(),
-      firstDate: start.isZero() ? DateTime.fromMillisecondsSinceEpoch(0) : start.toDatetime(),
-      lastDate: start.isZero() ? DateTime.now() : start.toDatetime(),
+      firstDate: DateTime.fromMillisecondsSinceEpoch(0),
+      lastDate: DateTime.now(),
     );
   }
 }

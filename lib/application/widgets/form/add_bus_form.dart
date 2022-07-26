@@ -106,7 +106,7 @@ class _AddDriverFormState extends State<AddBusForm> {
     value = value?.trim();
     if (value == null) return '';
     if (value.isEmpty) return S.of(context).shouldNotEmpty;
-    if (NewDatabase.of(context).containsBus(value)) {
+    if (Database.of(context).containsBus(value)) {
       return S.of(context).repeatedNumber;
     }
     return null;
@@ -123,7 +123,7 @@ class _AddDriverFormState extends State<AddBusForm> {
   void _onSubmit() {
     if (globalKey.currentState!.validate()) {
       Bus bus = Bus(code: code, status: status);
-      NewDatabase.of(context).putBus(bus);
+      Database.of(context).putBus(bus);
       widget.onSubmit?.call(bus);
     }
   }

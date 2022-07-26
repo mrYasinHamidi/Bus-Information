@@ -1,7 +1,7 @@
-enum NewDatabaseEventType { prop, driver, bus }
+import 'package:new_bus_information/application/database/database_event_type.dart';
 
-class NewDatabaseEvent {
-  final NewDatabaseEventType type;
+class DatabaseEvent {
+  final DatabaseEventType type;
 
-  NewDatabaseEvent(this.type);
+  DatabaseEvent(this.type);
 }

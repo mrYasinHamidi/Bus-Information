@@ -14,9 +14,9 @@ class PropItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Bus? bus = NewDatabase.of(context).getBus(prop.bus);
-    final Driver? driver = NewDatabase.of(context).getDriver(prop.driver);
-    final Driver? alternative = NewDatabase.of(context).getDriver(prop.alternativeDriver);
+    final Bus? bus = Database.of(context).getBus(prop.bus);
+    final Driver? driver = Database.of(context).getDriver(prop.driver);
+    final Driver? alternative = Database.of(context).getDriver(prop.alternativeDriver);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

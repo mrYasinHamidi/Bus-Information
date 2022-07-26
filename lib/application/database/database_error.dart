@@ -5,6 +5,6 @@ class DatabaseError extends Error {
 
   @override
   String toString() {
-    return 'HiveError: $message';
+    return 'Database Error: $message';
   }
 }

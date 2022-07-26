@@ -31,9 +31,9 @@ class _CreatePropPageState extends State<CreatePropPage> {
   void initState() {
     ///Initialize data with old data for editing prop
     if (_editMode) {
-      _firstDriver = NewDatabase.of(context).getDriver(widget.prop!.driver);
-      _secondDriver = NewDatabase.of(context).getDriver(widget.prop!.alternativeDriver);
-      _bus = NewDatabase.of(context).getBus(widget.prop!.bus);
+      _firstDriver = Database.of(context).getDriver(widget.prop!.driver);
+      _secondDriver = Database.of(context).getDriver(widget.prop!.alternativeDriver);
+      _bus = Database.of(context).getBus(widget.prop!.bus);
     }
     super.initState();
   }
@@ -113,7 +113,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
     return await openPage(
       context,
       DriverChooser(
-        drivers: NewDatabase.of(context).getDrivers().toList()..reSort(),
+        drivers: Database.of(context).getDrivers().toList()..reSort(),
       ),
     );
   }
@@ -122,7 +122,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
     return await openPage(
       context,
       BusChooser(
-        buses: NewDatabase.of(context).getBuses().toList()..reSort(),
+        buses: Database.of(context).getBuses().toList()..reSort(),
       ),
     );
   }
@@ -139,7 +139,7 @@ class _CreatePropPageState extends State<CreatePropPage> {
       driver: _firstDriver?.id,
       alternativeDriver: _secondDriver?.id,
     );
-    NewDatabase.of(context).putProp(prop);
+    Database.of(context).putProp(prop);
     Navigator.pop(context);
   }
 }

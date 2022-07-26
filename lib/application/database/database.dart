@@ -5,8 +5,8 @@ import 'package:new_bus_information/application/models/bus/bus.dart';
 import 'package:new_bus_information/application/models/driver/driver.dart';
 import 'package:new_bus_information/application/models/prop/prop.dart';
 
-abstract class NewDatabase {
-  static NewDatabase of(BuildContext context) => context.read<NewDatabase>();
+abstract class Database {
+  static Database of(BuildContext context) => context.read<Database>();
 
   void putBus(Bus bus);
   void putDriver(Driver driver);
@@ -27,5 +27,5 @@ abstract class NewDatabase {
   Driver? getDriver(String id);
   Prop? getProp(String id);
 
-  Stream<NewDatabaseEvent> stream();
+  Stream<DatabaseEvent> stream();
 }

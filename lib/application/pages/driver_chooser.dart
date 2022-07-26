@@ -79,7 +79,7 @@ class _DriverChooserState extends State<DriverChooser> {
                   ),
                   confirmDismiss: (d) async {
                     if (await _confirmDelete(d)) {
-                      NewDatabase.of(context).deleteDriver(_searchedItems[index]);
+                      Database.of(context).deleteDriver(_searchedItems[index]);
                       widget.drivers.removeAt(index);
                       return true;
                     }

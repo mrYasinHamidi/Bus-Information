@@ -78,7 +78,7 @@ class _BusChooserState extends State<BusChooser> {
                   ),
                   confirmDismiss: (d) async {
                     if (await _confirmDelete(d)) {
-                      NewDatabase.of(context).deleteBus(_searchedItems[index]);
+                      Database.of(context).deleteBus(_searchedItems[index]);
                       widget.buses.removeAt(index);
                       return true;
                     }

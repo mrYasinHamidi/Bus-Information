@@ -116,14 +116,14 @@ class _AddDriverFormState extends State<AddDriverForm> {
     value = value?.trim();
     if (value == null) return '';
     if (value.isEmpty) return S.of(context).shouldNotEmpty;
-    if (NewDatabase.of(context).containsDriver(value)) return S.of(context).repeatedName;
+    if (Database.of(context).containsDriver(value)) return S.of(context).repeatedName;
     return null;
   }
 
   void _onSubmit() {
     if (globalKey.currentState!.validate()) {
       Driver driver = Driver(name: name, status: status, shiftWork: shiftWork);
-      NewDatabase.of(context).putDriver(driver);
+      Database.of(context).putDriver(driver);
       widget.onSubmit?.call(driver);
     }
   }

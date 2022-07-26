@@ -12,7 +12,7 @@ import 'package:new_bus_information/application/models/search_condidate_type.dar
 part 'filter_prop_state.dart';
 
 class FilterPropCubit extends Cubit<FilterPropState> {
-  final NewDatabase database;
+  final Database database;
   final SearchBloc searchBloc;
   final FilterTermsBloc filterTermsBloc;
 
@@ -25,7 +25,7 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     required this.searchBloc,
     required this.filterTermsBloc,
   }) : super(FilterPropState.initial()) {
-    databaseSubscription = database.stream().listen((NewDatabaseEvent event) {
+    databaseSubscription = database.stream().listen((DatabaseEvent event) {
       _setFilteredProp();
     });
     searchSubscription = searchBloc.stream.listen((SearchState event) {
@@ -113,16 +113,16 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     emit(state.copyWith(filteredList: filteredProps));
   }
 
-  String getSearchTerm(NewDatabase database, Prop prop) {
+  String getSearchTerm(Database database, Prop prop) {
     String term = '';
     Set condidates = filterTermsBloc.state.searchCondidates;
-    if (condidates.contains(SearchCondidateType.bus)) {
+    if (condidates.isEmpty || condidates.contains(SearchCondidateType.bus)) {
       term += database.getBus(prop.bus)?.code ?? '';
     }
-    if (condidates.contains(SearchCondidateType.firstDriver)) {
+    if (condidates.isEmpty || condidates.contains(SearchCondidateType.firstDriver)) {
       term += database.getDriver(prop.driver)?.name ?? '';
     }
-    if (condidates.contains(SearchCondidateType.secondDriver)) {
+    if (condidates.isEmpty || condidates.contains(SearchCondidateType.secondDriver)) {
       term += database.getDriver(prop.alternativeDriver)?.name ?? '';
     }
     return term;

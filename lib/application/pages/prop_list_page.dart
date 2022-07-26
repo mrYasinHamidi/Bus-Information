@@ -54,7 +54,7 @@ class PropListPage extends StatelessWidget {
         return Slidable(
           key: ValueKey(props[index].id),
           startActionPane: ActionPane(
-            motion: const ScrollMotion(),
+            motion: const BehindMotion(),
             dismissible: DismissiblePane(
               confirmDismiss: () => showDeleteDialog(context),
               onDismissed: () => onDismissItem(props[index]),
@@ -97,7 +97,7 @@ class PropListPage extends StatelessWidget {
   }
 
   void delete(BuildContext context, Prop prop) {
-    NewDatabase.of(context).deleteProp(prop);
+    Database.of(context).deleteProp(prop);
   }
 
   Future<bool> showDeleteDialog(BuildContext context) async {

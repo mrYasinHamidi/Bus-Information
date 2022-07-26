@@ -18,11 +18,6 @@ class Date {
       : year = 0,
         month = 1,
         day = 1;
-
-  DateTime toDatetime() {
-    return DateTime(year, month, day);
-  }
-
   bool isZero() => year == 0 && month == 1 && day == 1;
 
   bool isAfter(Date other) {
@@ -30,7 +25,7 @@ class Date {
   }
 
   bool isAfterOrEqual(Date other) {
-    return hashCode > other.hashCode;
+    return hashCode >= other.hashCode;
   }
 
   bool isBefore(Date other) {
@@ -39,6 +34,10 @@ class Date {
 
   bool isBeforeOrEqual(Date other) {
     return hashCode <= other.hashCode;
+  }
+
+  DateTime toDatetime() {
+    return DateTime(year, month, day);
   }
 
   @override
