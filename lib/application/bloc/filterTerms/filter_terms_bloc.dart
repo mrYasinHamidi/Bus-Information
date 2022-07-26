@@ -11,6 +11,8 @@ import 'package:new_bus_information/application/models/search_condidate_type.dar
 part 'filter_terms_event.dart';
 part 'filter_terms_state.dart';
 
+///bloc associated with [FilterPage]
+///handling states of [FilterPage]
 class FilterTermsBloc extends Bloc<FilterTermsEvent, FilterTermsState> {
   FilterTermsBloc() : super(FilterTermsState.initial()) {
     on<SetSearchCondidateEvent>(changeSearchCondidate);

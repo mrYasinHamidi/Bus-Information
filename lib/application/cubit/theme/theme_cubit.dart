@@ -39,6 +39,8 @@ class ThemeCubit extends Cubit<ThemeState> {
         emit(LightThemeState(fontFamily: languageCubit.state.fontFamily));
         break;
     }
+
+    ///save the changes in [Settings]
     settings.isLight = state is LightThemeState;
   }
 

@@ -23,6 +23,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     });
   }
 
+  ///receive events after a specefic duration
+  ///if too meny events add to bloc one behind the other
+  ///only last events will apear after given duration
   EventTransformer<SetSearchTermEvent> debounce<SetSearchTermEvent>(Duration duration) {
     return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
   }

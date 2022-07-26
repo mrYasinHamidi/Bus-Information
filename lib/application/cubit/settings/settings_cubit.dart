@@ -4,6 +4,8 @@ import 'package:new_bus_information/application/database/database_error.dart';
 
 part 'settings_state.dart';
 
+///it is some kind of database class
+///use for saving setting of application
 class Settings {
   bool _isLight = false;
   bool get isLight => _isLight;

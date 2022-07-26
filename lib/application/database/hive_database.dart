@@ -10,11 +10,11 @@ import 'package:new_bus_information/application/models/prop/prop.dart';
 import 'database.dart';
 
 class HiveDatabase implements Database {
-  HiveDatabase(
-    this.buses,
-    this.drivers,
-    this.props,
-  );
+  HiveDatabase({
+    required this.buses,
+    required this.drivers,
+    required this.props,
+  });
 
   final Box<Prop> props;
   final Box<Driver> drivers;

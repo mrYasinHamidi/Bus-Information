@@ -11,6 +11,13 @@ import 'package:new_bus_information/application/models/search_condidate_type.dar
 
 part 'filter_prop_state.dart';
 
+///bloc associated with [PropListPage]
+///this bloc listen to [FilterTermBloc] [Database] and [SearchBloc]
+/// 1 . getting list of all prop from [Database]
+/// 2 . searching in props with [SearchState]
+/// 3 . setting filter terms form [FilterTermsBloc]
+/// 4 . emmiting the final List of props to ui
+
 class FilterPropCubit extends Cubit<FilterPropState> {
   final Database database;
   final SearchBloc searchBloc;
@@ -41,13 +48,14 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     _setFilteredProp();
   }
 
+  ///setting search term and filter terms to list and emitting to ui
   _setFilteredProp() {
     List<Prop> filteredProps = database.getProps().toList();
 
     if (searchBloc.state.searchTerm.isNotEmpty) {
       filteredProps = filteredProps
           .where((element) =>
-              getSearchTerm(database, element).toLowerCase().contains(searchBloc.state.searchTerm.toLowerCase()))
+              _getPropSerchWord(database, element).toLowerCase().contains(searchBloc.state.searchTerm.toLowerCase()))
           .toList();
     }
     if (filterTermsBloc.state.busStatusCondidate.isNotEmpty) {
@@ -113,7 +121,12 @@ class FilterPropCubit extends Cubit<FilterPropState> {
     emit(state.copyWith(filteredList: filteredProps));
   }
 
-  String getSearchTerm(Database database, Prop prop) {
+  ///what part of a [Prop] should use for searching?
+  ///First driver name , alternative driver name or bus code ?
+  ///1 . get the first driver , alternative driver and bus instances from database
+  ///2 . get search condidate from [FilterTermsBloc]
+  ///3 . return the the final word for searching
+  String _getPropSerchWord(Database database, Prop prop) {
     String term = '';
     Set condidates = filterTermsBloc.state.searchCondidates;
     if (condidates.isEmpty || condidates.contains(SearchCondidateType.bus)) {

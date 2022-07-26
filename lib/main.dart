@@ -32,6 +32,10 @@ Future<void> initHive() async {
   Hive.registerAdapter(DriverAdapter());
   Hive.registerAdapter(BusAdapter());
   Hive.registerAdapter(PropAdapter());
+  await Hive.openBox<bool>('settings');
+  await Hive.openBox<Bus>('buses');
+  await Hive.openBox<Driver>('drivers');
+  await Hive.openBox<Prop>('props');
 }
 
 class MyApp extends StatelessWidget {
@@ -39,67 +43,80 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<HiveDatabase> getDatabase() async {
-      await Hive.openBox<bool>('settings');
-      return HiveDatabase(
-        await Hive.openBox('buses'),
-        await Hive.openBox('drivers'),
-        await Hive.openBox('props'),
-      );
-    }
+    ///we comunicate with boxes through the concorate classes : [HiveDatabase] and [Setting]
 
-    return FutureBuilder(
-      future: getDatabase(),
-      builder: (BuildContext context, AsyncSnapshot<Database> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final Settings settings = Settings(settingsBox: Hive.box('settings'));
-          return RepositoryProvider(
-            create: (context) => snapshot.data,
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider(create: (context) => SearchBloc()),
-                BlocProvider(create: (context) => FilterTermsBloc()),
-                BlocProvider(
-                  create: (context) => LanguageCubit(
-                    settings: settings,
-                  ),
-                ),
-                BlocProvider(
-                  create: (context) => ThemeCubit(
-                    languageCubit: context.read<LanguageCubit>(),
-                    settings: settings,
-                  ),
-                ),
-                BlocProvider(
-                  create: (context) => FilterPropCubit(
-                    database: Database.of(context),
-                    searchBloc: context.read<SearchBloc>(),
-                    filterTermsBloc: context.read<FilterTermsBloc>(),
-                  ),
-                ),
-              ],
-              child: Builder(
-                builder: (context) {
-                  return MaterialApp(
-                    home: const HomePage(),
-                    theme: context.watch<ThemeCubit>().state.theme,
-                    supportedLocales: S.delegate.supportedLocales,
-                    locale: context.watch<LanguageCubit>().state.locale,
-                    localizationsDelegates: const [
-                      S.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    debugShowCheckedModeBanner: false,
-                  );
-                },
-              ),
+    ///settings class use for saving sttings of application
+    ///like which theme is selected or which language user picked up
+    final Settings settings = Settings(settingsBox: Hive.box('settings'));
+
+    ///the main database of application
+    ///use for saving main models of app : [Bus] , [Driver] and [Prop]
+    ///in all across the app we have only one instance of this class
+    ///provide it with [RepositoryProvider] to access anywhere just using a [BuildContext] instance
+    ///ex :
+    ///     Database database = context.read<Database>();
+    ///     database.deleteDriver(...);
+    ///     database.putProp(...);
+    ///     .
+    ///     .
+    ///     .
+    final Database database = HiveDatabase(
+      buses: Hive.box('buses'),
+      drivers: Hive.box('drivers'),
+      props: Hive.box('props'),
+    );
+
+    return RepositoryProvider(
+      ///provide a [Database] instance to using it all across the app with just a single instance
+      create: (context) => database,
+      child: MultiBlocProvider(
+        ///provide main cubits of app : [LanguageCubit] and [ThemeCubit]
+        ///we provide them higher than [MaterialApp] to access them anywhere in the app
+        providers: [
+          BlocProvider(
+            create: (context) => LanguageCubit(
+              settings: settings,
             ),
-          );
-        }
-        return const SizedBox();
-      },
+          ),
+          BlocProvider(
+            create: (context) => ThemeCubit(
+              languageCubit: context.read<LanguageCubit>(),
+              settings: settings,
+            ),
+          ),
+        ],
+        child: Builder(
+          builder: (context) {
+            return MaterialApp(
+              home: MultiBlocProvider(
+                ///provide cubits and blocs only for use in [HomePage]
+                providers: [
+                  BlocProvider(create: (context) => SearchBloc()),
+                  BlocProvider(create: (context) => FilterTermsBloc()),
+                  BlocProvider(
+                    create: (context) => FilterPropCubit(
+                      database: context.read<Database>(),
+                      searchBloc: context.read<SearchBloc>(),
+                      filterTermsBloc: context.read<FilterTermsBloc>(),
+                    ),
+                  ),
+                ],
+                child: const HomePage(),
+              ),
+              theme: context.watch<ThemeCubit>().state.theme,
+              supportedLocales: S.delegate.supportedLocales,
+              locale: context.watch<LanguageCubit>().state.locale,
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              debugShowCheckedModeBanner: false,
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -19,6 +19,8 @@ class LanguageCubit extends Cubit<LanguageState> {
         emit(EnglishState());
         break;
     }
+
+    ///save the changes in [Settings]
     settings.isEnglish = state is EnglishState;
   }
 }
