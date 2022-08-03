@@ -51,6 +51,5 @@ To run this project, do the steps :
 <img src="./screenshots/desktop_dark.png" />
 <p float="left">
   <img src="./screenshots/phone_dark.png" width="30%" />
-  <img width="10%"/>
   <img src="./screenshots/phone_light.png" width="30%" /> 
 </p>
