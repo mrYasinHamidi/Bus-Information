@@ -23,7 +23,7 @@ I created this application so he can do his job more easily and faster.
 * Flutter 3
 * Dart 2.17
 * Bloc 8
-* Hive 1.1
+* Flutter Hive 1.1
 
 # Launch
 
