@@ -47,6 +47,14 @@ To run this project, do the steps :
   $ flutter run 
   ```
 
+It is possible to get an error for generator package after step 4.  
+If it is , turn off the generate boolean in ``` pubspec.yaml ``` file and try again:
+```
+flutter:
+  generate: false
+```
+After that turn back on the generate boolean.
+
 # Screenshots
 
 <img src="./screenshots/desktop_dark.png" />
