@@ -1,5 +1,4 @@
 # Bus Information
-
 An managing application for bus organization .
 
 # Table of contents
