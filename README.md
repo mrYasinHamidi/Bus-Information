@@ -1,6 +1,6 @@
 # Bus Information
 
-A managing application for bus organization .  
+A managing application for bus organization.  
 
 # Table of contents
 * [General info](#general-info)
@@ -10,7 +10,7 @@ A managing application for bus organization .
 
 # General info
 Every town has a main bus organization that manage all bus and drivers.  
-With the growing town, the number of buses will be increased and managing of this buses become more complicated. 
+With the growing town, the number of buses will be increased and managing of this buses become more complicated.  
 My goal is to simplify the management of this system.
 
 >### **My motivation ?**
