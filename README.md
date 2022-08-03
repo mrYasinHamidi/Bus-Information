@@ -1,16 +1,36 @@
-# new_bus_information
+# Bus Information
 
-A new Flutter project.
+An managing application for bus organization .
 
-## Getting Started
+# Table of contents
+* [General info](https://github.com/mrYasinHamidi/bus_information/edit/master/README.md#my-motivation-)
+* Technologies
+* Launch
+* sources
+* Status
 
-This project is a starting point for a Flutter application.
+# General info
+Every town has a main bus organization that manage all bus and drivers.  
+With the growing town, the number of buses will be increased and managing of this buses become more complicated.  
 
-A few resources to get you started if this is your first Flutter project:
+>### **My motivation ?**
+>My friend's dad works in a bus organization as a bus line manager.  
+He managed all the drivers and buses by writing their information in a notebook. ( It was a very damn hard way )  
+I created this application so he can do his job more easily and faster.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# Technologies
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Flutter 3
+* Dart 2.17
+* Bloc 8
+* Hive 1.1
+
+# Launch
+
+To run this project, do the steps : 
+
+1. You first need to [install the **Flutter**](www.flutter.com) on your system
+2. Clone the repository ``` $ git clone https://github.com/mrYasinHamidi/bus_information.git ```
+3. 
+
+
