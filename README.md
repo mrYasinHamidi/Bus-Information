@@ -1,12 +1,12 @@
 # Bus Information
-An managing application for bus organization .
+
+An managing application for bus organization .  
 
 # Table of contents
-* [General info](https://github.com/mrYasinHamidi/bus_information/edit/master/README.md#my-motivation-)
-* Technologies
-* Launch
-* sources
-* Status
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Launch](#launch)
+* [Screenshots](#screenshots)
 
 # General info
 Every town has a main bus organization that manage all bus and drivers.  
@@ -46,4 +46,11 @@ To run this project, do the steps :
   $ flutter run 
   ```
 
+# Screenshots
 
+<img src="./screenshots/desktop_dark.png" />
+<p float="left">
+  <img src="./screenshots/phone_dark.png" width="30%" />
+  <img width="10%"/>
+  <img src="./screenshots/phone_light.png" width="30%" /> 
+</p>
