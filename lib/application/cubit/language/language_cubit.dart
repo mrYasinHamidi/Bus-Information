@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/cubit/settings/settings_cubit.dart';
+import 'package:bus_information/application/cubit/settings/settings_cubit.dart';
 part 'language_state.dart';
 
 class LanguageCubit extends Cubit<LanguageState> {

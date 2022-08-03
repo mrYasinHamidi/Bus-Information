@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:new_bus_information/application/models/bus/bus_status.dart';
-import 'package:new_bus_information/application/models/date/date.dart';
-import 'package:new_bus_information/application/models/driver/driver_status.dart';
-import 'package:new_bus_information/application/models/driver/shift_work.dart';
-import 'package:new_bus_information/application/models/search_condidate_type.dart';
+import 'package:bus_information/application/models/bus/bus_status.dart';
+import 'package:bus_information/application/models/date/date.dart';
+import 'package:bus_information/application/models/driver/driver_status.dart';
+import 'package:bus_information/application/models/driver/shift_work.dart';
+import 'package:bus_information/application/models/search_condidate_type.dart';
 
 part 'filter_terms_event.dart';
 part 'filter_terms_state.dart';

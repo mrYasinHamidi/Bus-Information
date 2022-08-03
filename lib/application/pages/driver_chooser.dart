@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/driver/driver.dart';
-import 'package:new_bus_information/application/widgets/create_dialog.dart';
-import 'package:new_bus_information/application/widgets/driver_item.dart';
-import 'package:new_bus_information/application/widgets/lottie/lottie_viewer.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/application/database/database.dart';
+import 'package:bus_information/application/models/driver/driver.dart';
+import 'package:bus_information/application/widgets/create_dialog.dart';
+import 'package:bus_information/application/widgets/driver_item.dart';
+import 'package:bus_information/application/widgets/lottie/lottie_viewer.dart';
+import 'package:bus_information/generated/l10n.dart';
 
 class DriverChooser extends StatefulWidget {
   final List<Driver> drivers;

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/bus/bus.dart';
-import 'package:new_bus_information/application/models/driver/driver.dart';
-import 'package:new_bus_information/application/models/prop/prop.dart';
-import 'package:new_bus_information/application/pages/driver_chooser.dart';
-import 'package:new_bus_information/application/pages/bus_chooser.dart';
-import 'package:new_bus_information/application/utils.dart';
-import 'package:new_bus_information/application/widgets/bus_preview.dart';
-import 'package:new_bus_information/application/widgets/driver_preview.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/application/database/database.dart';
+import 'package:bus_information/application/models/bus/bus.dart';
+import 'package:bus_information/application/models/driver/driver.dart';
+import 'package:bus_information/application/models/prop/prop.dart';
+import 'package:bus_information/application/pages/driver_chooser.dart';
+import 'package:bus_information/application/pages/bus_chooser.dart';
+import 'package:bus_information/application/utils.dart';
+import 'package:bus_information/application/widgets/bus_preview.dart';
+import 'package:bus_information/application/widgets/driver_preview.dart';
+import 'package:bus_information/generated/l10n.dart';
 
 class CreatePropPage extends StatefulWidget {
   final Prop? prop;

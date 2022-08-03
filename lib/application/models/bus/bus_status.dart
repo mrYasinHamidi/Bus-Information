@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/generated/l10n.dart';
 part 'bus_status.g.dart';
+
 @HiveType(typeId: 4)
 enum BusStatus {
   @HiveField(0)

@@ -1,4 +1,4 @@
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/generated/l10n.dart';
 
 enum SearchCondidateType { bus, firstDriver, secondDriver }
 

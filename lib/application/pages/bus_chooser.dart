@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/bus/bus.dart';
-import 'package:new_bus_information/application/widgets/bus_item.dart';
-import 'package:new_bus_information/application/widgets/create_dialog.dart';
-import 'package:new_bus_information/application/widgets/lottie/lottie_viewer.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/application/database/database.dart';
+import 'package:bus_information/application/models/bus/bus.dart';
+import 'package:bus_information/application/widgets/bus_item.dart';
+import 'package:bus_information/application/widgets/create_dialog.dart';
+import 'package:bus_information/application/widgets/lottie/lottie_viewer.dart';
+import 'package:bus_information/generated/l10n.dart';
 
 class BusChooser extends StatefulWidget {
   final List<Bus> buses;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/bus/bus_status.dart';
-import 'package:new_bus_information/application/models/bus/bus.dart';
-import 'package:new_bus_information/application/models/driver/driver.dart';
-import 'package:new_bus_information/application/models/prop/prop.dart';
-import 'package:new_bus_information/application/widgets/dot.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/application/database/database.dart';
+import 'package:bus_information/application/models/bus/bus_status.dart';
+import 'package:bus_information/application/models/bus/bus.dart';
+import 'package:bus_information/application/models/driver/driver.dart';
+import 'package:bus_information/application/models/prop/prop.dart';
+import 'package:bus_information/application/widgets/dot.dart';
+import 'package:bus_information/generated/l10n.dart';
 
 class PropItemWidget extends StatelessWidget {
   final Prop prop;

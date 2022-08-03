@@ -1,6 +1,6 @@
 {
-    "name": "new_bus_information",
-    "short_name": "new_bus_information",
+    "name": "bus_information",
+    "short_name": "bus_information",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

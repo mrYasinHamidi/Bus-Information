@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
-import 'package:new_bus_information/application/bloc/search/search_bloc.dart';
-import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/database/database_event.dart';
-import 'package:new_bus_information/application/models/date/date.dart';
-import 'package:new_bus_information/application/models/prop/prop.dart';
-import 'package:new_bus_information/application/models/search_condidate_type.dart';
+import 'package:bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
+import 'package:bus_information/application/bloc/search/search_bloc.dart';
+import 'package:bus_information/application/database/database.dart';
+import 'package:bus_information/application/database/database_event.dart';
+import 'package:bus_information/application/models/date/date.dart';
+import 'package:bus_information/application/models/prop/prop.dart';
+import 'package:bus_information/application/models/search_condidate_type.dart';
 
 part 'filter_prop_state.dart';
 

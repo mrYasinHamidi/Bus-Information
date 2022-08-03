@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/models/driver/driver_status.dart';
-import 'package:new_bus_information/application/models/driver/driver.dart';
-import 'package:new_bus_information/application/widgets/shake_widget.dart';
+import 'package:bus_information/application/cubit/theme/theme_cubit.dart';
+import 'package:bus_information/application/models/driver/driver_status.dart';
+import 'package:bus_information/application/models/driver/driver.dart';
+import 'package:bus_information/application/widgets/shake_widget.dart';
 
 import 'dot.dart';
 

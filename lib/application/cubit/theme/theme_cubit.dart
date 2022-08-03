@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_bus_information/application/cubit/language/language_cubit.dart';
-import 'package:new_bus_information/application/cubit/settings/settings_cubit.dart';
+import 'package:bus_information/application/cubit/language/language_cubit.dart';
+import 'package:bus_information/application/cubit/settings/settings_cubit.dart';
 part 'theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {

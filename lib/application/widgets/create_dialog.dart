@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/models/bus/bus.dart';
-import 'package:new_bus_information/application/models/driver/driver.dart';
-import 'package:new_bus_information/application/widgets/form/add_bus_form.dart';
-import 'package:new_bus_information/application/widgets/form/add_driver_form.dart';
+import 'package:bus_information/application/cubit/theme/theme_cubit.dart';
+import 'package:bus_information/application/models/bus/bus.dart';
+import 'package:bus_information/application/models/driver/driver.dart';
+import 'package:bus_information/application/widgets/form/add_bus_form.dart';
+import 'package:bus_information/application/widgets/form/add_driver_form.dart';
 
 class CreatorDialog extends StatefulWidget {
   final Function(Driver)? onAddDriver;

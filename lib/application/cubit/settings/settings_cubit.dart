@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:new_bus_information/application/database/database_error.dart';
+import 'package:bus_information/application/database/database_error.dart';
 
 part 'settings_state.dart';
 

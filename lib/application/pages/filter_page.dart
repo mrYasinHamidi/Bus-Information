@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
-import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
-import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/models/bus/bus_status.dart';
-import 'package:new_bus_information/application/models/date/date.dart';
-import 'package:new_bus_information/application/models/driver/driver_status.dart';
-import 'package:new_bus_information/application/models/driver/shift_work.dart';
-import 'package:new_bus_information/application/models/search_condidate_type.dart';
-import 'package:new_bus_information/application/widgets/toggled_enum.dart';
-import 'package:new_bus_information/application/widgets/toggled_grid_enum.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/application/bloc/filterTerms/filter_terms_bloc.dart';
+import 'package:bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
+import 'package:bus_information/application/cubit/theme/theme_cubit.dart';
+import 'package:bus_information/application/models/bus/bus_status.dart';
+import 'package:bus_information/application/models/date/date.dart';
+import 'package:bus_information/application/models/driver/driver_status.dart';
+import 'package:bus_information/application/models/driver/shift_work.dart';
+import 'package:bus_information/application/models/search_condidate_type.dart';
+import 'package:bus_information/application/widgets/toggled_enum.dart';
+import 'package:bus_information/application/widgets/toggled_grid_enum.dart';
+import 'package:bus_information/generated/l10n.dart';
 
 class FilterPage extends StatelessWidget {
   const FilterPage({Key? key}) : super(key: key);

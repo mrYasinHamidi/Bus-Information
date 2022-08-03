@@ -1,16 +1,22 @@
-# new_bus_information
+# Bus Information
 
-A new Flutter project.
+An managing application for bus department .
 
-## Getting Started
+# Table of contents
+* [General info](https://github.com/mrYasinHamidi/bus_information/edit/master/README.md#my-motivation-)
+* Technologies
+* Project Setup
+* sources
+* Status
 
-This project is a starting point for a Flutter application.
+# General info
+Every town has a main bus department that manage all bus and drivers.  
+With the growing town, the number of buses will be increased and managing of all buses and drivers together become more complicated.  
 
-A few resources to get you started if this is your first Flutter project:
+>#### **My motivation ?**
+>My father works in bus department as bus line manager and hi manage the drivers and buses with paper and pen.  
+its very unuseal . with this application he could  do the job more beter.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. adada
+2. sdsdsd
+3. dadafa

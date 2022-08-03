@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/generated/l10n.dart';
 part 'driver_status.g.dart';
 
 @HiveType(typeId: 5)
@@ -14,6 +14,7 @@ enum DriverStatus {
   @HiveField(3)
   coordination,
 }
+
 extension DriverStatusEx on DriverStatus {
   String get text {
     switch (this) {
@@ -27,6 +28,7 @@ extension DriverStatusEx on DriverStatus {
         return S.current.coordination;
     }
   }
+
   Color get color {
     switch (this) {
       case DriverStatus.active:
@@ -44,4 +46,3 @@ extension DriverStatusEx on DriverStatus {
 extension DriverStatusExe on List<DriverStatus> {
   List<Text> get asTextList => map((e) => Text(e.text)).toList();
 }
-

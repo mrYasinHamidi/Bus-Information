@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/generated/l10n.dart';
 part 'shift_work.g.dart';
+
 @HiveType(typeId: 6)
 enum ShiftWork {
   @HiveField(0)

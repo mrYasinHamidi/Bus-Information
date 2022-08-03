@@ -1,4 +1,4 @@
-package com.example.new_bus_information
+package com.example.bus_information
 
 import io.flutter.embedding.android.FlutterActivity
 

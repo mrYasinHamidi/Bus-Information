@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/constants/numerics.dart';
-import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
+import 'package:bus_information/application/constants/numerics.dart';
+import 'package:bus_information/application/cubit/theme/theme_cubit.dart';
 
 class ToggledGridEnum extends StatelessWidget {
   const ToggledGridEnum({

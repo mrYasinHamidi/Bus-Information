@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "new_bus_information",
+            "name": "bus_information",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "new_bus_information (profile mode)",
+            "name": "bus_information (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "new_bus_information (release mode)",
+            "name": "bus_information (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

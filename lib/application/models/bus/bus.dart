@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:new_bus_information/application/models/bus/bus_status.dart';
+import 'package:bus_information/application/models/bus/bus_status.dart';
 import 'package:objectid/objectid.dart';
 
 part 'bus.g.dart';

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:new_bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
-import 'package:new_bus_information/application/cubit/theme/theme_cubit.dart';
-import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/prop/prop.dart';
-import 'package:new_bus_information/application/pages/create_prop_page.dart';
-import 'package:new_bus_information/application/utils.dart';
-import 'package:new_bus_information/application/widgets/lottie/lottie_viewer.dart';
-import 'package:new_bus_information/application/widgets/prop_item.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/application/cubit/filterProp/filter_prop_cubit.dart';
+import 'package:bus_information/application/cubit/theme/theme_cubit.dart';
+import 'package:bus_information/application/database/database.dart';
+import 'package:bus_information/application/models/prop/prop.dart';
+import 'package:bus_information/application/pages/create_prop_page.dart';
+import 'package:bus_information/application/utils.dart';
+import 'package:bus_information/application/widgets/lottie/lottie_viewer.dart';
+import 'package:bus_information/application/widgets/prop_item.dart';
+import 'package:bus_information/generated/l10n.dart';
 
 class PropListPage extends StatelessWidget {
   const PropListPage({Key? key}) : super(key: key);

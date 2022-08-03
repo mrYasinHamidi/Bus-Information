@@ -1,12 +1,12 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:new_bus_information/application/database/database.dart';
-import 'package:new_bus_information/application/models/driver/driver_status.dart';
-import 'package:new_bus_information/application/models/driver/shift_work.dart';
-import 'package:new_bus_information/application/models/driver/driver.dart';
-import 'package:new_bus_information/application/widgets/custom_drop_down.dart';
-import 'package:new_bus_information/application/widgets/custom_input_field.dart';
-import 'package:new_bus_information/generated/l10n.dart';
+import 'package:bus_information/application/database/database.dart';
+import 'package:bus_information/application/models/driver/driver_status.dart';
+import 'package:bus_information/application/models/driver/shift_work.dart';
+import 'package:bus_information/application/models/driver/driver.dart';
+import 'package:bus_information/application/widgets/custom_drop_down.dart';
+import 'package:bus_information/application/widgets/custom_input_field.dart';
+import 'package:bus_information/generated/l10n.dart';
 
 class AddDriverForm extends StatefulWidget {
   final Function(Driver)? onSubmit;
