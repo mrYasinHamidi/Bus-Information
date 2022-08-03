@@ -28,7 +28,7 @@ I created this application so he can do his job more easily and faster.
 
 To run this project, do the steps : 
 
-1. You first need to [install the **Flutter**](www.flutter.com) on your system
+1. You first need to [install the Flutter](https://docs.flutter.dev/get-started/install) on your system
 2. Clone the repository
   ``` 
   $ git clone https://github.com/mrYasinHamidi/bus_information.git 
