@@ -32,7 +32,7 @@ To run this project, do the steps :
 1. You first need to [install the Flutter](https://docs.flutter.dev/get-started/install) on your system
 2. Clone the repository
   ``` 
-  $ git clone https://github.com/mrYasinHamidi/bus_information.git 
+  $ git clone https://github.com/mrYasinHamidi/Bus-Information.git 
   ```
 3. Get dependencies
   ```
