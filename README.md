@@ -38,22 +38,10 @@ To run this project, do the steps :
   ```
   $ flutter pub get 
   ```
-4. Generate Hive adapters 
-  ```
-  $ flutter packages pub run build_runner build 
-  ```
-5. Run the project 
+4. Run the project 
   ```
   $ flutter run 
   ```
-
-It is possible to get an error for ``` build_runner ``` package after step 4.  
-If it is , turn off the generate boolean in ``` pubspec.yaml ``` file and try again:
-```
-flutter:
-  generate: false
-```
-After that turn back on the generate boolean.
 
 # Screenshots
 
