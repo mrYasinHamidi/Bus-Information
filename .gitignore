@@ -4,7 +4,6 @@
 *.pyc
 *.swp
 *.bat
-*.g.dart
 .DS_Store
 .atom/
 .buildlog/
